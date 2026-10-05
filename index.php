@@ -1,122 +1,381 @@
 <?php
 $pageTitle = "Apex Surgical & Medical Equipment | Leading Medical Supplier";
-$pageDescription = "High-precision surgical instruments, OT equipment, ICU systems, and hospital sterilization solutions. CE & CDSCO compliant.";
+$pageDescription = "Supplying CE certified and CDSCO compliant surgical instruments, OT equipment, ICU systems, and hospital sterilization solutions.";
 require_once __DIR__ . '/includes/public-header.php';
 ?>
 
-<!-- HERO BANNER -->
-<section class="pub-page-header" style="padding: 70px 0 80px 0;">
-    <div class="pub-container pub-page-header-content">
-        <span class="pub-badge-tag" style="font-size:12px; padding:4px 12px; margin-bottom:14px; display:inline-block;">Hospital & Surgical Supply Partner</span>
-        <h1 class="pub-page-title" style="font-size:42px; max-width:760px; line-height:1.2;">Precision Surgical Instruments & Advanced Operating Theatre Equipment</h1>
-        <p class="pub-page-subtitle" style="font-size:17px; margin-bottom:28px;">
-            Supplying CE certified and CDSCO compliant surgical instruments, OT tables, ICU systems, and sterilization autoclaves to 500+ hospitals across India.
-        </p>
-        <div style="display:flex; gap:16px; flex-wrap:wrap;">
-            <a href="/surgical_equipment/contact.php#contact-form" class="pub-btn pub-btn-primary" style="padding:14px 28px; font-size:15px;">
-                <span>Request a Price Quote</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="https://wa.me/917863884678?text=Hello%20Apex%20Surgical%2C%20I%20am%20interested%20in%20product%20catalogues%20and%20pricing." target="_blank" rel="noopener noreferrer" class="pub-btn pub-quick-wa" style="padding:14px 28px; font-size:15px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
-                <span>WhatsApp Instant Quote</span>
-            </a>
-            <a href="tel:+917863884678" class="pub-btn pub-btn-outline" style="color:#ffffff; border-color:rgba(255,255,255,0.4); padding:14px 24px; font-size:15px;">
-                <span>Call +91 78638 84678</span>
-            </a>
-        </div>
-    </div>
-</section>
+<div class="figma-page-wrap">
 
-<!-- HIGHLIGHT METRICS & TRUST -->
-<section style="padding:48px 0; background:#ffffff; border-bottom:1px solid var(--pub-border);">
-    <div class="pub-container">
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:24px; text-align:center;">
-            <div>
-                <div style="font-size:36px; font-weight:800; color:var(--pub-secondary); font-family:var(--pub-font-heading);">15+</div>
-                <div style="font-weight:700; color:var(--pub-primary); margin-top:4px;">Years in Healthcare Supply</div>
-                <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Serving leading hospital chains</p>
-            </div>
-            <div>
-                <div style="font-size:36px; font-weight:800; color:var(--pub-secondary); font-family:var(--pub-font-heading);">500+</div>
-                <div style="font-weight:700; color:var(--pub-primary); margin-top:4px;">Hospitals & Clinics</div>
-                <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Equipped across India</p>
-            </div>
-            <div>
-                <div style="font-size:36px; font-weight:800; color:var(--pub-secondary); font-family:var(--pub-font-heading);">1,200+</div>
-                <div style="font-weight:700; color:var(--pub-primary); margin-top:4px;">Surgical Products</div>
-                <p class="text-muted" style="font-size:13.5px; margin-top:2px;">German Grade & OEM Certified</p>
-            </div>
-            <div>
-                <div style="font-size:36px; font-weight:800; color:var(--pub-secondary); font-family:var(--pub-font-heading);">24/7</div>
-                <div style="font-weight:700; color:var(--pub-primary); margin-top:4px;">AMC & Breakdown Support</div>
-                <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Certified biomedical engineers</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- MAIN CATEGORIES SHOWCASE -->
-<section style="padding:60px 0 70px 0;">
-    <div class="pub-container">
-        <div style="text-align:center; max-width:650px; margin:0 auto 40px auto;">
-            <span class="pub-form-tag">Medical & Surgical Catalogue</span>
-            <h2 style="font-size:32px; margin-bottom:10px;">Comprehensive Hospital Equipment</h2>
-            <p class="text-muted" style="font-size:15px;">Browse our core departments and request quotation with fast delivery and warranty support.</p>
+    <!-- 1. HERO SECTION -->
+    <section class="figma-hero">
+        <div class="figma-hero-header">
+            <h1 class="figma-hero-title">Equip with precision.</h1>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px;">
-            <?php
-            $categories = [
-                ['name' => 'Surgical Instruments', 'desc' => 'Forceps, scissors, needle holders & retractor sets in German-grade stainless steel.'],
-                ['name' => 'OT Equipment', 'desc' => 'Hydraulic OT tables, shadowless LED surgical lights & electro-cautery machines.'],
-                ['name' => 'Hospital Furniture', 'desc' => 'Motorized ICU beds, crash carts, patient transfer trolleys & examination tables.'],
-                ['name' => 'ICU Equipment', 'desc' => 'Multi-para patient monitors, syringe infusion pumps & high-end defibrillators.'],
-                ['name' => 'Laparoscopy Instruments', 'desc' => 'Trocar cannulas, bipolar forceps, clip appliers & endoscopic HD camera systems.'],
-                ['name' => 'Orthopedic Instruments', 'desc' => 'Bone drill systems, oscillating saws, reamers & trauma fixation sets.'],
-                ['name' => 'Anaesthesia Equipment', 'desc' => 'Workstations, vaporizers, laryngoscope sets & ventilator circuits.'],
-                ['name' => 'Autoclave & Sterilizers', 'desc' => 'Class B horizontal autoclaves, plasma sterilizers & ultrasonic cleaners.'],
-                ['name' => 'Suction Machines', 'desc' => 'High-vacuum surgical suction units, electric & mobile theatre suction.'],
-                ['name' => 'Surgical Disposables', 'desc' => 'Sterile drapes, surgical gloves, electro-surgical pencils & catheters.'],
-            ];
-            foreach ($categories as $cat): ?>
-                <div class="pub-info-card" style="flex-direction:column; padding:22px; justify-content:space-between;">
-                    <div>
-                        <div class="pub-info-icon" style="margin-bottom:14px;">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                        </div>
-                        <h3 style="font-size:17px; margin-bottom:6px;"><?= htmlspecialchars($cat['name']) ?></h3>
-                        <p style="font-size:13.5px; color:var(--pub-text-muted); line-height:1.5;"><?= htmlspecialchars($cat['desc']) ?></p>
+        <!-- TABLET SHOWCASE DISPLAY WITH DATA CHART OVERLAY -->
+        <div class="figma-showcase-container">
+            <div class="figma-showcase-backdrop"></div>
+            
+            <div class="figma-tablet-device">
+                <div class="figma-tablet-screen" style="background-image: url('/surgical_equipment/assets/images/hero-landscape.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. TRUSTED BY LOGOS (INFINITE MARQUEE) -->
+    <section class="figma-trusted-section">
+        <p class="figma-trusted-title">Trusted by leading hospitals, surgery clinics & medical chains:</p>
+        <div class="figma-marquee-container">
+            <div class="figma-marquee-track">
+                <!-- Group 1 -->
+                <div class="figma-marquee-group">
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.5 8 12 11.2 4.5 8 12 4.8zM4 9.6l7 3.1v7.5l-7-3.5V9.6zm9 10.6v-7.5l7-3.1v7.1l-7 3.5z"/></svg>
+                        <span>Apollo Hospitals</span>
                     </div>
-                    <div style="margin-top:16px; pt-3; border-top:1px solid var(--pub-border); padding-top:12px;">
-                        <a href="/surgical_equipment/contact.php?cat=<?= urlencode($cat['name']) ?>#contact-form" style="font-size:13px; font-weight:700; color:var(--pub-secondary); display:inline-flex; align-items:center; gap:4px;">
-                            <span>Request Quote</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </a>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12" stroke="#ffffff" stroke-width="2.5"/></svg>
+                        <span>Fortis Healthcare</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>Max Healthcare</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 4.2L18.8 19H5.2L12 6.2z"/></svg>
+                        <span>Manipal Hospitals</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4"/></svg>
+                        <span>AIIMS Network</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z"/></svg>
+                        <span>Narayana Health</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                        <span>Medanta The Medicity</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <span>Care Hospitals</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span>Kokilaben Hospital</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        <span>Aster DM Health</span>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
 
-<!-- QUICK CONTACT CALLOUT -->
-<section style="background:linear-gradient(135deg, #0a2540 0%, #0284c7 100%); color:#ffffff; padding:50px 0; text-align:center;">
-    <div class="pub-container">
-        <h2 style="color:#ffffff; font-size:32px; margin-bottom:12px;">Ready to Equip Your Hospital or Operating Theatre?</h2>
-        <p style="color:#e0f2fe; max-width:600px; margin:0 auto 24px auto; font-size:16px;">
-            Contact our technical team today for official quotations, product demonstrations, and distributor pricing.
-        </p>
-        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-            <a href="/surgical_equipment/contact.php" class="pub-btn pub-btn-primary" style="background:#ffffff; color:var(--pub-primary); font-weight:700; padding:14px 28px;">
-                <span>Go to Contact & Map</span>
-            </a>
-            <a href="https://wa.me/917863884678?text=Hello%20Apex%20Surgical%2C%20I%20would%20like%20to%20request%20pricing%20information." target="_blank" rel="noopener noreferrer" class="pub-btn pub-quick-wa" style="padding:14px 28px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
-                <span>Direct WhatsApp Chat</span>
-            </a>
+                <!-- Duplicate Group for Infinite Loop -->
+                <div class="figma-marquee-group" aria-hidden="true">
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.8L19.5 8 12 11.2 4.5 8 12 4.8zM4 9.6l7 3.1v7.5l-7-3.5V9.6zm9 10.6v-7.5l7-3.1v7.1l-7 3.5z"/></svg>
+                        <span>Apollo Hospitals</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M6 12h12" stroke="#ffffff" stroke-width="2.5"/></svg>
+                        <span>Fortis Healthcare</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        <span>Max Healthcare</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 4.2L18.8 19H5.2L12 6.2z"/></svg>
+                        <span>Manipal Hospitals</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4"/></svg>
+                        <span>AIIMS Network</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.5 10.5C3.67 10.5 3 11.17 3 12s.67 1.5 1.5 1.5h15c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5h-15z"/></svg>
+                        <span>Narayana Health</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                        <span>Medanta The Medicity</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <span>Care Hospitals</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span>Kokilaben Hospital</span>
+                    </div>
+                    <div class="figma-logo-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        <span>Aster DM Health</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- 2.5 BENEFITS: WE'VE SET THE STANDARD (FIGMA SPEC) -->
+    <section class="figma-benefits-section" id="benefits">
+        <div class="figma-benefits-header">
+            <div class="figma-benefits-label">Benefits</div>
+            <h2 class="figma-benefits-title">We’ve set the standard.</h2>
+            <p class="figma-benefits-subtitle">
+                Apex provides certified surgical precision and dependable hospital equipment, without supply chain delays or compromises.
+            </p>
+        </div>
+
+        <div class="figma-benefits-grid">
+            <div class="figma-benefit-item">
+                <div class="figma-benefit-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <h3 class="figma-benefit-title">Precision Instruments</h3>
+                <p class="figma-benefit-desc">
+                    Certified German & Japanese alloys calibrated for sub-millimeter surgical control and lasting ergonomic comfort.
+                </p>
+            </div>
+
+            <div class="figma-benefit-item">
+                <div class="figma-benefit-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </div>
+                <h3 class="figma-benefit-title">Turnkey OT Setup</h3>
+                <p class="figma-benefit-desc">
+                    Equip entire modular operating theatres and ICU wards with synchronized, certified biomedical systems.
+                </p>
+            </div>
+
+            <div class="figma-benefit-item">
+                <div class="figma-benefit-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+                </div>
+                <h3 class="figma-benefit-title">Certified Compliance</h3>
+                <p class="figma-benefit-desc">
+                    100% ISO 13485, CE & CDSCO compliant sterilization autoclaves and hospital-grade surgical suites.
+                </p>
+            </div>
+
+            <div class="figma-benefit-item">
+                <div class="figma-benefit-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                </div>
+                <h3 class="figma-benefit-title">On-Site AMC & Support</h3>
+                <p class="figma-benefit-desc">
+                    Rapid 24–48h express dispatch with dedicated biomedical engineers for on-site calibration and staff training.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. FEATURE: SEE THE BIG PICTURE -->
+    <section class="figma-big-picture-split-section" id="solutions">
+        <div class="figma-big-picture-split-grid">
+            <!-- Left Column: Content & Numbered List -->
+            <div class="figma-big-picture-content">
+                <h2 class="figma-big-picture-title">See the Big Picture</h2>
+                <p class="figma-big-picture-subtitle">
+                    Apex equips modern surgical suites, ICUs, and multi-specialty hospitals with certified precision instruments, modular OT infrastructure, and sterile clinical solutions.
+                </p>
+
+                <div class="figma-numbered-list">
+                    <div class="figma-numbered-item">
+                        <span class="figma-num-badge">01</span>
+                        <div class="figma-num-text">
+                            <strong>Spot Critical Needs in Seconds:</strong> Instant access to 1,200+ specialized surgical items and hospital sets.
+                        </div>
+                    </div>
+                    <div class="figma-numbered-item">
+                        <span class="figma-num-badge">02</span>
+                        <div class="figma-num-text">
+                            <strong>Align Your Entire Surgical Team:</strong> Standardized, ergonomically balanced instruments trusted by top surgeons.
+                        </div>
+                    </div>
+                    <div class="figma-numbered-item">
+                        <span class="figma-num-badge">03</span>
+                        <div class="figma-num-text">
+                            <strong>Hospital-Grade Sterility & Safety:</strong> Class B autoclaves and plasma systems meeting ISO 13485 & CE standards.
+                        </div>
+                    </div>
+                    <div class="figma-numbered-item">
+                        <span class="figma-num-badge">04</span>
+                        <div class="figma-num-text">
+                            <strong>End-to-End Biomedical Support:</strong> Comprehensive warranty, certified calibration, and dedicated on-site assistance.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="figma-big-picture-action">
+                    <a href="/surgical_equipment/products.php" class="figma-btn-pill figma-btn-secondary">
+                        <span>Discover More</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Sculptural Podiums Visual Card -->
+            <div class="figma-big-picture-visual-card">
+                <img src="/surgical_equipment/assets/images/sculptural-podiums.jpg" alt="Apex Surgical Equipment Showcase">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 4. FEATURE COMPARISON MATRIX (FIGMA SPEC) -->
+    <section class="figma-comparison-section" id="specs">
+        <div style="text-align:center; max-width:820px; margin:0 auto;">
+            <div style="font-size:13.5px; font-weight:600; color:var(--fg-olive); margin-bottom:14px; letter-spacing:0.02em;">Specs</div>
+            <h2 class="figma-comparison-title" style="margin-bottom:16px;">Why Choose Apex?</h2>
+            <p class="figma-section-desc" style="max-width:640px; margin:0 auto 28px auto; font-size:15.5px; line-height:1.6;">
+                You need equipment that never compromises. That’s why we engineered Apex. A surgeon-first approach to streamline your hospital's surgical procurement.
+            </p>
+            <div style="display:flex; justify-content:center; margin-bottom:8px;">
+                <a href="/surgical_equipment/products.php" class="figma-btn-pill figma-btn-secondary" style="padding:10px 24px; font-size:14px;">
+                    <span>Discover More</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="figma-comparison-container">
+            <div class="figma-comparison-table">
+                <!-- Column 1: Apex (Highlighted White Card) -->
+                <div class="figma-comp-col figma-comp-col-primary">
+                    <div class="figma-comp-header">Apex</div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>ISO 13485, CE & CDSCO Certified</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>German & Japanese Medical Alloys</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>On-site Biomedical AMC & Calibration</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>Direct Institutional & BOQ Pricing</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>Rapid 24–48h Dispatch & Spares Backup</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>Free Doctor & Hospital Demonstrations</span>
+                    </div>
+                </div>
+
+                <!-- Column 2: Standard Suppliers -->
+                <div class="figma-comp-col figma-comp-col-middle">
+                    <div class="figma-comp-header">Standard Suppliers</div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>Basic Regional Licensing</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>Standard 304 Stainless Steel</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Third-Party Repair Services Only</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Multi-Tier Middleman Markups</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-check">✓</span>
+                        <span>7–14 Days Standard Delivery</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Catalogue & Remote Orders Only</span>
+                    </div>
+                </div>
+
+                <!-- Column 3: Generic Traders -->
+                <div class="figma-comp-col">
+                    <div class="figma-comp-header">Generic Traders</div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Unverified Compliance</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Substandard Alloys / Corrosion Risk</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>No Technical After-Sales Support</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Inconsistent Pricing & Supply</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>Extended Delays & No Spares</span>
+                    </div>
+                    <div class="figma-comp-cell">
+                        <span class="figma-comp-icon-cross">✕</span>
+                        <span>No Product Demonstrations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. THREE-STEP PROCESS: 01, 02, 03 (FIGMA SPEC) -->
+    <section class="figma-process-section" id="how-it-works">
+        <div style="text-align:center; max-width:820px; margin:0 auto;">
+            <div style="font-size:13.5px; font-weight:600; color:var(--fg-olive); margin-bottom:14px; letter-spacing:0.02em;">How-to</div>
+            <h2 class="figma-section-h2">Equip Your Hospital in 3 Steps</h2>
+            <p class="figma-section-desc" style="max-width:620px; margin:12px auto 0 auto;">Fast, transparent and certified medical device acquisition for surgeons and institutions.</p>
+        </div>
+
+        <div class="figma-process-grid">
+            <div class="figma-step-card">
+                <div class="figma-step-number">01</div>
+                <h3 class="figma-step-title">Select & Specify</h3>
+                <p class="figma-step-desc">
+                    Browse our online catalogue of 1,200+ surgical items or submit your hospital's Bill of Quantities (BOQ).
+                </p>
+            </div>
+
+            <div class="figma-step-card">
+                <div class="figma-step-number">02</div>
+                <h3 class="figma-step-title">Official Quote & Demo</h3>
+                <p class="figma-step-desc">
+                    Receive verified institutional pricing, compliance certificates, and arrange on-site product demonstrations.
+                </p>
+            </div>
+
+            <div class="figma-step-card">
+                <div class="figma-step-number">03</div>
+                <h3 class="figma-step-title">Delivery & Biomedical Setup</h3>
+                <p class="figma-step-desc">
+                    Rapid insured delivery with calibration, surgical theatre installation, and dedicated biomedical engineer training.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONNECT WITH US CTA (FIGMA 1:1 SPEC) -->
+    <section class="figma-connect-section" id="contact-banner">
+        <h2 class="figma-connect-title">Connect with us</h2>
+        <p class="figma-connect-desc">
+            Schedule a consultation with our biomedical specialists to discover how Apex can equip your operating theatres and hospital facilities with precision solutions.
+        </p>
+        <a href="/surgical_equipment/contact.php" class="figma-connect-btn-wide">
+            <span>Learn More ↗</span>
+        </a>
+    </section>
+
+</div>
 
 <?php require_once __DIR__ . '/includes/public-footer.php'; ?>

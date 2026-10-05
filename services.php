@@ -1,210 +1,377 @@
 <?php
 $pageTitle = "Biomedical & Equipment Services | Apex Surgical & Medical Equipment";
-$pageDescription = "Complete biomedical equipment services including OT installation, hospital AMC & CMC contracts, surgical instrument sharpening, and autoclave maintenance.";
+$pageDescription = "Turnkey OT installations, hospital AMC & CMC contracts, surgical instrument re-sharpening, autoclave maintenance, and NABL traceable calibration.";
 require_once __DIR__ . '/includes/public-header.php';
 ?>
 
-<!-- PAGE BANNER -->
-<section class="pub-page-header">
-    <div class="pub-container pub-page-header-content">
-        <div class="pub-breadcrumb">
-            <a href="/surgical_equipment/index.php">Home</a>
-            <span>/</span>
-            <span>Services</span>
-        </div>
-        <h1 class="pub-page-title">Comprehensive Hospital Biomedical & AMC Services</h1>
-        <p class="pub-page-subtitle">
-            From complete turnkey OT installations and preventive maintenance to Annual Maintenance Contracts (AMC/CMC) and instrument re-sharpening across Gujarat and Western India.
+<div class="figma-page-wrap">
+
+    <!-- 1. EDITORIAL HERO SECTION -->
+    <section class="figma-products-hero" style="padding-bottom: 20px;">
+        <h1 class="figma-products-hero-title">Engineering hospital continuity.</h1>
+        <p class="figma-products-hero-subtitle">
+            From turnkey modular OT installations and NABL-traceable calibration to 24/7 breakdown response and comprehensive AMC/CMC lifecycle coverage across Gujarat & Western India.
         </p>
-    </div>
-</section>
+    </section>
 
-<!-- SERVICES HIGHLIGHT METRICS -->
-<section style="padding: 48px 0; background: #ffffff; border-bottom: 1px solid var(--pub-border);">
-    <div class="pub-container">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; text-align: center;">
-            <div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--pub-secondary); font-family: var(--pub-font-heading);">< 4 Hours</div>
-                <div style="font-weight: 700; color: var(--pub-primary); margin-top: 4px;">Emergency Response Time</div>
-                <p class="text-muted" style="font-size: 13px;">On-site biomedical engineers</p>
+    <!-- 2. SQUARED METRICS STRIP -->
+    <section style="width: 100%; max-width: 1380px; margin: 0 auto 50px auto; padding: 0 24px;">
+        <div style="background: #ffffff; border: 1px solid var(--fg-border); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <div style="padding: 28px 24px; border-right: 1px solid var(--fg-border); border-bottom: 1px solid var(--fg-border); text-align: left;">
+                <div style="font-family: var(--fg-serif); font-size: 40px; font-weight: 700; color: var(--fg-olive); line-height: 1;">< 4 Hours</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0d110d; margin: 8px 0 4px 0; text-transform: uppercase; letter-spacing: 0.04em;">Emergency Response</div>
+                <p style="color: var(--fg-muted); font-size: 13px; margin: 0;">Dedicated on-site biomedical engineers dispatched across regional hospital networks.</p>
             </div>
-            <div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--pub-secondary); font-family: var(--pub-font-heading);">100+</div>
-                <div style="font-weight: 700; color: var(--pub-primary); margin-top: 4px;">Active AMC Hospital Contracts</div>
-                <p class="text-muted" style="font-size: 13px;">Trusted preventive coverage</p>
+            <div style="padding: 28px 24px; border-right: 1px solid var(--fg-border); border-bottom: 1px solid var(--fg-border); text-align: left;">
+                <div style="font-family: var(--fg-serif); font-size: 40px; font-weight: 700; color: var(--fg-olive); line-height: 1;">100+</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0d110d; margin: 8px 0 4px 0; text-transform: uppercase; letter-spacing: 0.04em;">Hospital Contracts</div>
+                <p style="color: var(--fg-muted); font-size: 13px; margin: 0;">Active AMC and CMC maintenance coverage with multi-specialty healthcare chains.</p>
             </div>
-            <div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--pub-secondary); font-family: var(--pub-font-heading);">100%</div>
-                <div style="font-weight: 700; color: var(--pub-primary); margin-top: 4px;">Genuine OEM Spares</div>
-                <p class="text-muted" style="font-size: 13px;">Factory calibrated components</p>
+            <div style="padding: 28px 24px; border-right: 1px solid var(--fg-border); border-bottom: 1px solid var(--fg-border); text-align: left;">
+                <div style="font-family: var(--fg-serif); font-size: 40px; font-weight: 700; color: var(--fg-olive); line-height: 1;">100%</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0d110d; margin: 8px 0 4px 0; text-transform: uppercase; letter-spacing: 0.04em;">OEM Components</div>
+                <p style="color: var(--fg-muted); font-size: 13px; margin: 0;">Factory-calibrated genuine parts ensuring zero compromise on surgical safety.</p>
             </div>
-            <div>
-                <div style="font-size: 28px; font-weight: 800; color: var(--pub-secondary); font-family: var(--pub-font-heading);">ISO / NABL</div>
-                <div style="font-weight: 700; color: var(--pub-primary); margin-top: 4px;">Traceable Calibration</div>
-                <p class="text-muted" style="font-size: 13px;">Hospital accreditation compliant</p>
+            <div style="padding: 28px 24px; border-bottom: 1px solid var(--fg-border); text-align: left;">
+                <div style="font-family: var(--fg-serif); font-size: 40px; font-weight: 700; color: var(--fg-olive); line-height: 1;">ISO / NABL</div>
+                <div style="font-size: 14px; font-weight: 700; color: #0d110d; margin: 8px 0 4px 0; text-transform: uppercase; letter-spacing: 0.04em;">Traceable Audits</div>
+                <p style="color: var(--fg-muted); font-size: 13px; margin: 0;">Full documentation and compliance certificates ready for NABH & JCI audits.</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- MAIN SERVICES GRID -->
-<section style="padding: 70px 0; background: var(--pub-bg);">
-    <div class="pub-container">
-        <div style="text-align: center; max-width: 650px; margin: 0 auto 48px auto;">
-            <span class="pub-form-tag">Lifecycle Support</span>
-            <h2 style="font-size: 32px; margin-bottom: 10px;">Our End-to-End Hospital Services</h2>
-            <p class="text-muted" style="font-size: 15px;">Keeping critical operating theatres and ICUs running smoothly with certified biomedical engineers.</p>
+    <!-- 3. MAIN SERVICES MATRIX (SQUARED STRUCTURE) -->
+    <section class="figma-products-section" style="padding-bottom: 60px;">
+        
+        <div style="margin-bottom: 32px; border-bottom: 1px solid var(--fg-border); padding-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: gap: 12px;">
+            <div>
+                <span class="figma-category-badge" style="margin-bottom: 10px; display: inline-block;">Lifecycle Support</span>
+                <h2 style="font-family: var(--fg-serif); font-size: 34px; color: #0d110d; margin: 0;">Comprehensive Biomedical Capabilities</h2>
+            </div>
+            <p style="color: var(--fg-muted); font-size: 14px; max-width: 440px; margin: 0;">
+                Engineered protocols designed to eliminate OT downtime, prolong equipment longevity, and maintain peak clinical precision.
+            </p>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 28px;">
+        <div class="figma-products-grid">
             
             <!-- Service 1: AMC & CMC -->
-            <div class="pub-info-card" id="amc" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <div class="figma-product-card" id="amc">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #e0f2fe; color: #0284c7; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Preventive Care</span>
+                        <span class="figma-sku-badge">SVC-AMC-01</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">Annual Maintenance Contracts (AMC / CMC)</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        Customized non-comprehensive and comprehensive maintenance agreements for all surgical equipment, autoclaves, suction units, and OT lights with scheduled quarterly audits.
+
+                    <h3 class="figma-product-name">
+                        Annual Maintenance Contracts (AMC / CMC)
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Comprehensive & Non-Comprehensive Coverage
+                    </div>
+
+                    <p class="figma-product-desc">
+                        Customized service agreements tailored for surgical suites, autoclaves, suction units, and OT lights with quarterly scheduled preventative health audits.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ 4 Scheduled preventive maintenance visits per year</li>
-                        <li>✓ Unlimited breakdown emergency support</li>
-                        <li>✓ Preferential pricing on OEM replacement parts</li>
+
+                    <div class="figma-product-material">
+                        <strong>Coverage:</strong> 4 Scheduled Visits/Year + Unlimited Emergency Callouts
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> 4 Scheduled preventive maintenance visits per year</li>
+                        <li><span class="figma-spec-check">✓</span> Rapid emergency breakdown response (< 4 hours)</li>
+                        <li><span class="figma-spec-check">✓</span> Discounted factory-direct pricing on OEM replacement parts</li>
+                        <li><span class="figma-spec-check">✓</span> Digital maintenance logbooks for NABH hospital accreditation</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=AMC#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Request AMC Quote</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=AMC#contact-form" class="figma-card-btn-quote">
+                        <span>Request AMC Proposal ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20am%20interested%20in%20an%20AMC/CMC%20Contract%20proposal%20for%20our%20hospital." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
-            <!-- Service 2: OT & ICU Installation -->
-            <div class="pub-info-card" id="installation" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <!-- Service 2: OT & ICU Setup -->
+            <div class="figma-product-card" id="installation">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #dcfce7; color: #16a34a; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Turnkey Projects</span>
+                        <span class="figma-sku-badge">SVC-INS-02</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">OT & ICU Setup & Commissioning</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        Turnkey installation of ceiling-mounted shadowless LED surgical lights, hydraulic/electric OT tables, anaesthesia gas piping connections, and ICU bed systems.
+
+                    <h3 class="figma-product-name">
+                        OT & ICU Setup & Commissioning
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Modular Theatres, Pendants & ICU Infrastructure
+                    </div>
+
+                    <p class="figma-product-desc">
+                        Full turnkey installation of ceiling-mounted shadowless LED OT lights, hydraulic operating tables, medical gas manifold piping, and motorized ICU beds.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ Complete layout & ergonomic consultation</li>
-                        <li>✓ Pre-commissioning safety & load testing</li>
-                        <li>✓ Formal handover & test certification</li>
+
+                    <div class="figma-product-material">
+                        <strong>Scope:</strong> Layout Architecture, Structural Mounting & Load Testing
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> Architectural workflow & ergonomic equipment layout planning</li>
+                        <li><span class="figma-spec-check">✓</span> Pre-commissioning electrical safety and structural load testing</li>
+                        <li><span class="figma-spec-check">✓</span> Seamless integration with C-Arm and endoscopic video towers</li>
+                        <li><span class="figma-spec-check">✓</span> Official handover dossier and calibration certification</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=Installation#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Request Setup Consultation</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=Installation#contact-form" class="figma-card-btn-quote">
+                        <span>Book Project Consultation ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20want%20to%20discuss%20a%20turnkey%20OT/ICU%20Setup%20project." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Service 3: Sharpening & Repair -->
-            <div class="pub-info-card" id="repairs" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <div class="figma-product-card" id="repairs">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #fef3c7; color: #d97706; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Micro-Precision</span>
+                        <span class="figma-sku-badge">SVC-SHP-03</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">Instrument Sharpening & Repair</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        Micro-precision sharpening of Metzenbaum and micro-scissors, replacement of worn Tungsten Carbide jaws on needle holders, and laser joint re-alignment.
+
+                    <h3 class="figma-product-name">
+                        Instrument Sharpening & Refurbishment
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Scissors, TC Jaws & Micro-Surgical Sets
+                    </div>
+
+                    <p class="figma-product-desc">
+                        Micro-fine optical sharpening of Metzenbaum and iris scissors, replacement of worn Tungsten Carbide jaws, box-lock realignment, and ultrasonic passivation.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ Restores factory razor edge cutting performance</li>
-                        <li>✓ Re-passivation to prevent subsequent rusting</li>
-                        <li>✓ Quick 48-hour hospital turnaround</li>
+
+                    <div class="figma-product-material">
+                        <strong>Turnaround:</strong> 48-Hour Express Hospital Pick-up & Dispatch
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> Restores original factory razor sharpness and smooth cutting action</li>
+                        <li><span class="figma-spec-check">✓</span> Precision gold-ring TC insert re-welding and jaw serration</li>
+                        <li><span class="figma-spec-check">✓</span> Chemical re-passivation to permanently prevent rust pitting</li>
+                        <li><span class="figma-spec-check">✓</span> Extended lifespan reducing annual instrumentation budget by 40%</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=Sharpening#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Book Repair Service</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=Sharpening#contact-form" class="figma-card-btn-quote">
+                        <span>Book Sharpening Batch ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20want%20to%20send%20surgical%20instruments%20for%20sharpening/repair." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
-            <!-- Service 4: Autoclave Validation & Descaling -->
-            <div class="pub-info-card" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <!-- Service 4: Autoclave Validation & CSSD -->
+            <div class="figma-product-card" id="autoclave">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #fee2e2; color: #dc2626; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Sterilization</span>
+                        <span class="figma-sku-badge">SVC-AUT-04</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">Autoclave Validation & CSSD Servicing</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        Periodic steam chamber descaling, pneumatic gasket replacement, heating element testing, and chemical/biological spore indicator validation.
+
+                    <h3 class="figma-product-name">
+                        Autoclave Validation & CSSD Servicing
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Horizontal Class B, Flash & Plasma Sterilizers
+                    </div>
+
+                    <p class="figma-product-desc">
+                        Full steam chamber descaling, high-temp silicone gasket replacements, pneumatic solenoid valve testing, and biological spore validation audits.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ Temperature & pressure gauge calibration</li>
-                        <li>✓ Solenoid valve & safety release inspection</li>
-                        <li>✓ CSSD logbook compliance review</li>
+
+                    <div class="figma-product-material">
+                        <strong>Standard:</strong> EN 285 / ISO 17665 Sterility Assurance
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> Digital temperature & pressure sensor re-calibration</li>
+                        <li><span class="figma-spec-check">✓</span> Automatic safety door interlock and relief valve certified testing</li>
+                        <li><span class="figma-spec-check">✓</span> Vacuum leak-rate testing & air removal efficiency validation</li>
+                        <li><span class="figma-spec-check">✓</span> Microprocessor controller firmware diagnostics & printer testing</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=Autoclave#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Book CSSD Service</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=Autoclave#contact-form" class="figma-card-btn-quote">
+                        <span>Schedule CSSD Audit ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20need%20Autoclave/CSSD%20servicing%20and%20validation." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Service 5: Biomedical Calibration -->
-            <div class="pub-info-card" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <div class="figma-product-card" id="calibration">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #f3e8ff; color: #9333ea; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Accreditation Ready</span>
+                        <span class="figma-sku-badge">SVC-CAL-05</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">Biomedical Equipment Calibration</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        Precision calibration of electro-surgical units (cautery wattage), defibrillator joule output, ECG/NIBP vital monitors, and anaesthesia vaporizers.
+
+                    <h3 class="figma-product-name">
+                        Biomedical Equipment Calibration
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Cautery, Defibrillators, Monitors & Vaporizers
+                    </div>
+
+                    <p class="figma-product-desc">
+                        NABL-traceable testing of electrosurgical units (HF wattage output), defibrillator joule discharge, multi-para vital monitors, and anaesthesia vaporizer concentrations.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ NABL traceable calibration instruments</li>
-                        <li>✓ Electrical safety analyzer compliance report</li>
-                        <li>✓ Calibration sticker & digital certificates</li>
+
+                    <div class="figma-product-material">
+                        <strong>Certification:</strong> NABL Traceable Calibration Certificates & Stickers
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> Calibrated using master medical test analyzers (Fluke Biomedical)</li>
+                        <li><span class="figma-spec-check">✓</span> Comprehensive electrical safety inspection (IEC 62353 standards)</li>
+                        <li><span class="figma-spec-check">✓</span> Complete test datasheets formatted for NABH / JCI inspectors</li>
+                        <li><span class="figma-spec-check">✓</span> Annual calibration reminder schedule and asset tagging</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=Calibration#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Request Calibration Audit</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=Calibration#contact-form" class="figma-card-btn-quote">
+                        <span>Request Calibration Audit ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20need%20biomedical%20equipment%20calibration%20for%20our%20hospital." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Service 6: Staff Training -->
-            <div class="pub-info-card" style="flex-direction: column; padding: 32px; background: #ffffff; justify-content: space-between;">
+            <div class="figma-product-card" id="training">
                 <div>
-                    <div class="pub-info-icon" style="width: 52px; height: 52px; background: #ecfeff; color: #0891b2; margin-bottom: 18px;">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Clinical Skills</span>
+                        <span class="figma-sku-badge">SVC-TRN-06</span>
                     </div>
-                    <h3 style="font-size: 21px; margin-bottom: 8px; color: var(--pub-primary);">Hospital Staff & CSSD Training</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 14.5px; line-height: 1.65; margin-bottom: 14px;">
-                        On-site hands-on workshops for OT nurses, CSSD technicians, and resident doctors on proper instrument handling, ultrasonic cleaning, and sterilization protocols.
+
+                    <h3 class="figma-product-name">
+                        Hospital Staff & CSSD Training
+                    </h3>
+
+                    <div class="figma-product-model">
+                        Nurses, CSSD Techs & Biomedical Staff
+                    </div>
+
+                    <p class="figma-product-desc">
+                        On-site hands-on workshops on surgical instrument handling, enzymatic pre-cleaning, ultrasonic wash cycles, packaging protocols, and emergency OT troubleshooting.
                     </p>
-                    <ul style="list-style: none; font-size: 13px; color: var(--pub-text-muted); display: flex; flex-direction: column; gap: 6px;">
-                        <li>✓ Minimizes accidental instrument damage</li>
-                        <li>✓ Optimizes autoclave batch cycles & lifespan</li>
-                        <li>✓ Participation certificate for attending staff</li>
+
+                    <div class="figma-product-material">
+                        <strong>Format:</strong> On-Site Interactive Workshops + Certified Syllabus
+                    </div>
+
+                    <ul class="figma-product-specs-list">
+                        <li><span class="figma-spec-check">✓</span> Reduces instrument breakage and micro-joint damage by up to 55%</li>
+                        <li><span class="figma-spec-check">✓</span> Teaches optimal autoclave loading patterns to prevent wet packs</li>
+                        <li><span class="figma-spec-check">✓</span> Emergency error-code response training for OT nursing staff</li>
+                        <li><span class="figma-spec-check">✓</span> Official certificate of attendance issued to all participating staff</li>
                     </ul>
                 </div>
-                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--pub-border);">
-                    <a href="/surgical_equipment/contact.php?service=Training#contact-form" class="pub-btn pub-btn-primary pub-btn-block" style="font-size: 13.5px;">Schedule Staff Workshop</a>
+
+                <div class="figma-card-actions">
+                    <a href="/surgical_equipment/contact.php?service=Training#contact-form" class="figma-card-btn-quote">
+                        <span>Schedule Staff Workshop ↗</span>
+                    </a>
+                    <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20want%20to%20schedule%20a%20CSSD/OT%20staff%20training%20workshop." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    </a>
                 </div>
             </div>
 
         </div>
-    </div>
-</section>
 
-<!-- CALL TO ACTION -->
-<section style="background: linear-gradient(135deg, #0a2540 0%, #0284c7 100%); color: #ffffff; padding: 50px 0; text-align: center;">
-    <div class="pub-container">
-        <h2 style="color: #ffffff; font-size: 32px; margin-bottom: 12px;">Need Urgent Biomedical Repair or AMC Coverage?</h2>
-        <p style="color: #e0f2fe; max-width: 620px; margin: 0 auto 24px auto; font-size: 16px;">
-            Our biomedical support team is available 24/7. Call or WhatsApp directly for emergency breakdown visits across Gujarat.
+    </section>
+
+    <!-- 4. SQUARED 3-STEP SERVICE WORKFLOW -->
+    <section style="width: 100%; max-width: 1380px; margin: 0 auto 70px auto; padding: 0 24px;">
+        <div style="background: #ffffff; border: 1px solid var(--fg-border); padding: 40px;">
+            <div style="margin-bottom: 28px; border-bottom: 1px solid var(--fg-border-light); padding-bottom: 14px;">
+                <span class="figma-category-badge" style="margin-bottom: 8px; display: inline-block;">Service Protocol</span>
+                <h3 style="font-family: var(--fg-serif); font-size: 28px; color: #0d110d; margin: 0;">How Apex Delivers Zero-Downtime Care</h3>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <div style="border-top: 2px solid var(--fg-olive); padding-top: 16px;">
+                    <span style="font-family: monospace; font-size: 28px; font-weight: 700; color: var(--fg-olive); display: block; margin-bottom: 6px;">01</span>
+                    <h4 style="font-size: 17px; font-weight: 700; color: #0d110d; margin-bottom: 8px;">On-Site Audit & Diagnostic</h4>
+                    <p style="font-size: 13.5px; color: var(--fg-muted); line-height: 1.6; margin: 0;">
+                        Our certified biomedical team conducts comprehensive load, electrical safety, and optical precision checks on your active inventory.
+                    </p>
+                </div>
+                <div style="border-top: 2px solid var(--fg-olive); padding-top: 16px;">
+                    <span style="font-family: monospace; font-size: 28px; font-weight: 700; color: var(--fg-olive); display: block; margin-bottom: 6px;">02</span>
+                    <h4 style="font-size: 17px; font-weight: 700; color: #0d110d; margin-bottom: 8px;">Calibrated Service & OEM Repair</h4>
+                    <p style="font-size: 13.5px; color: var(--fg-muted); line-height: 1.6; margin: 0;">
+                        Restorations are performed using master Fluke Biomedical analyzers and 100% genuine factory components with traceable test reports.
+                    </p>
+                </div>
+                <div style="border-top: 2px solid var(--fg-olive); padding-top: 16px;">
+                    <span style="font-family: monospace; font-size: 28px; font-weight: 700; color: var(--fg-olive); display: block; margin-bottom: 6px;">03</span>
+                    <h4 style="font-size: 17px; font-weight: 700; color: #0d110d; margin-bottom: 8px;">Continuous 24/7 AMC Coverage</h4>
+                    <p style="font-size: 13.5px; color: var(--fg-muted); line-height: 1.6; margin: 0;">
+                        Enjoy peace of mind with scheduled quarterly audits, direct priority hotline support, and swift replacement standby loaner units.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 24/7 HELPLINE EMERGENCY SECTION (BORDERLESS & CENTERED WITH BIG TEXT) -->
+    <section style="width: 100%; max-width: 1100px; margin: 0 auto 100px auto; padding: 40px 24px; text-align: center;">
+        <div style="margin-bottom: 14px;">
+            <span class="figma-category-badge" style="background: #fee2e2; color: #b91c1c; border-color: rgba(185, 28, 28, 0.2); display: inline-block;">Emergency Breakdown</span>
+        </div>
+        
+        <h2 style="font-family: var(--fg-serif); font-size: clamp(38px, 5.2vw, 68px); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; color: #0d110d; margin: 0 auto 16px auto; max-width: 900px;">
+            Need Immediate On-Site Biomedical Assistance?
+        </h2>
+        
+        <p style="color: var(--fg-muted); font-size: 16px; line-height: 1.6; max-width: 620px; margin: 0 auto 36px auto;">
+            Our rapid response biomedical engineers are on call 24 hours a day, 7 days a week across Gujarat & Western India.
         </p>
-        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-            <a href="tel:+917863884678" class="pub-btn pub-btn-primary" style="background: #ffffff; color: var(--pub-primary); font-weight: 700; padding: 14px 28px;">
-                <span>Call Service Helpline: +91 78638 84678</span>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <a href="tel:+919106595469" class="figma-card-btn-specs" style="font-size: 13px; font-weight: 700; padding: 13px 20px;">
+                <span>Call: +91 91065 95469</span>
             </a>
-            <a href="https://wa.me/917863884678?text=Hello%20Apex%20Surgical%20Service%20Team%2C%20I%20need%20urgent%20service%20/%20AMC%20support." target="_blank" rel="noopener noreferrer" class="pub-btn pub-quick-wa" style="padding: 14px 28px;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
-                <span>WhatsApp 24/7 Breakdown</span>
+            <a href="tel:+917863884678" class="figma-card-btn-specs" style="font-size: 13px; font-weight: 700; padding: 13px 20px;">
+                <span>Call: +91 78638 84678</span>
+            </a>
+            <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%2C%20I%20have%20an%20urgent%20equipment%20breakdown%20at%20our%20hospital." target="_blank" rel="noopener noreferrer" class="figma-card-btn-quote" style="flex: initial; font-size: 13px; font-weight: 700; padding: 13px 24px;">
+                <span>WhatsApp 24/7 Emergency ↗</span>
             </a>
         </div>
-    </div>
-</section>
+    </section>
+
+</div>
 
 <?php require_once __DIR__ . '/includes/public-footer.php'; ?>

@@ -59,20 +59,21 @@ $catalog = [
         'size_model' => 'Model OT-Pro 9000 (Universal C-Arm Compatible)',
         'brand' => 'Apex OEM',
         'warranty' => '3 Years Comprehensive Warranty',
-        'desc' => 'State-of-the-art electro-hydraulic universal surgical table engineered for general surgery, orthopedic, cardiac, neuro, and laparoscopic procedures with full C-Arm radiotranslucency and motorized multi-axis articulation.',
+        'desc' => 'Motorized universal surgical operating table equipped with high-precision micro-hydraulic actuators, remote control handset, 360-degree C-Arm radiotranslucent table top, and emergency manual override pedals.',
         'features' => [
-            'Motorized height, Trendelenburg, lateral tilt, flex-reflex, and backrest elevation.',
-            'Built-in kidney bridge elevation up to 120mm.',
-            'Corded hand control pendant with emergency override safety toggle.',
-            'Heavy-duty base with hydraulic central braking castors.',
+            'Full C-Arm access with 300mm longitudinal table slide.',
+            'Ultra-quiet hydraulic elevation from 680mm to 1000mm.',
+            'Integrated rechargeable battery pack (up to 80 surgical cycles).',
+            'Heavy-duty stainless steel base with central floor locking braking system.',
         ],
         'specs' => [
-            'Maximum Patient Weight' => '280 kg (617 lbs)',
-            'Height Adjustment Range' => '680 mm to 1000 mm',
-            'Trendelenburg / Reverse' => '±25° / ±25°',
-            'Lateral Tilt (Left / Right)' => '±20° / ±20°',
-            'Power Supply' => '220V / 50Hz with 4-Hour Battery Backup',
-            'Mattress Type' => 'Antimicrobial, Anti-Static PU Memory Foam (60mm)',
+            'Patient Weight Capacity' => '280 kg (617 lbs)',
+            'Table Top Dimensions' => '2100 mm x 520 mm',
+            'Trendelenburg / Reverse' => '± 25° Motorized',
+            'Lateral Tilt (L/R)' => '± 20° Motorized',
+            'Back Plate Adjustment' => '+75° to -20° Electric',
+            'Kidney Bridge Elevation' => '120 mm Motorized',
+            'Certifications' => 'ISO 13485 / CE / IEC 60601-1',
         ]
     ],
     8 => [
@@ -82,11 +83,11 @@ $catalog = [
         'material' => 'Antimicrobial Polycarbonate Housing',
         'size_model' => 'Model LifeGuard-1200 (6-Para Standard)',
         'brand' => 'Mindray / Apex OEM',
-        'warranty' => '2 Years Warranty with Annual Calibration',
-        'desc' => 'High-resolution modular patient monitoring system designed for adult, pediatric, and neonatal ICU and OT surveillance. Displays real-time ECG waveforms, blood oxygen saturation, non-invasive blood pressure, and core temperature.',
+        'warranty' => '2 Years Warranty + 5 Years Spare Support',
+        'desc' => 'Modular bedside patient monitor for ICU, CCU, and recovery rooms. Features simultaneous 8-waveform display, ST segment analysis, arrhythmia detection, and rechargeable lithium battery backup.',
         'features' => [
-            '12.1-inch color anti-glare TFT touch display with customizable layouts.',
-            'Comprehensive arrhythmia analysis and ST segment elevation tracking.',
+            '12.1-inch color touchscreen with night-mode display.',
+            'Standard 6 Parameters: ECG, SpO2, NIBP, Respiration, 2-Channel Temp, Pulse.',
             '120-hour graphic and tabular trend memory review.',
             'Central nursing station networkable via Wi-Fi or Ethernet LAN.',
         ],
@@ -133,78 +134,79 @@ $pageDescription = "Technical specifications, material grade, and quotation inqu
 require_once __DIR__ . '/includes/public-header.php';
 ?>
 
-<!-- PAGE BANNER -->
-<section class="pub-page-header">
-    <div class="pub-container pub-page-header-content">
-        <div class="pub-breadcrumb">
-            <a href="/surgical_equipment/index.php">Home</a>
-            <span>/</span>
-            <a href="/surgical_equipment/products.php">Products</a>
-            <span>/</span>
-            <span><?= htmlspecialchars($product['name']) ?></span>
-        </div>
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
-            <span class="pub-badge-cert" style="background: rgba(255,255,255,0.15); color: #ffffff; border: 1px solid rgba(255,255,255,0.3);"><?= htmlspecialchars($product['category']) ?></span>
-            <span style="color: #cbd5e1; font-family: monospace; font-size: 13px;">SKU: <?= htmlspecialchars($product['sku']) ?></span>
-        </div>
-        <h1 class="pub-page-title"><?= htmlspecialchars($product['name']) ?></h1>
-    </div>
-</section>
+<div class="figma-page-wrap">
 
-<!-- MAIN PRODUCT DETAIL -->
-<section style="padding: 60px 0 80px 0; background: var(--pub-bg);">
-    <div class="pub-container">
-        
-        <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: start; margin-bottom: 50px;">
+    <!-- PAGE BANNER / HEADER -->
+    <section class="figma-products-hero" style="padding-bottom: 24px;">
+        <div style="display: flex; gap: 8px; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 13.5px; color: var(--fg-muted);">
+            <a href="/surgical_equipment/index.php" style="color: var(--fg-muted); text-decoration: none;">Home</a>
+            <span>/</span>
+            <a href="/surgical_equipment/products.php" style="color: var(--fg-muted); text-decoration: none;">Products</a>
+            <span>/</span>
+            <span style="color: var(--fg-olive); font-weight: 600;"><?= htmlspecialchars($product['category']) ?></span>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <span class="figma-category-badge"><?= htmlspecialchars($product['category']) ?></span>
+            <span class="figma-sku-badge">SKU: <?= htmlspecialchars($product['sku']) ?></span>
+        </div>
+
+        <h1 class="figma-products-hero-title" style="font-size: clamp(38px, 5.5vw, 68px);">
+            <?= htmlspecialchars($product['name']) ?>
+        </h1>
+    </section>
+
+    <!-- MAIN PRODUCT DETAIL -->
+    <section class="figma-products-section" style="padding-top: 10px;">
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: start; margin-bottom: 50px;">
             
             <!-- LEFT: PRODUCT HIGHLIGHTS & OVERVIEW -->
-            <div style="background: #ffffff; border: 1px solid var(--pub-border); border-radius: var(--pub-radius-xl); padding: 36px; box-shadow: var(--pub-shadow-sm);">
+            <div style="background: #ffffff; border: 1px solid var(--fg-border); border-radius: 0; padding: 32px; box-shadow: none;">
                 
-                <h2 style="font-size: 24px; margin-bottom: 14px; color: var(--pub-primary);">Product Overview</h2>
-                <p style="color: var(--pub-text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+                <h2 style="font-family: var(--fg-serif); font-size: 28px; margin-bottom: 14px; color: #0d110d;">Product Overview</h2>
+                <p style="color: var(--fg-muted); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
                     <?= htmlspecialchars($product['desc']) ?>
                 </p>
 
                 <!-- Key Value Badges -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px;">
-                    <div style="background: var(--pub-surface-alt); padding: 14px; border-radius: var(--pub-radius-md);">
-                        <span class="text-muted" style="font-size: 12px; display: block;">Material Metallurgy</span>
-                        <strong style="font-size: 13.5px; color: var(--pub-primary);"><?= htmlspecialchars($product['material']) ?></strong>
+                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Material Metallurgy</span>
+                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['material']) ?></strong>
                     </div>
-                    <div style="background: var(--pub-surface-alt); padding: 14px; border-radius: var(--pub-radius-md);">
-                        <span class="text-muted" style="font-size: 12px; display: block;">Model / Dimension</span>
-                        <strong style="font-size: 13.5px; color: var(--pub-primary);"><?= htmlspecialchars($product['size_model']) ?></strong>
+                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Model / Dimension</span>
+                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['size_model']) ?></strong>
                     </div>
-                    <div style="background: var(--pub-surface-alt); padding: 14px; border-radius: var(--pub-radius-md);">
-                        <span class="text-muted" style="font-size: 12px; display: block;">Brand / OEM Origin</span>
-                        <strong style="font-size: 13.5px; color: var(--pub-primary);"><?= htmlspecialchars($product['brand']) ?></strong>
+                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Brand / OEM Origin</span>
+                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['brand']) ?></strong>
                     </div>
-                    <div style="background: var(--pub-surface-alt); padding: 14px; border-radius: var(--pub-radius-md);">
-                        <span class="text-muted" style="font-size: 12px; display: block;">Warranty Guarantee</span>
-                        <strong style="font-size: 13.5px; color: #16a34a;"><?= htmlspecialchars($product['warranty']) ?></strong>
+                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Warranty Guarantee</span>
+                        <strong style="font-size: 13.5px; color: var(--fg-olive);"><?= htmlspecialchars($product['warranty']) ?></strong>
                     </div>
                 </div>
 
                 <!-- Engineering Features -->
-                <h3 style="font-size: 18px; margin-bottom: 12px; color: var(--pub-primary);">Key Performance Features</h3>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px;">
+                <h3 style="font-family: var(--fg-serif); font-size: 24px; margin-bottom: 14px; color: #0d110d;">Key Performance Features</h3>
+                <ul class="figma-product-specs-list" style="margin-bottom: 28px; gap: 10px;">
                     <?php foreach ($product['features'] as $feat): ?>
-                        <li style="display: flex; gap: 10px; font-size: 14px; color: var(--pub-text-muted); line-height: 1.5;">
-                            <span style="color: #16a34a; font-weight: 700; flex-shrink: 0;">✓</span>
+                        <li style="font-size: 14px; line-height: 1.5; color: #384236;">
+                            <span class="figma-spec-check">✓</span>
                             <span><?= htmlspecialchars($feat) ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
 
                 <!-- Brochure PDF Trigger -->
-                <div style="padding: 18px; background: #e0f2fe; border: 1px dashed #0284c7; border-radius: var(--pub-radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <div style="padding: 18px; background: var(--fg-lime-tint); border: 1px dashed var(--fg-sage); border-radius: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                     <div>
-                        <strong style="font-size: 14px; color: #0369a1; display: block;">Technical Datasheet & Brochure (PDF)</strong>
-                        <span style="font-size: 12.5px; color: #0284c7;">Includes dimensional blueprints & CE certificates</span>
+                        <strong style="font-size: 14px; color: var(--fg-olive); display: block; margin-bottom: 2px;">Technical Datasheet & Brochure (PDF)</strong>
+                        <span style="font-size: 12.5px; color: var(--fg-muted);">Includes dimensional blueprints & CE certificates</span>
                     </div>
-                    <a href="https://wa.me/917863884678?text=<?= urlencode('Please send technical brochure PDF for ' . $product['name'] . ' (' . $product['sku'] . ')') ?>" target="_blank" class="pub-btn pub-btn-primary" style="font-size: 13px; padding: 8px 16px;">
-                        <span>Request PDF Brochure</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <a href="https://wa.me/919106595469?text=<?= urlencode('Hello Heer Jani, please send technical brochure PDF for ' . $product['name'] . ' (' . $product['sku'] . ')') ?>" target="_blank" class="figma-card-btn-quote" style="font-size: 12px; padding: 10px 18px; border-radius: 0;">
+                        <span>Request PDF Brochure ↗</span>
                     </a>
                 </div>
 
@@ -214,10 +216,10 @@ require_once __DIR__ . '/includes/public-header.php';
             <div style="display: flex; flex-direction: column; gap: 24px;">
                 
                 <!-- Instant Quote Card -->
-                <div class="pub-form-card" style="padding: 30px;">
-                    <span class="pub-form-tag">Direct Factory Price</span>
-                    <h3 style="font-size: 22px; margin-bottom: 8px;">Request Official Quotation</h3>
-                    <p style="color: var(--pub-text-muted); font-size: 13.5px; margin-bottom: 20px;">
+                <div style="background: #ffffff; border: 1px solid var(--fg-border); border-radius: 0; padding: 28px; box-shadow: none;">
+                    <span class="figma-category-badge" style="margin-bottom: 12px; display: inline-block;">Direct Factory Price</span>
+                    <h3 style="font-family: var(--fg-serif); font-size: 26px; margin-bottom: 8px; color: #0d110d;">Request Official Quotation</h3>
+                    <p style="color: var(--fg-muted); font-size: 13.5px; margin-bottom: 20px; line-height: 1.5;">
                         Receive official proforma invoice, bulk hospital discount, and dispatch timeline.
                     </p>
 
@@ -225,47 +227,49 @@ require_once __DIR__ . '/includes/public-header.php';
                         <input type="hidden" name="inquiry_type" value="Price Quote Request">
                         <input type="hidden" name="equipment_category" value="<?= htmlspecialchars($product['category']) ?>">
                         
-                        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+                        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 18px;">
                             <div>
-                                <label class="pub-label">Your Name <span>*</span></label>
-                                <input type="text" name="full_name" class="pub-input" placeholder="e.g. Dr. Ramesh Shah / Purchase Manager" required>
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-dark); display: block; margin-bottom: 6px;">Your Name <span style="color: #ef4444;">*</span></label>
+                                <input type="text" name="full_name" class="figma-search-input" style="padding: 11px 14px; border-radius: 0;" placeholder="e.g. Dr. Ramesh Shah / Purchase Manager" required>
                             </div>
                             <div>
-                                <label class="pub-label">Phone / WhatsApp <span>*</span></label>
-                                <input type="tel" name="phone" class="pub-input" placeholder="+91 78638 84678" required>
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-dark); display: block; margin-bottom: 6px;">Phone / WhatsApp <span style="color: #ef4444;">*</span></label>
+                                <input type="tel" name="phone" class="figma-search-input" style="padding: 11px 14px; border-radius: 0;" placeholder="+91 91065 95469" required>
                             </div>
                             <div>
-                                <label class="pub-label">Hospital / City</label>
-                                <input type="text" name="hospital_name" class="pub-input" placeholder="e.g. City Hospital, Ahmedabad">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-dark); display: block; margin-bottom: 6px;">Hospital / City</label>
+                                <input type="text" name="hospital_name" class="figma-search-input" style="padding: 11px 14px; border-radius: 0;" placeholder="e.g. City Hospital, Ahmedabad">
                             </div>
                             <div>
-                                <label class="pub-label">Requirement / Quantity</label>
-                                <textarea name="message" class="pub-textarea" style="min-height: 80px;" required>Please send quotation for <?= htmlspecialchars($product['name']) ?> (SKU: <?= htmlspecialchars($product['sku']) ?>). Required Quantity: 1 set.</textarea>
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-dark); display: block; margin-bottom: 6px;">Requirement / Quantity</label>
+                                <textarea name="message" class="figma-search-input" style="min-height: 80px; padding: 11px 14px; border-radius: 0; resize: vertical;" required>Please send quotation for <?= htmlspecialchars($product['name']) ?> (SKU: <?= htmlspecialchars($product['sku']) ?>). Required Quantity: 1 set.</textarea>
                             </div>
                         </div>
 
-                        <button type="submit" class="pub-btn pub-btn-primary pub-btn-block" style="padding: 12px; font-size: 14.5px;">
-                            <span>Submit Quote Request</span>
+                        <button type="submit" class="figma-card-btn-quote" style="width: 100%; padding: 13px; font-size: 13px; border-radius: 0;">
+                            <span>Submit Quote Request ↗</span>
                         </button>
                     </form>
 
                     <!-- WhatsApp Button -->
-                    <div style="margin-top: 14px; text-align: center;">
-                        <a href="https://wa.me/917863884678?text=<?= urlencode('Hello, I am looking for a quick price quote for ' . $product['name'] . ' (Model: ' . $product['sku'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="pub-btn pub-quick-wa pub-btn-block" style="padding: 12px;">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <a href="https://wa.me/919106595469?text=<?= urlencode('Hello Heer Jani (Apex Surgical), I am looking for a quick price quote for ' . $product['name'] . ' (Model: ' . $product['sku'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="figma-btn-wa-full" style="display: flex; align-items: center; justify-content: center; width: 100%; padding: 11px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; gap: 8px; border-radius: 0; background: #25D366; color: #ffffff; text-decoration: none;">
+                            <span style="width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                            </span>
                             <span>Chat on WhatsApp Now</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Technical Specs Table Card -->
-                <div style="background: #ffffff; border: 1px solid var(--pub-border); border-radius: var(--pub-radius-xl); padding: 26px;">
-                    <h3 style="font-size: 18px; margin-bottom: 14px; color: var(--pub-primary);">Technical Specifications</h3>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="background: #ffffff; border: 1px solid var(--fg-border); border-radius: 0; padding: 28px; box-shadow: none;">
+                    <h3 style="font-family: var(--fg-serif); font-size: 22px; margin-bottom: 16px; color: #0d110d;">Technical Specifications</h3>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
                         <?php foreach ($product['specs'] as $label => $val): ?>
-                            <div style="display: flex; justify-content: space-between; font-size: 13px; padding-bottom: 8px; border-bottom: 1px solid var(--pub-border);">
-                                <span class="text-muted"><?= htmlspecialchars($label) ?></span>
-                                <strong style="color: var(--pub-primary); text-align: right; max-width: 55%;"><?= htmlspecialchars($val) ?></strong>
+                            <div style="display: flex; justify-content: space-between; font-size: 13px; padding-bottom: 8px; border-bottom: 1px solid var(--fg-border-light);">
+                                <span style="color: var(--fg-muted);"><?= htmlspecialchars($label) ?></span>
+                                <strong style="color: #0d110d; text-align: right; max-width: 55%;"><?= htmlspecialchars($val) ?></strong>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -275,7 +279,8 @@ require_once __DIR__ . '/includes/public-header.php';
 
         </div>
 
-    </div>
-</section>
+    </section>
+
+</div>
 
 <?php require_once __DIR__ . '/includes/public-footer.php'; ?>

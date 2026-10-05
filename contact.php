@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Contact Us | Apex Surgical & Medical Equipment";
-$pageDescription = "Get in touch with Apex Surgical for inquiries, quotations, hospital supply, and equipment AMC support. Reach out via WhatsApp, phone, or online form.";
+$pageDescription = "Connect directly with Apex Surgical for hospital equipment quotations, biomedical engineering support, and AMC inquiries in Gujarat, India.";
 require_once __DIR__ . '/includes/public-header.php';
 
 $formData = $_SESSION['form_data'] ?? [];
@@ -9,129 +9,191 @@ $flashError = $_SESSION['pub_error'] ?? null;
 unset($_SESSION['pub_success'], $_SESSION['pub_error']);
 ?>
 
-<!-- PAGE BANNER -->
-<section class="pub-page-header">
-    <div class="pub-container pub-page-header-content">
-        <div class="pub-breadcrumb">
-            <a href="/surgical_equipment/index.php">Home</a>
-            <span>/</span>
-            <span>Contact Us</span>
-        </div>
-        <h1 class="pub-page-title">Contact & Technical Inquiry Desk</h1>
-        <p class="pub-page-subtitle">
-            Need pricing, equipment specifications, AMC contracts, or tender quotation? Connect directly with our biomedical specialists and sales executives.
+<div class="figma-page-wrap">
+
+    <!-- 1. EDITORIAL HERO SECTION -->
+    <section class="figma-products-hero" style="padding-bottom: 20px;">
+        <h1 class="figma-products-hero-title">Connect with our clinical desk.</h1>
+        <p class="figma-products-hero-subtitle">
+            Direct technical consultation, hospital setup proposals, annual maintenance inquiries, and immediate quote requests.
         </p>
-    </div>
-</section>
+    </section>
 
-<!-- MAIN CONTACT SECTION -->
-<section class="pub-contact-section">
-    <div class="pub-container">
-        
-        <div class="pub-contact-grid">
+    <!-- 3. MAIN CONTACT & INQUIRY SPLIT SECTION -->
+    <section style="width: 100%; max-width: 1380px; margin: 0 auto 70px auto; padding: 0 24px;">
+        <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 32px; align-items: start;">
             
-            <!-- LEFT COLUMN: CONTACT DETAILS & DIRECT TRIGGERS -->
-            <div class="pub-contact-info-wrap">
+            <!-- LEFT COLUMN: DIRECT CONTACT CHANNELS -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
                 
-                <!-- Card 1: Office & Showroom -->
-                <div class="pub-info-card">
-                    <div class="pub-info-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <!-- Office Card -->
+                <div class="figma-product-card" style="padding: 28px;">
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge" style="background: var(--fg-lime-tint); color: var(--fg-olive);">Headquarters</span>
+                        <span class="figma-sku-badge">EST. 2012</span>
                     </div>
-                    <div class="pub-info-content">
-                        <h3>Corporate Office & Experience Center</h3>
-                        <p>Near post office, Khodu Road, Dudhrej, Gujarat 363040, India.</p>
-                        <span class="pub-info-highlight">Open: Mon – Sat (9:00 AM – 7:30 PM)</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: Sales & Quotations -->
-                <div class="pub-info-card">
-                    <div class="pub-info-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                    </div>
-                    <div class="pub-info-content">
-                        <h3>Sales & Tender Quotations</h3>
-                        <p>Direct Phone: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
-                        <p>WhatsApp: <a href="https://wa.me/917863884678" target="_blank" class="pub-info-highlight">+91 78638 84678</a></p>
-                        <p>Email: <a href="mailto:swetazala05@gmail.com">swetazala05@gmail.com</a></p>
+                    <h3 style="font-family: var(--fg-serif); font-size: 22px; color: #0d110d; margin: 0 0 10px 0;">
+                        Corporate Office & Experience Center
+                    </h3>
+                    <p style="font-size: 14px; color: var(--fg-muted); line-height: 1.6; margin: 0 0 12px 0;">
+                        Near post office, Khodu Road, Dudhrej, Surendranagar, Gujarat 363040, India.
+                    </p>
+                    <div style="font-size: 12px; font-weight: 700; color: var(--fg-olive); text-transform: uppercase; letter-spacing: 0.04em;">
+                        Working Hours: Mon – Sat (9:00 AM – 7:30 PM IST)
                     </div>
                 </div>
 
-                <!-- Card 3: AMC & Technical Support -->
-                <div class="pub-info-card">
-                    <div class="pub-info-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <!-- Contact Person 1: Heer Jani -->
+                <div class="figma-product-card" style="padding: 24px;">
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Institutional Relations</span>
+                        <span class="figma-sku-badge">DIRECT DESK</span>
                     </div>
-                    <div class="pub-info-content">
-                        <h3>Biomedical Engineering & AMC Support</h3>
-                        <p>24/7 Breakdown Help: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
-                        <p>Support Email: <a href="mailto:swetazala05@gmail.com">swetazala05@gmail.com</a></p>
+                    <h3 style="font-family: var(--fg-serif); font-size: 22px; color: #0d110d; margin: 0 0 2px 0;">
+                        Heer Jani
+                    </h3>
+                    <div style="font-size: 13px; font-weight: 600; color: var(--fg-olive); margin-bottom: 12px;">
+                        Sales &amp; Hospital Relations Desk
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: #0d110d; margin-bottom: 18px;">
+                        <div>
+                            <span style="color: var(--fg-muted); font-size: 12px; display: block;">Phone / WhatsApp:</span>
+                            <a href="tel:+919106595469" style="font-weight: 700; color: var(--fg-olive); text-decoration: none;">+91 91065 95469</a>
+                        </div>
+                        <div>
+                            <span style="color: var(--fg-muted); font-size: 12px; display: block;">Email:</span>
+                            <a href="mailto:heerujani0501@gmail.com" style="font-weight: 600; color: #0d110d; text-decoration: none;">heerujani0501@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="figma-card-actions">
+                        <a href="tel:+919106595469" class="figma-card-btn-quote" style="text-align: center; font-size: 12px; padding: 10px 14px;">
+                            <span>Call Heer Jani ↗</span>
+                        </a>
+                        <a href="https://wa.me/919106595469?text=Hello%20Heer%20Jani%20(Apex%20Surgical)%2C%20I%20would%20like%20to%20request%20a%20quotation." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="WhatsApp Heer Jani">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Card 4: Quick Action Triggers (WhatsApp & Direct Call) -->
-                <div class="pub-quick-triggers">
-                    <a href="https://wa.me/917863884678?text=Hello%20Apex%20Surgical%20Team%2C%20I%20want%20to%20inquire%20about%20surgical%20equipment." target="_blank" rel="noopener noreferrer" class="pub-quick-btn pub-quick-wa">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
-                        <span>WhatsApp Us</span>
-                    </a>
-                    <a href="tel:+917863884678" class="pub-quick-btn pub-quick-call">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        <span>Call Sales Now</span>
-                    </a>
+                <!-- Contact Person 2: Sweta Zala -->
+                <div class="figma-product-card" style="padding: 24px;">
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge">Quotations &amp; Tenders</span>
+                        <span class="figma-sku-badge">DIRECT DESK</span>
+                    </div>
+                    <h3 style="font-family: var(--fg-serif); font-size: 22px; color: #0d110d; margin: 0 0 2px 0;">
+                        Sweta Zala
+                    </h3>
+                    <div style="font-size: 13px; font-weight: 600; color: var(--fg-olive); margin-bottom: 12px;">
+                        Commercial &amp; Quotations Lead
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: #0d110d; margin-bottom: 18px;">
+                        <div>
+                            <span style="color: var(--fg-muted); font-size: 12px; display: block;">Phone / WhatsApp:</span>
+                            <a href="tel:+917863884678" style="font-weight: 700; color: var(--fg-olive); text-decoration: none;">+91 78638 84678</a>
+                        </div>
+                        <div>
+                            <span style="color: var(--fg-muted); font-size: 12px; display: block;">Email:</span>
+                            <a href="mailto:swetazala05@gmail.com" style="font-weight: 600; color: #0d110d; text-decoration: none;">swetazala05@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="figma-card-actions">
+                        <a href="tel:+917863884678" class="figma-card-btn-quote" style="text-align: center; font-size: 12px; padding: 10px 14px;">
+                            <span>Call Sweta Zala ↗</span>
+                        </a>
+                        <a href="https://wa.me/917863884678?text=Hello%20Sweta%20Zala%20(Apex%20Surgical)%2C%20I%20would%20like%20to%20request%20a%20quotation." target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="WhatsApp Sweta Zala">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Biomedical Support Card -->
+                <div class="figma-product-card" style="padding: 24px;">
+                    <div class="figma-card-top-meta">
+                        <span class="figma-category-badge" style="background: var(--fg-lime-tint); color: var(--fg-olive);">Biomedical Engineering</span>
+                        <span class="figma-sku-badge">24/7 SUPPORT</span>
+                    </div>
+                    <h3 style="font-family: var(--fg-serif); font-size: 22px; color: #0d110d; margin: 0 0 8px 0;">
+                        Technical AMC &amp; Emergency Service
+                    </h3>
+                    <p style="font-size: 13.5px; color: var(--fg-muted); line-height: 1.5; margin: 0 0 16px 0;">
+                        Immediate on-site biomedical repair, preventive maintenance, calibration validation, and surgical scissor sharpening.
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="tel:+919106595469" class="figma-card-btn-specs" style="text-align: center; font-weight: 700; font-size: 12.5px; padding: 10px 14px;">
+                            <span>Helpline 1: +91 91065 95469</span>
+                        </a>
+                        <a href="tel:+917863884678" class="figma-card-btn-specs" style="text-align: center; font-weight: 700; font-size: 12.5px; padding: 10px 14px;">
+                            <span>Helpline 2: +91 78638 84678</span>
+                        </a>
+                    </div>
                 </div>
 
             </div>
 
-            <!-- RIGHT COLUMN: ENQUIRY & QUOTE FORM -->
-            <div class="pub-form-card" id="contact-form">
-                <div class="pub-form-header">
-                    <span class="pub-form-tag">Fast Response Guaranteed</span>
-                    <h2 class="pub-form-title">Request a Quote / Enquire Now</h2>
-                    <p class="pub-form-subtitle">Fill out the form below and our medical equipment representative will get back to you with pricing, brochures, and availability.</p>
+            <!-- RIGHT COLUMN: INQUIRY FORM & EXPERIENCE CENTER MAP -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <div id="contact-form" style="background: #ffffff; border: 1px solid var(--fg-border); padding: 40px;">
+                
+                <div style="margin-bottom: 24px; border-bottom: 1px solid var(--fg-border-light); padding-bottom: 18px;">
+                    <span class="figma-category-badge" style="margin-bottom: 8px; display: inline-block;">Commercial & Technical Inquiry</span>
+                    <h2 style="font-family: var(--fg-serif); font-size: 30px; color: #0d110d; margin: 0 0 8px 0;">Request a Formal Quote</h2>
+                    <p style="font-size: 14px; color: var(--fg-muted); margin: 0; line-height: 1.5;">
+                        Complete the specifications below. Our biomedical sales engineer will prepare your itemized proforma invoice within 2 hours.
+                    </p>
                 </div>
 
                 <?php if ($flashSuccess): ?>
-                    <div class="pub-alert pub-alert-success">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                        <span><?= $flashSuccess ?></span>
+                    <div style="background: rgba(62, 83, 27, 0.08); border-left: 3px solid var(--fg-olive); padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: var(--fg-olive); font-weight: 600;">
+                        ✓ <?= htmlspecialchars($flashSuccess) ?>
                     </div>
                 <?php endif; ?>
 
                 <?php if ($flashError): ?>
-                    <div class="pub-alert pub-alert-error">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                        <span><?= $flashError ?></span>
+                    <div style="background: rgba(220, 38, 38, 0.08); border-left: 3px solid #dc2626; padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: #dc2626; font-weight: 600;">
+                        ✕ <?= htmlspecialchars($flashError) ?>
                     </div>
                 <?php endif; ?>
 
                 <form action="/surgical_equipment/process-inquiry.php" method="POST">
-                    <div class="pub-form-grid">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px;">
                         
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="full_name">Your Name <span>*</span></label>
-                            <input type="text" id="full_name" name="full_name" class="pub-input" placeholder="e.g. Dr. Rajesh Patel / Hospital Purchase Manager" value="<?= htmlspecialchars($formData['full_name'] ?? '') ?>" required>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="full_name">
+                                Your Full Name <span style="color: #dc2626;">*</span>
+                            </label>
+                            <input type="text" id="full_name" name="full_name" required placeholder="e.g. Dr. Rajesh Patel" value="<?= htmlspecialchars($formData['full_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                         </div>
 
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="phone">Phone / WhatsApp Number <span>*</span></label>
-                            <input type="tel" id="phone" name="phone" class="pub-input" placeholder="e.g. +91 98765 01234" value="<?= htmlspecialchars($formData['phone'] ?? '') ?>" required>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="phone">
+                                Phone / WhatsApp <span style="color: #dc2626;">*</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" required placeholder="e.g. +91 98765 01234" value="<?= htmlspecialchars($formData['phone'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                         </div>
 
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="email">Email Address <span>*</span></label>
-                            <input type="email" id="email" name="email" class="pub-input" placeholder="e.g. contact@hospital.org" value="<?= htmlspecialchars($formData['email'] ?? '') ?>" required>
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="email">
+                                Email Address <span style="color: #dc2626;">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="e.g. purchase@hospital.org" value="<?= htmlspecialchars($formData['email'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                         </div>
 
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="hospital_name">Hospital / Clinic / Company</label>
-                            <input type="text" id="hospital_name" name="hospital_name" class="pub-input" placeholder="e.g. Sterling Multi-Specialty Hospital" value="<?= htmlspecialchars($formData['hospital_name'] ?? '') ?>">
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="hospital_name">
+                                Hospital / Clinic / Lab
+                            </label>
+                            <input type="text" id="hospital_name" name="hospital_name" placeholder="e.g. Apex Multi-Specialty Hospital" value="<?= htmlspecialchars($formData['hospital_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                         </div>
 
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="inquiry_type">Inquiry Purpose</label>
-                            <select id="inquiry_type" name="inquiry_type" class="pub-select">
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="inquiry_type">
+                                Inquiry Purpose
+                            </label>
+                            <select id="inquiry_type" name="inquiry_type" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                                 <option value="Request a Price Quote">Request a Price Quote</option>
                                 <option value="Product Availability & Technical Specs">Product Availability & Technical Specs</option>
                                 <option value="Annual Maintenance Contract (AMC / CMC)">Annual Maintenance Contract (AMC / CMC)</option>
@@ -141,9 +203,11 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                             </select>
                         </div>
 
-                        <div class="pub-form-group">
-                            <label class="pub-label" for="equipment_category">Equipment Category</label>
-                            <select id="equipment_category" name="equipment_category" class="pub-select">
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="equipment_category">
+                                Equipment Category
+                            </label>
+                            <select id="equipment_category" name="equipment_category" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
                                 <option value="">-- Select Category (Optional) --</option>
                                 <option value="Surgical Instruments">Surgical Instruments</option>
                                 <option value="OT Equipment">OT Equipment</option>
@@ -158,46 +222,105 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                             </select>
                         </div>
 
-                        <div class="pub-form-group pub-full-col">
-                            <label class="pub-label" for="message">Requirement Details / Message <span>*</span></label>
-                            <textarea id="message" name="message" class="pub-textarea" placeholder="Please specify product models, quantities, required delivery timeline, or any custom specifications..." required><?= htmlspecialchars($formData['message'] ?? '') ?></textarea>
+                        <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="message">
+                                Requirement Details / Message <span style="color: #dc2626;">*</span>
+                            </label>
+                            <textarea id="message" name="message" required rows="4" placeholder="Specify product models, instrument quantities, required delivery timeline, or hospital tender specs..." style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none; resize: vertical;"><?= htmlspecialchars($formData['message'] ?? '') ?></textarea>
                         </div>
 
                     </div>
 
-                    <button type="submit" class="pub-btn pub-btn-primary pub-btn-block" style="padding:14px; font-size:15px;">
-                        <span>Submit Quote Request</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <button type="submit" class="figma-card-btn-quote" style="width: 100%; padding: 15px 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-align: center; border: none; cursor: pointer;">
+                        <span>Submit Quotation Request ↗</span>
                     </button>
                 </form>
-            </div>
 
-        </div>
-
-        <!-- GOOGLE MAP EMBED (100% FREE, NO API KEY REQUIRED) -->
-        <div class="pub-map-wrapper">
-            <div class="pub-map-header">
-                <div>
-                    <h3>Visit Our Healthcare Experience Center</h3>
-                    <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Near post office, Khodu road, Dudhrej, Gujarat 363040, India (View on Google Maps)</p>
                 </div>
-                <a href="https://maps.google.com/?q=Near+post+office+khodu+road+Dudhrej+363040" target="_blank" rel="noopener noreferrer" class="pub-btn pub-btn-outline" style="font-size:12.5px; padding:6px 14px;">
-                    <span>Open in Google Maps App</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
+
+                <!-- GOOGLE MAP EXPERIENCE CENTER (SQUARED CONTAINER) -->
+                <div style="background: #ffffff; border: 1px solid var(--fg-border); padding: 32px;">
+                    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 14px;">
+                        <div>
+                            <span class="figma-category-badge" style="margin-bottom: 6px; display: inline-block;">Physical Showroom</span>
+                            <h3 style="font-family: var(--fg-serif); font-size: 24px; color: #0d110d; margin: 0;">Visit Our Healthcare Experience Center</h3>
+                            <p style="font-size: 13.5px; color: var(--fg-muted); margin: 4px 0 0 0;">
+                                Near post office, Khodu Road, Dudhrej, Gujarat 363040, India
+                            </p>
+                        </div>
+                        <a href="https://maps.google.com/?q=Near+post+office+khodu+road+Dudhrej+363040" target="_blank" rel="noopener noreferrer" class="figma-card-btn-specs" style="padding: 8px 16px; font-size: 12.5px; font-weight: 700;">
+                            <span>Open in Google Maps ↗</span>
+                        </a>
+                    </div>
+                    
+                    <div style="width: 100%; height: 320px; border: 1px solid var(--fg-border-light); overflow: hidden;">
+                        <iframe 
+                            title="Apex Surgical Location Map"
+                            src="https://maps.google.com/maps?q=Near+post+office+khodu+road+Dudhrej+363040&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                            width="100%"
+                            height="100%"
+                            style="border: 0;"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
             </div>
-            <div class="pub-map-frame-container">
-                <iframe 
-                    title="Apex Surgical Location Map"
-                    src="https://maps.google.com/maps?q=Near+post+office+khodu+road+Dudhrej+363040&t=&z=14&ie=UTF8&iwloc=&output=embed" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
+
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- 5. CENTERED BORDERLESS CTA SECTION -->
+    <section style="width: 100%; max-width: 1100px; margin: 0 auto 100px auto; padding: 40px 24px; text-align: center;">
+        <div style="margin-bottom: 14px;">
+            <span class="figma-category-badge" style="display: inline-block;">Direct Hotline</span>
+        </div>
+        
+        <h2 style="font-family: var(--fg-serif); font-size: clamp(38px, 5.2vw, 68px); font-weight: 400; line-height: 1.05; letter-spacing: -0.025em; color: #0d110d; margin: 0 auto 16px auto; max-width: 900px;">
+            Need Immediate On-Site Biomedical Assistance?
+        </h2>
+        
+        <p style="color: var(--fg-muted); font-size: 16px; line-height: 1.6; max-width: 620px; margin: 0 auto 36px auto;">
+            Our biomedical engineers and sales directors are standing by to assist with emergency OT equipment support, tenders, and bulk orders.
+        </p>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <a href="tel:+919106595469" class="figma-card-btn-quote" style="flex: initial; font-size: 13px; font-weight: 700; padding: 13px 24px;">
+                <span>Call Heer Jani: +91 91065 95469</span>
+            </a>
+            <a href="tel:+917863884678" class="figma-card-btn-quote" style="flex: initial; font-size: 13px; font-weight: 700; padding: 13px 24px;">
+                <span>Call Sweta Zala: +91 78638 84678</span>
+            </a>
+            <a href="https://wa.me/919106595469?text=Hello%20Apex%20Surgical%20Team%2C%20I%20need%20immediate%20assistance." target="_blank" rel="noopener noreferrer" class="figma-card-btn-specs" style="font-size: 13px; font-weight: 700; padding: 13px 24px;">
+                <span>WhatsApp Instant Desk</span>
+            </a>
+        </div>
+    </section>
 
-<?php require_once __DIR__ . '/includes/public-footer.php'; ?>
+    <!-- 6. THANK YOU SIGN-OFF BY APEX -->
+    <section style="width: 100%; max-width: 1100px; margin: 0 auto 80px auto; padding: 48px 24px; text-align: center; border-top: 1px solid rgba(0, 0, 0, 0.08);">
+        <div style="margin-bottom: 12px;">
+            <span class="figma-category-badge" style="background: var(--fg-lime-tint); color: var(--fg-olive); display: inline-block;">Message from Apex</span>
+        </div>
+        <h2 style="font-family: var(--fg-serif); font-size: clamp(32px, 4vw, 48px); font-weight: 400; color: #0d110d; margin: 0 auto 14px auto; line-height: 1.15;">
+            Thank you for choosing Apex Surgical.
+        </h2>
+        <p style="color: var(--fg-muted); font-size: 15px; line-height: 1.7; max-width: 680px; margin: 0 auto 20px auto;">
+            We are honored to partner with healthcare professionals, surgical centers, and healthcare institutions. Every instrument we deliver and every system we service is backed by our unwavering commitment to precision, patient safety, and clinical excellence.
+        </p>
+        <div style="font-family: var(--fg-serif); font-size: 20px; font-style: italic; color: var(--fg-olive); margin-top: 10px;">
+            — The Team at Apex Surgical &amp; Medical Equipment
+        </div>
+        <div style="font-size: 12px; color: var(--fg-muted); margin-top: 8px; letter-spacing: 0.04em; text-transform: uppercase;">
+            Dudhrej, Gujarat • Serving Healthcare Nationwide
+        </div>
+    </section>
+
+</div>
+
+<?php 
+$hideFooter = true;
+require_once __DIR__ . '/includes/public-footer.php'; 
+?>
