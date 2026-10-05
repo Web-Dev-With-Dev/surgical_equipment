@@ -17,7 +17,7 @@
                         Trusted manufacturer & authorized distributor of surgical instruments, OT equipment, ICU systems, and sterilization autoclaves for over 15 years across 500+ healthcare facilities.
                     </p>
                     <div class="pub-cert-badges-mini">
-                        <span class="pub-badge-cert">ISO 13485:2016</span>
+                        <span class="pub-badge-cert">Hospital Grade Tested</span>
                         <span class="pub-badge-cert">CE 0123</span>
                         <span class="pub-badge-cert">CDSCO Approved</span>
                     </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="pub-contact-item">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <a href="mailto:info@apexsurgical.com">info@apexsurgical.com</a>
+                        <a href="mailto:swetazala05@gmail.com">swetazala05@gmail.com</a>
                     </div>
                     <div class="pub-footer-timing">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>

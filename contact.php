@@ -54,7 +54,7 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                         <h3>Sales & Tender Quotations</h3>
                         <p>Direct Phone: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
                         <p>WhatsApp: <a href="https://wa.me/917863884678" target="_blank" class="pub-info-highlight">+91 78638 84678</a></p>
-                        <p>Email: <a href="mailto:sales@apexsurgical.com">sales@apexsurgical.com</a></p>
+                        <p>Email: <a href="mailto:swetazala05@gmail.com">swetazala05@gmail.com</a></p>
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                     <div class="pub-info-content">
                         <h3>Biomedical Engineering & AMC Support</h3>
                         <p>24/7 Breakdown Help: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
-                        <p>Support Email: <a href="mailto:service@apexsurgical.com">service@apexsurgical.com</a></p>
+                        <p>Support Email: <a href="mailto:swetazala05@gmail.com">swetazala05@gmail.com</a></p>
                     </div>
                 </div>
 

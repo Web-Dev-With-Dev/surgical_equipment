@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Apex Surgical & Medical Equipment | Leading Medical Supplier";
-$pageDescription = "High-precision surgical instruments, OT equipment, ICU systems, and hospital sterilization solutions. ISO 13485 & CE certified.";
+$pageDescription = "High-precision surgical instruments, OT equipment, ICU systems, and hospital sterilization solutions. CE & CDSCO compliant.";
 require_once __DIR__ . '/includes/public-header.php';
 ?>
 
@@ -10,7 +10,7 @@ require_once __DIR__ . '/includes/public-header.php';
         <span class="pub-badge-tag" style="font-size:12px; padding:4px 12px; margin-bottom:14px; display:inline-block;">Hospital & Surgical Supply Partner</span>
         <h1 class="pub-page-title" style="font-size:42px; max-width:760px; line-height:1.2;">Precision Surgical Instruments & Advanced Operating Theatre Equipment</h1>
         <p class="pub-page-subtitle" style="font-size:17px; margin-bottom:28px;">
-            Supplying ISO 13485 & CE certified surgical instruments, OT tables, ICU systems, and sterilization autoclaves to 500+ hospitals across India.
+            Supplying CE certified and CDSCO compliant surgical instruments, OT tables, ICU systems, and sterilization autoclaves to 500+ hospitals across India.
         </p>
         <div style="display:flex; gap:16px; flex-wrap:wrap;">
             <a href="/surgical_equipment/contact.php#contact-form" class="pub-btn pub-btn-primary" style="padding:14px 28px; font-size:15px;">

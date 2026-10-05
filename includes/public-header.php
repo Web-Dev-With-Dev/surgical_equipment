@@ -10,7 +10,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) . ' | Apex Surgical & Medical Equipment' : 'Apex Surgical & Medical Equipment | Leading Medical Supplier' ?></title>
-    <meta name="description" content="<?= isset($pageDescription) ? htmlspecialchars($pageDescription) : 'Apex Surgical - High-precision surgical instruments, OT equipment, ICU systems, and sterilization solutions. ISO 13485 & CE certified.' ?>">
+    <meta name="description" content="<?= isset($pageDescription) ? htmlspecialchars($pageDescription) : 'Apex Surgical - High-precision surgical instruments, OT equipment, ICU systems, and sterilization solutions. CE & CDSCO compliant.' ?>">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,18 +26,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <header class="pub-topbar">
         <div class="pub-container pub-topbar-inner">
             <div class="pub-topbar-left">
-                <span class="pub-badge-tag">ISO 13485:2016 Certified</span>
+                <span class="pub-badge-tag">CE & CDSCO Compliant</span>
                 <span class="pub-topbar-divider">|</span>
-                <span>CDSCO Registered Medical Device Supplier</span>
+                <span>Authorized Medical Device Supplier</span>
             </div>
             <div class="pub-topbar-right">
                 <a href="tel:+917863884678" class="pub-topbar-link">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                     +91 78638 84678
                 </a>
-                <a href="mailto:info@apexsurgical.com" class="pub-topbar-link">
+                <a href="mailto:swetazala05@gmail.com" class="pub-topbar-link">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    info@apexsurgical.com
+                    swetazala05@gmail.com
                 </a>
                 <a href="/surgical_equipment/auth/login.php" class="pub-topbar-portal">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
