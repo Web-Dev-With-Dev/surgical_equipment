@@ -2,6 +2,7 @@
 ob_start();
 
 require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/product-helpers.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -110,26 +111,32 @@ require_once __DIR__ . '/../includes/sidebar.php';
         <?php unset($_SESSION['flash_success']); ?>
     <?php endif; ?>
 
+    <?php $itemImg = get_product_image_url($item['category'] ?? '', $item['name'] ?? '', $item['equipment_code'] ?? '', $item['notes'] ?? ''); ?>
     <div class="card mb-6">
         <div class="card-header"><h3 class="card-title">Equipment Information</h3></div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px;">
-            <?php
-            $fields = [
-                'Equipment Code'   => $item['equipment_code'] ?? '—',
-                'Category'         => $item['category'] ?? '—',
-                'Serial Number'    => $item['serial_number'] ?? '—',
-                'Current Location' => $item['current_location'] ?? '—',
-                'Purchase Date'    => !empty($item['purchase_date']) ? date('M j, Y', strtotime($item['purchase_date'])) : '—',
-                'Warranty Expiry'  => !empty($item['warranty_expiry']) ? date('M j, Y', strtotime($item['warranty_expiry'])) : '—',
-                'Last Sterilised'  => !empty($item['last_sterilised_at']) ? date('M j, Y g:i A', strtotime($item['last_sterilised_at'])) : 'Never',
-                'Added'            => !empty($item['created_at']) ? date('M j, Y', strtotime($item['created_at'])) : '—',
-            ];
-            foreach ($fields as $label => $val): ?>
-                <div>
-                    <span class="text-muted" style="font-size:var(--font-size-xs); display:block;"><?= $label ?></span>
-                    <strong><?= htmlspecialchars($val, ENT_QUOTES, 'UTF-8') ?></strong>
-                </div>
-            <?php endforeach; ?>
+        <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:start;">
+            <div style="width:200px; height:160px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--color-border); flex-shrink:0; background:#FAFBF8; display:flex; align-items:center; justify-content:center; padding:8px;">
+                <img src="<?= htmlspecialchars($itemImg) ?>" alt="<?= htmlspecialchars($item['name'] ?? '', ENT_QUOTES, 'UTF-8') ?>" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain;">
+            </div>
+            <div style="flex:1; min-width:260px; display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:18px;">
+                <?php
+                $fields = [
+                    'Equipment Code'   => $item['equipment_code'] ?? '—',
+                    'Category'         => $item['category'] ?? '—',
+                    'Serial Number'    => $item['serial_number'] ?? '—',
+                    'Current Location' => $item['current_location'] ?? '—',
+                    'Purchase Date'    => !empty($item['purchase_date']) ? date('M j, Y', strtotime($item['purchase_date'])) : '—',
+                    'Warranty Expiry'  => !empty($item['warranty_expiry']) ? date('M j, Y', strtotime($item['warranty_expiry'])) : '—',
+                    'Last Sterilised'  => !empty($item['last_sterilised_at']) ? date('M j, Y g:i A', strtotime($item['last_sterilised_at'])) : 'Never',
+                    'Added'            => !empty($item['created_at']) ? date('M j, Y', strtotime($item['created_at'])) : '—',
+                ];
+                foreach ($fields as $label => $val): ?>
+                    <div>
+                        <span class="text-muted" style="font-size:var(--font-size-xs); display:block;"><?= $label ?></span>
+                        <strong><?= htmlspecialchars($val, ENT_QUOTES, 'UTF-8') ?></strong>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
         <?php if (!empty($item['notes'])): ?>
             <div class="mt-4">

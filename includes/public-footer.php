@@ -31,7 +31,7 @@
                             <li><a href="/surgical_equipment/certifications.php">Quality & Compliance</a></li>
                             <li><a href="/surgical_equipment/brands.php">Authorized OEMs</a></li>
                             <li><a href="/surgical_equipment/contact.php">Contact Specialists</a></li>
-                            <li><a href="/surgical_equipment/auth/login.php">Internal Portal</a></li>
+                            <li><a href="/surgical_equipment/auth/login.php" style="color:var(--fg-olive); font-weight:600;">Admin &amp; Staff Portal ↗</a></li>
                         </ul>
                     </div>
                 </div>

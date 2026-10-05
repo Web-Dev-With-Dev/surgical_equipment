@@ -71,15 +71,55 @@ try {
             $code     = trim($_POST['equipment_code'] ?? '');
             $name     = trim($_POST['name'] ?? '');
             $category = trim($_POST['category'] ?? '');
-            $status   = $_POST['status'] ?? 'available';
-            $location = trim($_POST['current_location'] ?? 'Main Store');
-            $serial   = trim($_POST['serial_number'] ?? '') ?: null;
-            $purchase = trim($_POST['purchase_date'] ?? '') ?: null;
-            $warranty = trim($_POST['warranty_expiry'] ?? '') ?: null;
-            $notes    = trim($_POST['notes'] ?? '') ?: null;
+            $status   = trim($_POST['status'] ?? 'available');
+            $location = trim($_POST['current_location'] ?? '');
+            $serial   = trim($_POST['serial_number'] ?? '');
+            $purchase = trim($_POST['purchase_date'] ?? '');
+            $warranty = trim($_POST['warranty_expiry'] ?? '');
+            $notes    = trim($_POST['notes'] ?? '');
 
-            if ($code === '' || $name === '' || $category === '') {
-                throw new RuntimeException('Code, name, and category are required.');
+            // All fields are required
+            if ($code === '' || $name === '' || $category === '' || $status === '' || $location === '' || $serial === '' || $purchase === '' || $warranty === '' || $notes === '') {
+                throw new RuntimeException('All fields are required. Please fill in all equipment details.');
+            }
+
+            // Image file upload handling (Required on create)
+            $imagePath = null;
+            if (!isset($_FILES['product_image']) || $_FILES['product_image']['error'] !== UPLOAD_ERR_OK) {
+                throw new RuntimeException('Product image is required. Please upload a clear photograph of the equipment.');
+            } else {
+                $file = $_FILES['product_image'];
+                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+                if (!in_array($ext, $allowed, true)) {
+                    throw new RuntimeException('Invalid image format. Allowed formats: JPG, JPEG, PNG, WEBP.');
+                }
+                
+                $uploadDir = __DIR__ . '/assets/images/photos';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                // Name file after sanitized product name or code
+                $cleanBase = preg_replace('/[^\w\s\(\)#-]/u', '', $name);
+                $cleanBase = trim($cleanBase) ?: preg_replace('/[^a-zA-Z0-9_-]/', '', $code);
+                $targetFilename = $cleanBase . '.' . $ext;
+                $destination = $uploadDir . '/' . $targetFilename;
+
+                if (!move_uploaded_file($file['tmp_name'], $destination)) {
+                    throw new RuntimeException('Failed to save uploaded product image to server.');
+                }
+
+                $imagePath = '/surgical_equipment/assets/images/photos/' . rawurlencode($targetFilename);
+                // Append or prepend image note
+                $notes = "Image: " . $imagePath . "\n" . $notes;
+            }
+
+            // Check if duplicate equipment code exists
+            $dupStmt = $pdo->prepare('SELECT id FROM equipment_inventory WHERE equipment_code = :code LIMIT 1');
+            $dupStmt->execute([':code' => $code]);
+            if ($dupStmt->fetch()) {
+                throw new RuntimeException("Equipment code/SKU \"$code\" already exists. Please use a unique SKU.");
             }
 
             $stmt = $pdo->prepare('
@@ -88,13 +128,19 @@ try {
                 VALUES (:code, :name, :cat, :status, :loc, :serial, :purchase, :warranty, :notes)
             ');
             $stmt->execute([
-                ':code' => $code, ':name' => $name, ':cat' => $category,
-                ':status' => $status, ':loc' => $location, ':serial' => $serial,
-                ':purchase' => $purchase, ':warranty' => $warranty, ':notes' => $notes,
+                ':code'     => $code,
+                ':name'     => $name,
+                ':cat'      => $category,
+                ':status'   => $status,
+                ':loc'      => $location,
+                ':serial'   => $serial,
+                ':purchase' => $purchase,
+                ':warranty' => $warranty,
+                ':notes'    => $notes,
             ]);
             $newId = (int) $pdo->lastInsertId();
             $logAudit('equipment.create', 'equipment_inventory', $newId, "Created: $name ($code)");
-            $_SESSION['flash_success'] = "Equipment \"$name\" added successfully.";
+            $_SESSION['flash_success'] = "Equipment \"$name\" and photo added and published successfully.";
             header('Location: /surgical_equipment/equipment/equipment-details.php?id=' . $newId);
             exit;
         }
@@ -104,15 +150,47 @@ try {
             $code     = trim($_POST['equipment_code'] ?? '');
             $name     = trim($_POST['name'] ?? '');
             $category = trim($_POST['category'] ?? '');
-            $status   = $_POST['status'] ?? 'available';
-            $location = trim($_POST['current_location'] ?? 'Main Store');
-            $serial   = trim($_POST['serial_number'] ?? '') ?: null;
-            $purchase = trim($_POST['purchase_date'] ?? '') ?: null;
-            $warranty = trim($_POST['warranty_expiry'] ?? '') ?: null;
-            $notes    = trim($_POST['notes'] ?? '') ?: null;
+            $status   = trim($_POST['status'] ?? 'available');
+            $location = trim($_POST['current_location'] ?? '');
+            $serial   = trim($_POST['serial_number'] ?? '');
+            $purchase = trim($_POST['purchase_date'] ?? '');
+            $warranty = trim($_POST['warranty_expiry'] ?? '');
+            $notes    = trim($_POST['notes'] ?? '');
 
-            if ($id <= 0 || $code === '' || $name === '' || $category === '') {
-                throw new RuntimeException('Missing required fields.');
+            if ($id <= 0) {
+                throw new RuntimeException('Invalid equipment ID.');
+            }
+
+            // All fields are required
+            if ($code === '' || $name === '' || $category === '' || $status === '' || $location === '' || $serial === '' || $purchase === '' || $warranty === '' || $notes === '') {
+                throw new RuntimeException('All fields are required. Please fill in all equipment details.');
+            }
+
+            // Check for new image upload
+            if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
+                $file = $_FILES['product_image'];
+                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+                if (!in_array($ext, $allowed, true)) {
+                    throw new RuntimeException('Invalid image format. Allowed formats: JPG, JPEG, PNG, WEBP.');
+                }
+                
+                $uploadDir = __DIR__ . '/assets/images/photos';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                $cleanBase = preg_replace('/[^\w\s\(\)#-]/u', '', $name);
+                $cleanBase = trim($cleanBase) ?: preg_replace('/[^a-zA-Z0-9_-]/', '', $code);
+                $targetFilename = $cleanBase . '.' . $ext;
+                $destination = $uploadDir . '/' . $targetFilename;
+
+                if (move_uploaded_file($file['tmp_name'], $destination)) {
+                    $imagePath = '/surgical_equipment/assets/images/photos/' . rawurlencode($targetFilename);
+                    // Update notes with new image path
+                    $cleanNotes = trim(preg_replace('/Image:\s*[^\n]+\n?/i', '', $notes));
+                    $notes = "Image: " . $imagePath . "\n" . $cleanNotes;
+                }
             }
 
             $stmt = $pdo->prepare('
@@ -123,13 +201,19 @@ try {
                 WHERE id=:id
             ');
             $stmt->execute([
-                ':code' => $code, ':name' => $name, ':cat' => $category,
-                ':status' => $status, ':loc' => $location, ':serial' => $serial,
-                ':purchase' => $purchase, ':warranty' => $warranty, ':notes' => $notes,
-                ':id' => $id,
+                ':code'     => $code,
+                ':name'     => $name,
+                ':cat'      => $category,
+                ':status'   => $status,
+                ':loc'      => $location,
+                ':serial'   => $serial,
+                ':purchase' => $purchase,
+                ':warranty' => $warranty,
+                ':notes'    => $notes,
+                ':id'       => $id,
             ]);
             $logAudit('equipment.update', 'equipment_inventory', $id, "Updated: $name ($code)");
-            $_SESSION['flash_success'] = "Equipment updated successfully.";
+            $_SESSION['flash_success'] = "Equipment \"$name\" updated successfully.";
             header('Location: /surgical_equipment/equipment/equipment-details.php?id=' . $id);
             exit;
         }

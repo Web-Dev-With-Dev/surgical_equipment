@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/product-helpers.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -126,11 +127,14 @@ require_once __DIR__ . '/../includes/sidebar.php';
 
     <div class="card-grid mb-4">
         <?php if (count($items) > 0): ?>
-            <?php foreach ($items as $item): ?>
+            <?php foreach ($items as $item): 
+                $itemImg = get_product_image_url($item['category'] ?? '', $item['name'], $item['equipment_code'], $item['notes'] ?? '');
+            ?>
                 <div class="session-card">
 
-                    <div class="session-card-header">
-                        <div style="min-width:0;">
+                    <div class="session-card-header" style="display:flex; align-items:center; gap:12px;">
+                        <img src="<?= htmlspecialchars($itemImg) ?>" alt="<?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?>" style="width:44px; height:44px; object-fit:cover; border-radius:var(--radius-sm); border:1px solid var(--color-border); flex-shrink:0;">
+                        <div style="min-width:0; flex:1;">
                             <span class="session-card-title"><?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?></span>
                             <span style="display:block; font-size:0.75rem; color:var(--color-text-muted); margin-top:2px; font-family:var(--font-sans);"><?= htmlspecialchars($item['equipment_code'], ENT_QUOTES, 'UTF-8') ?></span>
                         </div>

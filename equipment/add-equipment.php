@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/product-helpers.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -84,12 +85,48 @@ require_once __DIR__ . '/../includes/sidebar.php';
     <?php endif; ?>
 
     <div class="card" style="max-width:820px;">
-        <form method="post" action="/surgical_equipment/process-action.php">
+        <?php 
+        $currentImg = get_product_image_url($item['category'] ?? '', $item['name'] ?? '', $item['equipment_code'] ?? '', $item['notes'] ?? '');
+        ?>
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--color-border);">
+            <div style="width:72px; height:72px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--color-border); background:#FAFBF8; flex-shrink:0; display:flex; align-items:center; justify-content:center; padding:4px;">
+                <img id="productImagePreview" src="<?= htmlspecialchars($currentImg) ?>" alt="Product Preview" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain;">
+            </div>
+            <div>
+                <h4 style="margin:0 0 4px 0; font-size:1rem; font-weight:700; color:var(--color-text-body);">Catalogue Photography Integration</h4>
+                <p style="margin:0; font-size:0.8125rem; color:var(--color-text-muted);">
+                    Apex dynamically associates high-resolution clinical photographs matching the category and instrument name across the public store.
+                </p>
+            </div>
+        </div>
+
+        <form method="post" action="/surgical_equipment/process-action.php" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token"  value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>">
             <input type="hidden" name="action"       value="<?= $item ? 'equipment_update' : 'equipment_create' ?>">
             <?php if ($item): ?>
                 <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
             <?php endif; ?>
+
+            <!-- Equipment Image Upload Field -->
+            <div class="form-group mb-4" style="background:#FAFBF8; border:1px dashed var(--color-border); padding:20px; border-radius:var(--radius-md);">
+                <label for="product_image" style="font-weight:700; display:flex; align-items:center; gap:6px; margin-bottom:8px; font-size:0.9375rem; color:var(--color-text-body);">
+                    <span>Product Photograph</span>
+                    <span style="color:var(--color-danger)">*</span>
+                    <?php if ($item): ?>
+                        <span style="font-size:0.75rem; color:var(--color-text-muted); font-weight:normal;">(Leave empty to keep existing photograph)</span>
+                    <?php endif; ?>
+                </label>
+                <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+                    <input type="file" id="product_image" name="product_image" class="form-control"
+                           accept="image/png, image/jpeg, image/jpg, image/webp"
+                           <?= !$item ? 'required' : '' ?>
+                           onchange="previewUploadedImage(this);"
+                           style="flex:1; min-width:220px; background:#ffffff;">
+                    <div style="font-size:0.8125rem; color:var(--color-text-muted);">
+                        Supported: JPG, JPEG, PNG, WEBP (Max 10MB)
+                    </div>
+                </div>
+            </div>
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
                 <div class="form-group">
@@ -116,8 +153,8 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     </datalist>
                 </div>
                 <div class="form-group">
-                    <label for="status">Inventory Status</label>
-                    <select id="status" name="status" class="form-control">
+                    <label for="status">Inventory Status <span style="color:var(--color-danger)">*</span></label>
+                    <select id="status" name="status" class="form-control" required>
                         <?php $curStatus = $item['status'] ?? 'available'; ?>
                         <?php foreach (['available','in_use','under_maintenance','sterilising','retired'] as $s): ?>
                             <option value="<?= $s ?>" <?= $curStatus===$s ? 'selected':'' ?>>
@@ -127,34 +164,34 @@ require_once __DIR__ . '/../includes/sidebar.php';
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="serial_number">Model / Dimension / Serial No.</label>
-                    <input type="text" id="serial_number" name="serial_number" class="form-control"
+                    <label for="serial_number">Model / Dimension / Serial No. <span style="color:var(--color-danger)">*</span></label>
+                    <input type="text" id="serial_number" name="serial_number" class="form-control" required
                            placeholder="e.g. 7 Inch (180mm) / Model Pro-900"
                            value="<?= htmlspecialchars($item['serial_number'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div class="form-group">
-                    <label for="current_location">Hospital Location</label>
-                    <input type="text" id="current_location" name="current_location" class="form-control"
+                    <label for="current_location">Hospital Location <span style="color:var(--color-danger)">*</span></label>
+                    <input type="text" id="current_location" name="current_location" class="form-control" required
                            placeholder="e.g. OT Store A / ICU Bay 2"
                            value="<?= htmlspecialchars($item['current_location'] ?? 'Main Store', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div class="form-group">
-                    <label for="purchase_date">Procurement / Launch Date</label>
-                    <input type="date" id="purchase_date" name="purchase_date" class="form-control"
+                    <label for="purchase_date">Procurement / Launch Date <span style="color:var(--color-danger)">*</span></label>
+                    <input type="date" id="purchase_date" name="purchase_date" class="form-control" required
                            value="<?= htmlspecialchars($item['purchase_date'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <div class="form-group">
-                    <label for="warranty_expiry">Warranty Expiry</label>
-                    <input type="date" id="warranty_expiry" name="warranty_expiry" class="form-control"
+                    <label for="warranty_expiry">Warranty Expiry <span style="color:var(--color-danger)">*</span></label>
+                    <input type="date" id="warranty_expiry" name="warranty_expiry" class="form-control" required
                            value="<?= htmlspecialchars($item['warranty_expiry'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="notes">Description &amp; Specifications (Syncs to Public Catalogue)</label>
-                <textarea id="notes" name="notes" class="form-control" rows="4" placeholder="Enter clinical description, material grade, and specifications (e.g. Material: German Stainless Steel; Brand: Apex OEM; Specs: Autoclavable, CE Approved)"><?= htmlspecialchars($item['notes'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                <label for="notes">Description &amp; Specifications (Syncs to Public Catalogue) <span style="color:var(--color-danger)">*</span></label>
+                <textarea id="notes" name="notes" class="form-control" rows="4" required placeholder="Enter clinical description, material grade, and specifications (e.g. Material: German Stainless Steel; Brand: Apex OEM; Specs: Autoclavable, CE Approved)"><?= htmlspecialchars($item['notes'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
                 <small style="color:var(--color-text-muted); font-size:12px; margin-top:4px; display:block;">
-                    Tip: You can optionally format lines with <code>Material: ...</code>, <code>Brand: ...</code>, and <code>Specs: item1, item2</code> to display structured metadata in the public product view.
+                    Tip: Format lines with <code>Material: ...</code>, <code>Brand: ...</code>, and <code>Specs: item1, item2</code> to display rich highlights on public product cards.
                 </small>
             </div>
 
@@ -176,5 +213,20 @@ require_once __DIR__ . '/../includes/sidebar.php';
             </form>
         <?php endif; ?>
     </div>
+
+    <script>
+    function previewUploadedImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('productImagePreview');
+                if (preview) {
+                    preview.src = e.target.result;
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
 </main>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

@@ -3,6 +3,7 @@ $pageTitle = "Medical & Surgical Products Catalogue | Apex Surgical";
 $pageDescription = "Browse medical categories including Surgical Instruments, OT Equipment, ICU Monitors, Laparoscopy sets, Autoclaves, and Hospital Furniture.";
 $hideFooter = true;
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/includes/product-helpers.php';
 require_once __DIR__ . '/includes/public-header.php';
 
 // Dynamic Database Fetch
@@ -51,6 +52,7 @@ try {
         }
 
         $sizeModel = $row['serial_number'] ?: ('Model: ' . $row['equipment_code']);
+        $productImage = get_product_image_url($row['category'], $row['name'], $row['equipment_code'], $notes);
 
         $allProducts[] = [
             'id' => (int) $row['id'],
@@ -63,6 +65,7 @@ try {
             'specs' => $specs,
             'brand' => $brand,
             'status' => $row['status'],
+            'image' => $productImage,
         ];
     }
 
@@ -127,57 +130,72 @@ $activeCategory = $_GET['cat'] ?? 'all';
             <?php foreach ($allProducts as $p): ?>
                 <div class="figma-product-card" data-category="<?= htmlspecialchars($p['category']) ?>" data-search="<?= strtolower(htmlspecialchars($p['name'] . ' ' . $p['sku'] . ' ' . $p['material'] . ' ' . $p['desc'] . ' ' . $p['category'])) ?>">
                     
-                    <div>
-                        <!-- Category & SKU Tag -->
-                        <div class="figma-card-top-meta">
-                            <span class="figma-category-badge"><?= htmlspecialchars($p['category']) ?></span>
-                            <span class="figma-sku-badge"><?= htmlspecialchars($p['sku']) ?></span>
-                        </div>
-
-                        <!-- Product Name -->
-                        <h3 class="figma-product-name">
-                            <?= htmlspecialchars($p['name']) ?>
-                        </h3>
-
-                        <!-- Model / Size -->
-                        <div class="figma-product-model">
-                            Model/Size: <?= htmlspecialchars($p['size_model']) ?>
-                        </div>
-
-                        <!-- Description -->
-                        <p class="figma-product-desc">
-                            <?= htmlspecialchars($p['desc']) ?>
-                        </p>
-
-                        <!-- Material Pill -->
-                        <div class="figma-product-material">
-                            <strong>Material:</strong> <?= htmlspecialchars($p['material']) ?>
-                        </div>
-
-                        <!-- Technical Specs Bullets -->
-                        <div style="margin-bottom: 16px;">
-                            <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: var(--fg-muted); letter-spacing: 0.05em; display: block; margin-bottom: 8px;">Key Highlights:</span>
-                            <ul class="figma-product-specs-list">
-                                <?php foreach ($p['specs'] as $spec): ?>
-                                    <li>
-                                        <span class="figma-spec-check">✓</span> <?= htmlspecialchars($spec) ?>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
+                    <!-- Product Image Container -->
+                    <div class="figma-card-img-wrap">
+                        <a href="/surgical_equipment/product-details.php?id=<?= $p['id'] ?>" style="display:block; width:100%; height:100%;">
+                            <img src="<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" loading="lazy">
+                        </a>
+                        <div class="figma-card-floating-badge">
+                            <span>ISO 13485 / CE</span>
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
-                    <div class="figma-card-actions">
-                        <a href="/surgical_equipment/product-details.php?id=<?= $p['id'] ?>" class="figma-card-btn-specs" title="View Technical Specifications">
-                            <span>Specs</span>
-                        </a>
-                        <a href="/surgical_equipment/contact.php?product=<?= urlencode($p['name']) ?>&sku=<?= urlencode($p['sku']) ?>#contact-form" class="figma-card-btn-quote">
-                            <span>Get Quote ↗</span>
-                        </a>
-                        <a href="https://wa.me/919106595469?text=<?= urlencode('Hello Heer Jani (Apex Surgical), I want a price quote & technical datasheet for ' . $p['name'] . ' (' . $p['sku'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
-                        </a>
+                    <!-- Card Body -->
+                    <div class="figma-card-body">
+                        <div>
+                            <!-- Category & SKU Tag -->
+                            <div class="figma-card-top-meta">
+                                <span class="figma-category-badge"><?= htmlspecialchars($p['category']) ?></span>
+                                <span class="figma-sku-badge"><?= htmlspecialchars($p['sku']) ?></span>
+                            </div>
+
+                            <!-- Product Name -->
+                            <h3 class="figma-product-name">
+                                <a href="/surgical_equipment/product-details.php?id=<?= $p['id'] ?>" style="color: inherit; text-decoration: none;">
+                                    <?= htmlspecialchars($p['name']) ?>
+                                </a>
+                            </h3>
+
+                            <!-- Model / Size -->
+                            <div class="figma-product-model">
+                                Model/Size: <?= htmlspecialchars($p['size_model']) ?>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="figma-product-desc">
+                                <?= htmlspecialchars($p['desc']) ?>
+                            </p>
+
+                            <!-- Material Pill -->
+                            <div class="figma-product-material">
+                                <strong>Material:</strong> <?= htmlspecialchars($p['material']) ?>
+                            </div>
+
+                            <!-- Technical Specs Bullets -->
+                            <div style="margin-bottom: 16px;">
+                                <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: var(--fg-muted); letter-spacing: 0.05em; display: block; margin-bottom: 8px;">Key Highlights:</span>
+                                <ul class="figma-product-specs-list">
+                                    <?php foreach ($p['specs'] as $spec): ?>
+                                        <li>
+                                            <span class="figma-spec-check">✓</span> <?= htmlspecialchars($spec) ?>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="figma-card-actions">
+                            <a href="/surgical_equipment/product-details.php?id=<?= $p['id'] ?>" class="figma-card-btn-specs" title="View Technical Specifications">
+                                <span>Specs</span>
+                            </a>
+                            <a href="/surgical_equipment/contact.php?product=<?= urlencode($p['name']) ?>&sku=<?= urlencode($p['sku']) ?>#contact-form" class="figma-card-btn-quote">
+                                <span>Get Quote ↗</span>
+                            </a>
+                            <a href="https://wa.me/919106595469?text=<?= urlencode('Hello Heer Jani (Apex Surgical), I want a price quote & technical datasheet for ' . $p['name'] . ' (' . $p['sku'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="figma-card-btn-wa" title="Inquire on WhatsApp">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
+                            </a>
+                        </div>
                     </div>
 
                 </div>

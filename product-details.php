@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/includes/product-helpers.php';
 
 $productId = (int)($_GET['id'] ?? 0);
 $skuQuery  = trim($_GET['sku'] ?? '');
@@ -73,6 +74,7 @@ try {
         }
 
         $sizeModel = $row['serial_number'] ?: ('Model ' . $row['equipment_code']);
+        $productImage = get_product_image_url($row['category'], $row['name'], $row['equipment_code'], $notes);
 
         $product = [
             'id'         => (int) $row['id'],
@@ -87,6 +89,7 @@ try {
             'features'   => $features,
             'specs'      => $specs,
             'status'     => $row['status'],
+            'image'      => $productImage,
         ];
 
         // Related products in same category
@@ -142,60 +145,83 @@ require_once __DIR__ . '/includes/public-header.php';
     <section class="figma-products-section" style="padding-top: 10px;">
         <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: start; margin-bottom: 50px;" class="prod-detail-grid">
             
-            <!-- LEFT: PRODUCT HIGHLIGHTS & OVERVIEW -->
-            <div style="background: #ffffff; border: 1px solid var(--fg-border); border-radius: 0; padding: 32px; box-shadow: none;">
+            <!-- LEFT: PRODUCT PHOTO SHOWCASE & OVERVIEW -->
+            <div style="background: #ffffff; border: 1px solid var(--fg-border); border-radius: 0; padding: 0; box-shadow: none; overflow: hidden;">
                 
-                <h2 style="font-family: var(--fg-serif); font-size: 28px; margin-bottom: 14px; color: #0d110d;">Product Overview</h2>
-                <p style="color: var(--fg-muted); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
-                    <?= htmlspecialchars($product['desc']) ?>
-                </p>
+                <!-- Original Resolution Photo Showcase (No Crop / No Distortion) -->
+                <div style="position: relative; width: 100%; background: #FAFBF8; border-bottom: 1px solid var(--fg-border-light); padding: 28px 20px; display: flex; align-items: center; justify-content: center; min-height: 280px;">
+                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" style="max-width: 100%; max-height: 520px; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+                    
+                    <!-- Floating Certifications & Spec Badges -->
+                    <div style="position: absolute; top: 16px; left: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <span style="background: rgba(13, 17, 13, 0.85); backdrop-filter: blur(6px); color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            ISO 13485 / CE Certified
+                        </span>
+                        <span style="background: var(--fg-olive); color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px;">
+                            Biocompatible
+                        </span>
+                    </div>
 
-                <!-- Key Value Badges -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px;">
-                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
-                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Material Metallurgy</span>
-                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['material']) ?></strong>
-                    </div>
-                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
-                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Model / Dimension</span>
-                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['size_model']) ?></strong>
-                    </div>
-                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
-                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Brand / OEM Origin</span>
-                        <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['brand']) ?></strong>
-                    </div>
-                    <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
-                        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Warranty Guarantee</span>
-                        <strong style="font-size: 13.5px; color: var(--fg-olive);"><?= htmlspecialchars($product['warranty']) ?></strong>
+                    <div style="position: absolute; bottom: 16px; right: 16px;">
+                        <span style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(6px); color: #0d110d; font-size: 11px; font-weight: 700; padding: 5px 12px; border: 1px solid var(--fg-border);">
+                            Autoclave Safe: 134°C
+                        </span>
                     </div>
                 </div>
 
-                <!-- Engineering Features -->
-                <h3 style="font-family: var(--fg-serif); font-size: 24px; margin-bottom: 14px; color: #0d110d;">Key Performance Features</h3>
-                <ul class="figma-product-specs-list" style="margin-bottom: 28px; gap: 10px;">
-                    <?php foreach ($product['features'] as $feat): ?>
-                        <li style="font-size: 14px; line-height: 1.5; color: #384236;">
-                            <span class="figma-spec-check">✓</span>
-                            <span><?= htmlspecialchars($feat) ?></span>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <div style="padding: 32px;">
+                    <h2 style="font-family: var(--fg-serif); font-size: 28px; margin-bottom: 14px; color: #0d110d;">Product Overview</h2>
+                    <p style="color: var(--fg-muted); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+                        <?= htmlspecialchars($product['desc']) ?>
+                    </p>
 
-                <!-- Technical Specification Table -->
-                <h3 style="font-family: var(--fg-serif); font-size: 24px; margin-bottom: 14px; color: #0d110d;">Technical Specifications</h3>
-                <div style="border: 1px solid var(--fg-border); border-radius: 0; overflow: hidden;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
-                        <tbody>
-                            <?php foreach ($product['specs'] as $label => $val): ?>
-                                <tr style="border-bottom: 1px solid var(--fg-border-light);">
-                                    <td style="padding: 12px 16px; background: #FAF8F5; font-weight: 600; color: #0d110d; width: 40%;"><?= htmlspecialchars($label) ?></td>
-                                    <td style="padding: 12px 16px; background: #ffffff; color: var(--fg-muted);"><?= htmlspecialchars($val) ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <!-- Key Value Badges -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px;">
+                        <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Material Metallurgy</span>
+                            <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['material']) ?></strong>
+                        </div>
+                        <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Model / Dimension</span>
+                            <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['size_model']) ?></strong>
+                        </div>
+                        <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Brand / OEM Origin</span>
+                            <strong style="font-size: 13.5px; color: #0d110d;"><?= htmlspecialchars($product['brand']) ?></strong>
+                        </div>
+                        <div style="background: #F7F9F5; border: 1px solid var(--fg-border-light); padding: 14px; border-radius: 0;">
+                            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fg-muted); display: block; margin-bottom: 4px;">Warranty Guarantee</span>
+                            <strong style="font-size: 13.5px; color: var(--fg-olive);"><?= htmlspecialchars($product['warranty']) ?></strong>
+                        </div>
+                    </div>
+
+                    <!-- Engineering Features -->
+                    <h3 style="font-family: var(--fg-serif); font-size: 24px; margin-bottom: 14px; color: #0d110d;">Key Performance Features</h3>
+                    <ul class="figma-product-specs-list" style="margin-bottom: 28px; gap: 10px;">
+                        <?php foreach ($product['features'] as $feat): ?>
+                            <li style="font-size: 14px; line-height: 1.5; color: #384236;">
+                                <span class="figma-spec-check">✓</span>
+                                <span><?= htmlspecialchars($feat) ?></span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <!-- Technical Specification Table -->
+                    <h3 style="font-family: var(--fg-serif); font-size: 24px; margin-bottom: 14px; color: #0d110d;">Technical Specifications</h3>
+                    <div style="border: 1px solid var(--fg-border); border-radius: 0; overflow: hidden;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+                            <tbody>
+                                <?php foreach ($product['specs'] as $label => $val): ?>
+                                    <tr style="border-bottom: 1px solid var(--fg-border-light);">
+                                        <td style="padding: 12px 16px; background: #FAF8F5; font-weight: 600; color: #0d110d; width: 40%;"><?= htmlspecialchars($label) ?></td>
+                                        <td style="padding: 12px 16px; background: #ffffff; color: var(--fg-muted);"><?= htmlspecialchars($val) ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-
             </div>
 
             <!-- RIGHT: QUOTATION & DISPATCH CARD -->
@@ -251,15 +277,28 @@ require_once __DIR__ . '/includes/public-header.php';
             <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--fg-border);">
                 <h3 style="font-family: var(--fg-serif); font-size: 28px; color: #0d110d; margin-bottom: 20px;">Related Equipment in <?= htmlspecialchars($product['category']) ?></h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                    <?php foreach ($relatedProducts as $rel): ?>
-                        <div style="background: #ffffff; border: 1px solid var(--fg-border); padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-                            <div>
-                                <span class="figma-sku-badge" style="margin-bottom: 8px; display: inline-block;"><?= htmlspecialchars($rel['equipment_code']) ?></span>
-                                <h4 style="font-family: var(--fg-serif); font-size: 20px; color: #0d110d; margin-bottom: 8px;"><?= htmlspecialchars($rel['name']) ?></h4>
+                    <?php foreach ($relatedProducts as $rel): 
+                        $relImg = get_product_image_url($rel['category'], $rel['name'], $rel['equipment_code'], $rel['notes'] ?? '');
+                    ?>
+                        <div style="background: #ffffff; border: 1px solid var(--fg-border); padding: 0; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;">
+                            <div style="position: relative; width: 100%; height: 160px; background: #FAFBF8; overflow: hidden; border-bottom: 1px solid var(--fg-border-light); display: flex; align-items: center; justify-content: center; padding: 10px;">
+                                <a href="/surgical_equipment/product-details.php?id=<?= $rel['id'] ?>" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">
+                                    <img src="<?= htmlspecialchars($relImg) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                </a>
                             </div>
-                            <div style="margin-top: 16px; display: flex; gap: 8px;">
-                                <a href="/surgical_equipment/product-details.php?id=<?= $rel['id'] ?>" class="figma-card-btn-specs" style="flex: 1; text-align: center; text-decoration: none;">View Specs</a>
-                                <a href="/surgical_equipment/contact.php?product=<?= urlencode($rel['name']) ?>&sku=<?= urlencode($rel['equipment_code']) ?>#contact-form" class="figma-card-btn-quote" style="flex: 1; text-align: center; text-decoration: none;">Quote ↗</a>
+                            <div style="padding: 20px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+                                <div>
+                                    <span class="figma-sku-badge" style="margin-bottom: 8px; display: inline-block;"><?= htmlspecialchars($rel['equipment_code']) ?></span>
+                                    <h4 style="font-family: var(--fg-serif); font-size: 20px; color: #0d110d; margin-bottom: 8px;">
+                                        <a href="/surgical_equipment/product-details.php?id=<?= $rel['id'] ?>" style="color: inherit; text-decoration: none;">
+                                            <?= htmlspecialchars($rel['name']) ?>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div style="margin-top: 16px; display: flex; gap: 8px;">
+                                    <a href="/surgical_equipment/product-details.php?id=<?= $rel['id'] ?>" class="figma-card-btn-specs" style="flex: 1; text-align: center; text-decoration: none;">View Specs</a>
+                                    <a href="/surgical_equipment/contact.php?product=<?= urlencode($rel['name']) ?>&sku=<?= urlencode($rel['equipment_code']) ?>#contact-form" class="figma-card-btn-quote" style="flex: 1; text-align: center; text-decoration: none;">Quote ↗</a>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>

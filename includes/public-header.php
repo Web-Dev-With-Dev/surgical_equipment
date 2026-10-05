@@ -46,6 +46,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
             <!-- Right: Action Button & Mobile Toggle (fades out on scroll) -->
             <div class="figma-nav-right-actions" id="figmaNavRight">
+                <a href="/surgical_equipment/auth/login.php" class="figma-btn-pill figma-nav-admin-btn" title="Staff & Admin Portal">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:-1px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>Admin Login</span>
+                </a>
                 <a href="/surgical_equipment/contact.php#contact-form" class="figma-btn-pill figma-btn-primary figma-nav-btn">
                     <span>Request Quote ↗</span>
                 </a>
@@ -73,9 +77,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <li><a href="/surgical_equipment/certifications.php" class="<?= ($currentPage === 'certifications.php') ? 'active' : '' ?>">Quality & Certs</a></li>
                 <li><a href="/surgical_equipment/contact.php" class="<?= ($currentPage === 'contact.php') ? 'active' : '' ?>">Contact Us</a></li>
             </ul>
-            <div class="figma-drawer-footer">
+            <div class="figma-drawer-footer" style="display:flex; flex-direction:column; gap:10px;">
                 <a href="/surgical_equipment/contact.php#contact-form" class="figma-btn-pill figma-btn-primary" style="width: 100%; text-align: center;">
                     <span>Request Quote ↗</span>
+                </a>
+                <a href="/surgical_equipment/auth/login.php" class="figma-btn-pill" style="width: 100%; text-align: center; border: 1px solid var(--fg-border); color: var(--fg-dark); text-decoration: none; padding: 10px 18px; border-radius: 9999px; font-weight: 600; font-size: 14px;">
+                    <span>Staff &amp; Admin Login ↗</span>
                 </a>
             </div>
         </div>

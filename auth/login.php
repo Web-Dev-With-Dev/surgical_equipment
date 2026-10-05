@@ -230,34 +230,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 1px;
             background: var(--color-border);
         }
-
-        .hint-box {
-            margin-top: 28px;
-            padding: 14px 16px;
-            border: 1px solid #D5E7B0;
-            border-radius: 6px;
-            background: var(--color-lime-tint);
-        }
-
-        .hint-box .hint-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 5px;
-        }
-
-        .hint-box .hint-users {
-            font-size: 0.75rem;
-            color: var(--color-muted);
-            line-height: 1.6;
-        }
-
-        .hint-box .hint-users a {
-            color: var(--color-primary);
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -306,17 +278,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             </div>
         </form>
-
-        <div class="hint-box">
-            <div class="hint-title">Demo credentials &mdash; password: <code>Password123!</code></div>
-            <div class="hint-users">
-                <a>admin</a> &nbsp;/&nbsp;
-                <a>surgeon_john</a> &nbsp;/&nbsp;
-                <a>nurse_mary</a> &nbsp;/&nbsp;
-                <a>tech_alex</a> &nbsp;/&nbsp;
-                <a>auditor_david</a>
-            </div>
-        </div>
 
     </div>
 </body>
