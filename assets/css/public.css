@@ -2560,15 +2560,28 @@ body.figma-body {
 .figma-product-card {
     background: #ffffff;
     border: 1px solid var(--fg-border);
-    border-radius: 0;
-    padding: 0;
+    border-radius: 6px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     overflow: hidden;
+}
+
+/* For cards with image header on products.php */
+.figma-product-card:has(.figma-card-img-wrap) {
+    padding: 0;
+}
+
+/* Fallback for direct children divs */
+.figma-product-card > div:first-child:not(.figma-card-img-wrap):not(.figma-card-body) {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .figma-product-card:hover {
@@ -2622,6 +2635,7 @@ body.figma-body {
     display: flex;
     align-items: center;
     gap: 5px;
+    border-radius: 4px;
 }
 
 .figma-card-body {
@@ -2639,6 +2653,7 @@ body.figma-body {
     margin-bottom: 16px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--fg-border-light);
+    gap: 8px;
 }
 
 .figma-category-badge {
