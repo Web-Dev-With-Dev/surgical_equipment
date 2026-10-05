@@ -40,7 +40,7 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                     </div>
                     <div class="pub-info-content">
                         <h3>Corporate Office & Experience Center</h3>
-                        <p>Apex MedTech Plaza, 4th Floor, Ring Road, Healthcare Zone, Ahmedabad, Gujarat 380015, India.</p>
+                        <p>Near post office, Khodu Road, Dudhrej, Gujarat 363040, India.</p>
                         <span class="pub-info-highlight">Open: Mon – Sat (9:00 AM – 7:30 PM)</span>
                     </div>
                 </div>
@@ -52,8 +52,8 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                     </div>
                     <div class="pub-info-content">
                         <h3>Sales & Tender Quotations</h3>
-                        <p>Direct Phone: <a href="tel:+919876543210" class="pub-info-highlight">+91 98765 43210</a></p>
-                        <p>Landline: <a href="tel:+917926501234">+91 79 2650 1234</a></p>
+                        <p>Direct Phone: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
+                        <p>WhatsApp: <a href="https://wa.me/917863884678" target="_blank" class="pub-info-highlight">+91 78638 84678</a></p>
                         <p>Email: <a href="mailto:sales@apexsurgical.com">sales@apexsurgical.com</a></p>
                     </div>
                 </div>
@@ -65,18 +65,18 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
                     </div>
                     <div class="pub-info-content">
                         <h3>Biomedical Engineering & AMC Support</h3>
-                        <p>24/7 Breakdown Help: <a href="tel:+919876543211" class="pub-info-highlight">+91 98765 43211</a></p>
+                        <p>24/7 Breakdown Help: <a href="tel:+917863884678" class="pub-info-highlight">+91 78638 84678</a></p>
                         <p>Support Email: <a href="mailto:service@apexsurgical.com">service@apexsurgical.com</a></p>
                     </div>
                 </div>
 
                 <!-- Card 4: Quick Action Triggers (WhatsApp & Direct Call) -->
                 <div class="pub-quick-triggers">
-                    <a href="https://wa.me/919876543210?text=Hello%20Apex%20Surgical%20Team%2C%20I%20want%20to%20inquire%20about%20surgical%20equipment." target="_blank" rel="noopener noreferrer" class="pub-quick-btn pub-quick-wa">
+                    <a href="https://wa.me/917863884678?text=Hello%20Apex%20Surgical%20Team%2C%20I%20want%20to%20inquire%20about%20surgical%20equipment." target="_blank" rel="noopener noreferrer" class="pub-quick-btn pub-quick-wa">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.67-1.39 1.29-1.93 1.34-.51.05-1.17.07-3.79-.98-3.15-1.26-5.18-4.45-5.34-4.66-.16-.21-1.28-1.7-1.28-3.25 0-1.55.81-2.31 1.1-2.62.29-.31.64-.39.85-.39.21 0 .43 0 .61.01.2.01.46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.11.21-.16.35-.32.53-.16.19-.34.42-.49.56-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.24 1.24 1.1 2.28 1.45 2.6 1.61.32.16.51.13.7-.08.19-.21.8-.93 1.01-1.25.21-.32.43-.27.72-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.77-.16 1.44z"/></svg>
                         <span>WhatsApp Us</span>
                     </a>
-                    <a href="tel:+919876543210" class="pub-quick-btn pub-quick-call">
+                    <a href="tel:+917863884678" class="pub-quick-btn pub-quick-call">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                         <span>Call Sales Now</span>
                     </a>
@@ -179,9 +179,9 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
             <div class="pub-map-header">
                 <div>
                     <h3>Visit Our Healthcare Experience Center</h3>
-                    <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Ahmedabad, Gujarat, India (View on Google Maps)</p>
+                    <p class="text-muted" style="font-size:13.5px; margin-top:2px;">Near post office, Khodu road, Dudhrej, Gujarat 363040, India (View on Google Maps)</p>
                 </div>
-                <a href="https://maps.google.com/?q=Ahmedabad+Healthcare+Zone" target="_blank" rel="noopener noreferrer" class="pub-btn pub-btn-outline" style="font-size:12.5px; padding:6px 14px;">
+                <a href="https://maps.google.com/?q=Near+post+office+khodu+road+Dudhrej+363040" target="_blank" rel="noopener noreferrer" class="pub-btn pub-btn-outline" style="font-size:12.5px; padding:6px 14px;">
                     <span>Open in Google Maps App</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
@@ -189,7 +189,7 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
             <div class="pub-map-frame-container">
                 <iframe 
                     title="Apex Surgical Location Map"
-                    src="https://maps.google.com/maps?q=Ahmedabad,Gujarat,India&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                    src="https://maps.google.com/maps?q=Near+post+office+khodu+road+Dudhrej+363040&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
