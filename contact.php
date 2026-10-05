@@ -7,6 +7,43 @@ $formData = $_SESSION['form_data'] ?? [];
 $flashSuccess = $_SESSION['pub_success'] ?? null;
 $flashError = $_SESSION['pub_error'] ?? null;
 unset($_SESSION['pub_success'], $_SESSION['pub_error']);
+
+// Dynamic Context Pre-fills
+$reqProduct = trim($_GET['product'] ?? '');
+$reqSku     = trim($_GET['sku'] ?? '');
+$reqService = trim($_GET['service'] ?? '');
+$reqDoc     = trim($_GET['doc'] ?? '');
+$reqBrand   = trim($_GET['brand'] ?? '');
+$reqCat     = trim($_GET['cat'] ?? '');
+
+$defaultInquiryType = $formData['inquiry_type'] ?? 'Request a Price Quote';
+$defaultCategory    = $formData['equipment_category'] ?? '';
+$defaultMessage     = $formData['message'] ?? '';
+$contextBadge       = '';
+
+if (empty($formData['message'])) {
+    if (!empty($reqProduct)) {
+        $defaultInquiryType = 'Request a Price Quote';
+        $defaultMessage = "Please send official price quotation and delivery timeline for:\n• Product: " . $reqProduct . (!empty($reqSku) ? " (SKU: " . $reqSku . ")" : "") . "\n• Required Quantity: 1 set / batch\n• Hospital / Delivery Location: ";
+        $contextBadge = "Inquiry for: " . $reqProduct;
+    } elseif (!empty($reqService)) {
+        $defaultInquiryType = ($reqService === 'AMC') ? 'Annual Maintenance Contract (AMC / CMC)' : (($reqService === 'Sharpening') ? 'Equipment Repair & Sharpening' : 'General Inquiry');
+        $defaultMessage = "I would like to request technical details and a proposal for " . $reqService . " services.\n• Facility Type / Number of Beds: \n• Specific Equipment Models: ";
+        $contextBadge = "Service Inquiry: " . $reqService;
+    } elseif (!empty($reqDoc)) {
+        $defaultInquiryType = 'Product Availability & Technical Specs';
+        $defaultMessage = "Please furnish verified compliance documentation and master test certificates for " . $reqDoc . ".\n• Organization / Tender Authority: ";
+        $contextBadge = "Compliance Docs: " . $reqDoc;
+    } elseif (!empty($reqBrand)) {
+        $defaultInquiryType = 'Request a Price Quote';
+        $defaultMessage = "Please provide catalog specifications and official institution pricing for " . $reqBrand . " medical systems.\n• Required Quantities / Timeline: ";
+        $contextBadge = "OEM Brand: " . $reqBrand;
+    } elseif (!empty($reqCat)) {
+        $defaultCategory = $reqCat;
+        $defaultMessage = "Please provide product catalog and quotation for " . $reqCat . ".";
+        $contextBadge = "Category: " . $reqCat;
+    }
+}
 ?>
 
 <div class="figma-page-wrap">
@@ -136,105 +173,133 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
             <!-- RIGHT COLUMN: INQUIRY FORM & EXPERIENCE CENTER MAP -->
             <div style="display: flex; flex-direction: column; gap: 24px;">
                 
-                <div id="contact-form" style="background: #ffffff; border: 1px solid var(--fg-border); padding: 40px;">
+                <div id="contact-form" style="background: #ffffff; border: 1px solid var(--fg-border); padding: 36px;">
                 
-                <div style="margin-bottom: 24px; border-bottom: 1px solid var(--fg-border-light); padding-bottom: 18px;">
-                    <span class="figma-category-badge" style="margin-bottom: 8px; display: inline-block;">Commercial & Technical Inquiry</span>
-                    <h2 style="font-family: var(--fg-serif); font-size: 30px; color: #0d110d; margin: 0 0 8px 0;">Request a Formal Quote</h2>
-                    <p style="font-size: 14px; color: var(--fg-muted); margin: 0; line-height: 1.5;">
-                        Complete the specifications below. Our biomedical sales engineer will prepare your itemized proforma invoice within 2 hours.
-                    </p>
-                </div>
-
-                <?php if ($flashSuccess): ?>
-                    <div style="background: rgba(62, 83, 27, 0.08); border-left: 3px solid var(--fg-olive); padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: var(--fg-olive); font-weight: 600;">
-                        ✓ <?= htmlspecialchars($flashSuccess) ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php if ($flashError): ?>
-                    <div style="background: rgba(220, 38, 38, 0.08); border-left: 3px solid #dc2626; padding: 14px 18px; margin-bottom: 24px; font-size: 14px; color: #dc2626; font-weight: 600;">
-                        ✕ <?= htmlspecialchars($flashError) ?>
-                    </div>
-                <?php endif; ?>
-
-                <form action="/surgical_equipment/process-inquiry.php" method="POST">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 24px;">
-                        
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="full_name">
-                                Your Full Name <span style="color: #dc2626;">*</span>
-                            </label>
-                            <input type="text" id="full_name" name="full_name" required placeholder="e.g. Dr. Rajesh Patel" value="<?= htmlspecialchars($formData['full_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                    <div style="margin-bottom: 20px; border-bottom: 1px solid var(--fg-border-light); padding-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+                            <span class="figma-category-badge" style="display: inline-block;">Commercial &amp; Technical Inquiry</span>
+                            <?php if (!empty($contextBadge)): ?>
+                                <span style="background: var(--fg-lime-tint); color: var(--fg-olive); font-size: 11.5px; font-weight: 700; padding: 3px 10px; border: 1px solid var(--fg-sage); display: inline-flex; align-items: center; gap: 6px;">
+                                    <span><?= htmlspecialchars($contextBadge) ?></span>
+                                    <a href="/surgical_equipment/contact.php#contact-form" style="color: var(--fg-olive); text-decoration: none; font-size: 13px;" title="Clear Context">✕</a>
+                                </span>
+                            <?php endif; ?>
                         </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="phone">
-                                Phone / WhatsApp <span style="color: #dc2626;">*</span>
-                            </label>
-                            <input type="tel" id="phone" name="phone" required placeholder="e.g. +91 98765 01234" value="<?= htmlspecialchars($formData['phone'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="email">
-                                Email Address <span style="color: #dc2626;">*</span>
-                            </label>
-                            <input type="email" id="email" name="email" required placeholder="e.g. purchase@hospital.org" value="<?= htmlspecialchars($formData['email'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="hospital_name">
-                                Hospital / Clinic / Lab
-                            </label>
-                            <input type="text" id="hospital_name" name="hospital_name" placeholder="e.g. Apex Multi-Specialty Hospital" value="<?= htmlspecialchars($formData['hospital_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="inquiry_type">
-                                Inquiry Purpose
-                            </label>
-                            <select id="inquiry_type" name="inquiry_type" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
-                                <option value="Request a Price Quote">Request a Price Quote</option>
-                                <option value="Product Availability & Technical Specs">Product Availability & Technical Specs</option>
-                                <option value="Annual Maintenance Contract (AMC / CMC)">Annual Maintenance Contract (AMC / CMC)</option>
-                                <option value="Equipment Repair & Sharpening">Equipment Repair & Sharpening</option>
-                                <option value="Bulk Hospital Setup / Tender Supply">Bulk Hospital Setup / Tender Supply</option>
-                                <option value="General Inquiry">General Inquiry</option>
-                            </select>
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="equipment_category">
-                                Equipment Category
-                            </label>
-                            <select id="equipment_category" name="equipment_category" style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
-                                <option value="">-- Select Category (Optional) --</option>
-                                <option value="Surgical Instruments">Surgical Instruments</option>
-                                <option value="OT Equipment">OT Equipment</option>
-                                <option value="Hospital Furniture">Hospital Furniture</option>
-                                <option value="ICU Equipment">ICU Equipment</option>
-                                <option value="Laparoscopy Instruments">Laparoscopy Instruments</option>
-                                <option value="Orthopedic Instruments">Orthopedic Instruments</option>
-                                <option value="Anaesthesia Equipment">Anaesthesia Equipment</option>
-                                <option value="Autoclave & Sterilizers">Autoclave & Sterilizers</option>
-                                <option value="Suction Machines">Suction Machines</option>
-                                <option value="Surgical Disposables">Surgical Disposables</option>
-                            </select>
-                        </div>
-
-                        <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
-                            <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="message">
-                                Requirement Details / Message <span style="color: #dc2626;">*</span>
-                            </label>
-                            <textarea id="message" name="message" required rows="4" placeholder="Specify product models, instrument quantities, required delivery timeline, or hospital tender specs..." style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none; resize: vertical;"><?= htmlspecialchars($formData['message'] ?? '') ?></textarea>
-                        </div>
-
+                        <h2 style="font-family: var(--fg-serif); font-size: 28px; color: #0d110d; margin: 0 0 6px 0;">Request a Formal Quote</h2>
+                        <p style="font-size: 13.5px; color: var(--fg-muted); margin: 0; line-height: 1.5;">
+                            Complete the requirements below. Our biomedical sales engineers provide itemized proforma invoices with full compliance datasheets.
+                        </p>
                     </div>
 
-                    <button type="submit" class="figma-card-btn-quote" style="width: 100%; padding: 15px 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-align: center; border: none; cursor: pointer;">
-                        <span>Submit Quotation Request ↗</span>
-                    </button>
-                </form>
+                    <?php if ($flashSuccess): ?>
+                        <div style="background: rgba(62, 83, 27, 0.08); border-left: 3px solid var(--fg-olive); padding: 14px 18px; margin-bottom: 20px; font-size: 14px; color: var(--fg-olive); font-weight: 600;">
+                            <?= htmlspecialchars($flashSuccess) ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if ($flashError): ?>
+                        <div style="background: rgba(220, 38, 38, 0.08); border-left: 3px solid #dc2626; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; color: #dc2626; font-weight: 600;">
+                            <?= htmlspecialchars($flashError) ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <form id="quoteDynamicForm" action="/surgical_equipment/process-inquiry.php" method="POST">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="full_name">
+                                    Your Full Name <span style="color: #dc2626;">*</span>
+                                </label>
+                                <input type="text" id="full_name" name="full_name" required placeholder="e.g. Dr. Rajesh Patel" value="<?= htmlspecialchars($formData['full_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="phone">
+                                    Phone / WhatsApp <span style="color: #dc2626;">*</span>
+                                </label>
+                                <input type="tel" id="phone" name="phone" required placeholder="e.g. +91 98765 01234" value="<?= htmlspecialchars($formData['phone'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="email">
+                                    Email Address <span style="color: #dc2626;">*</span>
+                                </label>
+                                <input type="email" id="email" name="email" required placeholder="e.g. purchase@hospital.org" value="<?= htmlspecialchars($formData['email'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="hospital_name">
+                                    Hospital / Clinic / Lab
+                                </label>
+                                <input type="text" id="hospital_name" name="hospital_name" placeholder="e.g. Sterling Multi-Specialty Hospital" value="<?= htmlspecialchars($formData['hospital_name'] ?? '') ?>" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="inquiry_type">
+                                    Inquiry Purpose
+                                </label>
+                                <select id="inquiry_type" name="inquiry_type" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                                    <option value="Request a Price Quote" <?= $defaultInquiryType === 'Request a Price Quote' ? 'selected' : '' ?>>Request a Price Quote</option>
+                                    <option value="Product Availability & Technical Specs" <?= $defaultInquiryType === 'Product Availability & Technical Specs' ? 'selected' : '' ?>>Product Availability & Technical Specs</option>
+                                    <option value="Annual Maintenance Contract (AMC / CMC)" <?= $defaultInquiryType === 'Annual Maintenance Contract (AMC / CMC)' ? 'selected' : '' ?>>Annual Maintenance Contract (AMC / CMC)</option>
+                                    <option value="Equipment Repair & Sharpening" <?= $defaultInquiryType === 'Equipment Repair & Sharpening' ? 'selected' : '' ?>>Equipment Repair & Sharpening</option>
+                                    <option value="Bulk Hospital Setup / Tender Supply" <?= $defaultInquiryType === 'Bulk Hospital Setup / Tender Supply' ? 'selected' : '' ?>>Bulk Hospital Setup / Tender Supply</option>
+                                    <option value="General Inquiry" <?= $defaultInquiryType === 'General Inquiry' ? 'selected' : '' ?>>General Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="equipment_category">
+                                    Equipment Category
+                                </label>
+                                <select id="equipment_category" name="equipment_category" style="width: 100%; border: 1px solid var(--fg-border); padding: 11px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none;">
+                                    <option value="">-- Select Category (Optional) --</option>
+                                    <option value="Surgical Instruments" <?= $defaultCategory === 'Surgical Instruments' ? 'selected' : '' ?>>Surgical Instruments</option>
+                                    <option value="OT Equipment" <?= $defaultCategory === 'OT Equipment' ? 'selected' : '' ?>>OT Equipment</option>
+                                    <option value="Hospital Furniture" <?= $defaultCategory === 'Hospital Furniture' ? 'selected' : '' ?>>Hospital Furniture</option>
+                                    <option value="ICU Equipment" <?= $defaultCategory === 'ICU Equipment' ? 'selected' : '' ?>>ICU Equipment</option>
+                                    <option value="Laparoscopy Instruments" <?= $defaultCategory === 'Laparoscopy Instruments' ? 'selected' : '' ?>>Laparoscopy Instruments</option>
+                                    <option value="Orthopedic Instruments" <?= $defaultCategory === 'Orthopedic Instruments' ? 'selected' : '' ?>>Orthopedic Instruments</option>
+                                    <option value="Anaesthesia Equipment" <?= $defaultCategory === 'Anaesthesia Equipment' ? 'selected' : '' ?>>Anaesthesia Equipment</option>
+                                    <option value="Autoclave & Sterilizers" <?= $defaultCategory === 'Autoclave & Sterilizers' ? 'selected' : '' ?>>Autoclave & Sterilizers</option>
+                                    <option value="Suction Machines" <?= $defaultCategory === 'Suction Machines' ? 'selected' : '' ?>>Suction Machines</option>
+                                    <option value="Surgical Disposables" <?= $defaultCategory === 'Surgical Disposables' ? 'selected' : '' ?>>Surgical Disposables</option>
+                                </select>
+                            </div>
+
+                            <!-- Quick Requirement Tag Pills -->
+                            <div style="grid-column: 1 / -1;">
+                                <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-muted); display: block; margin-bottom: 6px;">
+                                    Quick Specifications (Click to Add):
+                                </span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Delivery timeline needed in < 48 hours.">Urgent (&lt; 48 hrs)</button>
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Please attach CE 0123 & CDSCO certificates.">CE &amp; CDSCO Docs</button>
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Requesting on-site demonstration at hospital.">On-site Demo</button>
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Inquiring about bulk institution discount tier.">Bulk Tier Discount</button>
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Please provide itemized GST Proforma Invoice.">Proforma Invoice</button>
+                                    <button type="button" class="quick-spec-pill" data-append="• Requirement: Include 1-Year Comprehensive AMC option.">Include AMC Option</button>
+                                </div>
+                            </div>
+
+                            <div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px;">
+                                <label style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0d110d;" for="message">
+                                    Requirement Details / Message <span style="color: #dc2626;">*</span>
+                                </label>
+                                <textarea id="message" name="message" required rows="4" placeholder="Specify product models, instrument quantities, required delivery timeline, or hospital tender specs..." style="width: 100%; border: 1px solid var(--fg-border); padding: 12px 14px; font-family: var(--fg-sans); font-size: 14px; background: #ffffff; border-radius: 0px; outline: none; resize: vertical; line-height: 1.5;"><?= htmlspecialchars($defaultMessage) ?></textarea>
+                            </div>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button type="submit" class="figma-card-btn-quote" style="width: 100%; padding: 14px 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-align: center; border: none; cursor: pointer;">
+                                <span>Submit Formal Quotation Request ↗</span>
+                            </button>
+                            <button type="button" id="btnInstantWhatsApp" class="figma-card-btn-specs" style="width: 100%; padding: 12px 24px; font-size: 12.5px; font-weight: 700; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                <span>Send Direct to Heer Jani on WhatsApp ↗</span>
+                            </button>
+                        </div>
+                    </form>
 
                 </div>
 
@@ -317,6 +382,111 @@ unset($_SESSION['pub_success'], $_SESSION['pub_error']);
             Dudhrej, Gujarat • Serving Healthcare Nationwide
         </div>
     </section>
+
+    <style>
+    .quick-spec-pill {
+        background: #f4f4f0;
+        border: 1px solid var(--fg-border);
+        color: #0d110d;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 0px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--fg-sans);
+        user-select: none;
+    }
+    .quick-spec-pill:hover {
+        background: var(--fg-lime-tint);
+        border-color: var(--fg-olive);
+        color: var(--fg-olive);
+    }
+    .quick-spec-pill.active {
+        background: var(--fg-olive) !important;
+        border-color: var(--fg-olive) !important;
+        color: #ffffff !important;
+    }
+    .quick-spec-pill:active {
+        transform: scale(0.97);
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const msgTextarea = document.getElementById('message');
+        const pills = document.querySelectorAll('.quick-spec-pill');
+        const btnInstantWhatsApp = document.getElementById('btnInstantWhatsApp');
+        let currentSpecText = '';
+
+        // Clean single-select and toggle for quick spec pills
+        pills.forEach(pill => {
+            pill.addEventListener('click', function() {
+                const newSpec = this.getAttribute('data-append');
+                
+                if (this.classList.contains('active')) {
+                    // Deselect and remove previous text
+                    this.classList.remove('active');
+                    if (currentSpecText && msgTextarea) {
+                        msgTextarea.value = msgTextarea.value
+                            .split('\n')
+                            .filter(line => line.trim() !== currentSpecText.trim())
+                            .join('\n')
+                            .trim();
+                    }
+                    currentSpecText = '';
+                } else {
+                    // Remove previous active spec line if exists
+                    if (currentSpecText && msgTextarea) {
+                        msgTextarea.value = msgTextarea.value
+                            .split('\n')
+                            .filter(line => line.trim() !== currentSpecText.trim())
+                            .join('\n')
+                            .trim();
+                    }
+                    
+                    pills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    currentSpecText = newSpec;
+                    
+                    if (msgTextarea) {
+                        const currentVal = msgTextarea.value.trim();
+                        if (currentVal.length > 0) {
+                            msgTextarea.value = currentVal + '\n' + currentSpecText;
+                        } else {
+                            msgTextarea.value = currentSpecText;
+                        }
+                    }
+                }
+                if (msgTextarea) msgTextarea.focus();
+            });
+        });
+
+        // Instant WhatsApp compilation
+        if (btnInstantWhatsApp) {
+            btnInstantWhatsApp.addEventListener('click', function() {
+                const name = document.getElementById('full_name')?.value || 'Valued Customer';
+                const phone = document.getElementById('phone')?.value || '';
+                const hospital = document.getElementById('hospital_name')?.value || '';
+                const purpose = document.getElementById('inquiry_type')?.value || 'Quotation Request';
+                const cat = document.getElementById('equipment_category')?.value || '';
+                const msg = document.getElementById('message')?.value || '';
+
+                let waText = `Hello Heer Jani (Apex Surgical), I am requesting a formal quotation:%0A%0A`;
+                waText += `*Name:* ${encodeURIComponent(name)}%0A`;
+                if (phone) waText += `*Phone:* ${encodeURIComponent(phone)}%0A`;
+                if (hospital) waText += `*Hospital/Org:* ${encodeURIComponent(hospital)}%0A`;
+                waText += `*Purpose:* ${encodeURIComponent(purpose)}%0A`;
+                if (cat) waText += `*Category:* ${encodeURIComponent(cat)}%0A`;
+                if (msg) waText += `*Details:*%0A${encodeURIComponent(msg)}%0A`;
+
+                window.open(`https://wa.me/919106595469?text=${waText}`, '_blank');
+            });
+        }
+    });
+    </script>
 
 </div>
 

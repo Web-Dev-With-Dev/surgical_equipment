@@ -25,7 +25,7 @@ $page_title_map = [
 ];
 
 $html_title = ($page_title_map[$current_page] ?? ucfirst(str_replace('-', ' ', $current_page)))
-    . ' — Surgical Equipment Mgmt';
+    . ' — APEX Admin';
 
 $fullName = $_SESSION['full_name'] ?? 'User Name';
 $initials = '';
@@ -53,7 +53,7 @@ if (empty($initials)) {
     <!-- Load fonts in parallel with stylesheet -->
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/surgical_equipment/assets/css/style.css">
+    <link rel="stylesheet" href="/surgical_equipment/assets/css/style.css?v=<?= time() ?>">
 </head>
 <body>
 <?php if ($current_page !== 'login'): ?>

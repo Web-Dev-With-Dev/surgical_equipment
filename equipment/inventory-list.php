@@ -143,10 +143,20 @@ require_once __DIR__ . '/../includes/sidebar.php';
                             </button>
                             <div class="session-card-dropdown" style="display:none; position:absolute; right:0; top:100%; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:0 8px 24px rgba(0,0,0,.08); z-index:50; min-width:140px; padding:6px 0; margin-top:4px;">
                                 <a href="/surgical_equipment/equipment/equipment-details.php?id=<?= (int)$item['id'] ?>"
-                                   style="display:block; padding:7px 14px; font-size:0.8125rem; color:var(--color-text-body); font-weight:500; text-decoration:none;">View Details</a>
+                                   style="display:block; padding:7px 14px; font-size:0.8125rem; color:var(--color-text-body); font-weight:500; text-decoration:none;">Admin Details</a>
+                                <a href="/surgical_equipment/product-details.php?id=<?= (int)$item['id'] ?>" target="_blank"
+                                   style="display:block; padding:7px 14px; font-size:0.8125rem; color:var(--color-primary); font-weight:600; text-decoration:none;">View in Public Store ↗</a>
                                 <?php if ($role === 'admin'): ?>
                                     <a href="/surgical_equipment/equipment/add-equipment.php?edit=<?= (int)$item['id'] ?>"
                                        style="display:block; padding:7px 14px; font-size:0.8125rem; color:var(--color-text-body); font-weight:500; text-decoration:none;">Edit Item</a>
+                                    <form method="post" action="/surgical_equipment/process-action.php" onsubmit="return confirm('Are you sure you want to permanently delete \'<?= htmlspecialchars(addslashes($item['name']), ENT_QUOTES, 'UTF-8') ?>\'?');" style="margin:0;">
+                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                        <input type="hidden" name="action" value="equipment_delete">
+                                        <input type="hidden" name="id" value="<?= (int)$item['id'] ?>">
+                                        <button type="submit" style="width:100%; text-align:left; background:none; border:none; padding:7px 14px; font-size:0.8125rem; color:var(--color-danger); font-weight:600; cursor:pointer; font-family:var(--font-sans);">
+                                            Delete Item
+                                        </button>
+                                    </form>
                                 <?php endif; ?>
                                 <?php if (in_array($role, ['admin', 'nurse', 'sterilisation_tech'], true)): ?>
                                     <a href="/surgical_equipment/maintenance/log-maintenance.php?equipment_id=<?= (int)$item['id'] ?>"

@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In — Surgical Equipment Mgmt</title>
+    <title>Sign In — APEX Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -75,12 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         :root {
             --font-serif: 'Fraunces', Georgia, serif;
             --font-sans:  'Manrope', system-ui, sans-serif;
-            --color-bg:      #f7f7f5;
+            --color-bg:      #F4F6F0;
             --color-surface: #ffffff;
-            --color-border:  #e4e4e4;
-            --color-text:    #0a0a0a;
-            --color-muted:   #777;
+            --color-border:  #E0E7DC;
+            --color-text:    #1E280D;
+            --color-primary: #3E531B;
+            --color-primary-hover: #2E3E14;
+            --color-muted:   #5E695D;
             --color-danger:  #c0392b;
+            --color-lime-tint: #F1F7DD;
         }
 
         html, body {
@@ -96,10 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             min-height: 100vh;
             padding: 24px;
-            /* Subtle grid background like the reference */
+            /* Subtle grid background in light green sage */
             background-image:
-                linear-gradient(to right, #e8e8e6 1px, transparent 1px),
-                linear-gradient(to bottom, #e8e8e6 1px, transparent 1px);
+                linear-gradient(to right, rgba(62, 83, 27, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(62, 83, 27, 0.08) 1px, transparent 1px);
             background-size: 48px 48px;
             background-color: var(--color-bg);
         }
@@ -164,12 +167,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .field input::placeholder {
-            color: #bbb;
+            color: #8C9F7C;
         }
 
         .field input:focus {
-            border-color: #999;
-            box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(62, 83, 27, 0.12);
         }
 
         .error-msg {
@@ -188,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             gap: 10px;
             width: 100%;
             padding: 15px 24px;
-            background: var(--color-text);
+            background: var(--color-primary);
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -201,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 6px;
         }
 
-        .btn-signin:hover { background: #222; }
+        .btn-signin:hover { background: var(--color-primary-hover); }
         .btn-signin:active { transform: scale(0.99); }
 
         .btn-signin svg {
@@ -231,9 +234,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .hint-box {
             margin-top: 28px;
             padding: 14px 16px;
-            border: 1px solid var(--color-border);
+            border: 1px solid #D5E7B0;
             border-radius: 6px;
-            background: var(--color-surface);
+            background: var(--color-lime-tint);
         }
 
         .hint-box .hint-title {
@@ -250,18 +253,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .hint-box .hint-users a {
-            color: var(--color-text);
+            color: var(--color-primary);
             font-weight: 600;
             text-decoration: none;
-            cursor: default;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
 
-        <h1 class="brand-name">Surgical Equipment</h1>
-        <p class="brand-tagline">Management System — Sign in to continue</p>
+        <h1 class="brand-name">APEX</h1>
+        <p class="brand-tagline">Surgical Equipment Management — Sign in to continue</p>
 
         <?php if ($error !== ''): ?>
             <div class="error-msg" style="margin-bottom:20px;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div>

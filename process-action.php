@@ -26,6 +26,7 @@ $action = trim($_POST['action'] ?? '');
 $roleRestrictions = [
     'equipment_create'            => ['admin'],
     'equipment_update'            => ['admin'],
+    'equipment_delete'            => ['admin'],
     'maintenance_create'          => ['admin','nurse','sterilisation_tech'],
     'maintenance_complete'        => ['admin','sterilisation_tech'],
     'sterilisation_create_batch'  => ['admin','sterilisation_tech'],
@@ -130,6 +131,30 @@ try {
             $logAudit('equipment.update', 'equipment_inventory', $id, "Updated: $name ($code)");
             $_SESSION['flash_success'] = "Equipment updated successfully.";
             header('Location: /surgical_equipment/equipment/equipment-details.php?id=' . $id);
+            exit;
+        }
+
+        case 'equipment_delete': {
+            $id = (int) ($_POST['id'] ?? 0);
+            if ($id <= 0) {
+                throw new RuntimeException('Invalid equipment ID for deletion.');
+            }
+
+            // Fetch info before deleting for audit logging
+            $checkStmt = $pdo->prepare('SELECT id, name, equipment_code FROM equipment_inventory WHERE id = :id LIMIT 1');
+            $checkStmt->execute([':id' => $id]);
+            $equipItem = $checkStmt->fetch();
+
+            if (!$equipItem) {
+                throw new RuntimeException('Equipment item not found or already deleted.');
+            }
+
+            $deleteStmt = $pdo->prepare('DELETE FROM equipment_inventory WHERE id = :id');
+            $deleteStmt->execute([':id' => $id]);
+
+            $logAudit('equipment.delete', 'equipment_inventory', $id, "Deleted: {$equipItem['name']} ({$equipItem['equipment_code']})");
+            $_SESSION['flash_success'] = "Equipment \"{$equipItem['name']}\" ({$equipItem['equipment_code']}) deleted successfully.";
+            header('Location: /surgical_equipment/equipment/inventory-list.php');
             exit;
         }
 

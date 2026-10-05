@@ -45,7 +45,7 @@ if (empty($initials)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Surgical Equipment Management System">
     <title><?= htmlspecialchars($html_title, ENT_QUOTES, 'UTF-8') ?></title>
-    <link rel="stylesheet" href="/surgical_equipment/assets/css/style.css">
+    <link rel="stylesheet" href="/surgical_equipment/assets/css/style.css?v=<?= time() ?>">
 </head>
 <body>
 <?php if ($current_page !== 'login'): ?>

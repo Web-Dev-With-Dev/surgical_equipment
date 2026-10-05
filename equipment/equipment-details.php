@@ -80,7 +80,10 @@ require_once __DIR__ . '/../includes/sidebar.php';
                 <?= htmlspecialchars($item['equipment_code'] ?? '—', ENT_QUOTES, 'UTF-8') ?>
             </p>
         </div>
-        <div class="flex gap-2">
+        <div class="flex gap-2" style="align-items:center;">
+            <a href="/surgical_equipment/product-details.php?id=<?= $id ?>" target="_blank" class="btn btn-secondary">
+                <span>View in Public Store ↗</span>
+            </a>
             <span class="status-badge status-<?= htmlspecialchars($item['status'] ?? 'available', ENT_QUOTES, 'UTF-8') ?>" style="font-size:var(--font-size-base); padding:6px 14px;">
                 <?= htmlspecialchars(ucfirst(str_replace('_', ' ', $item['status'] ?? 'available')), ENT_QUOTES, 'UTF-8') ?>
             </span>
@@ -89,6 +92,15 @@ require_once __DIR__ . '/../includes/sidebar.php';
             <?php endif; ?>
             <?php if ($role === 'admin'): ?>
                 <a href="/surgical_equipment/equipment/add-equipment.php?edit=<?= $id ?>" class="btn btn-primary">Edit</a>
+                <form method="post" action="/surgical_equipment/process-action.php" onsubmit="return confirm('Are you sure you want to permanently delete this equipment (<?= htmlspecialchars(addslashes($item['name'] ?? ''), ENT_QUOTES, 'UTF-8') ?>)? This action cannot be undone.');" style="display:inline; margin:0;">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                    <input type="hidden" name="action" value="equipment_delete">
+                    <input type="hidden" name="id" value="<?= $id ?>">
+                    <button type="submit" class="btn btn-danger" style="background-color:var(--color-danger); border-color:var(--color-danger); color:#ffffff;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        <span>Delete</span>
+                    </button>
+                </form>
             <?php endif; ?>
         </div>
     </div>

@@ -1,207 +1,78 @@
 <?php
 $pageTitle = "Medical & Surgical Products Catalogue | Apex Surgical";
-$pageDescription = "Browse 10 medical categories including Surgical Instruments, OT Equipment, ICU Monitors, Laparoscopy sets, Autoclaves, and Hospital Furniture.";
+$pageDescription = "Browse medical categories including Surgical Instruments, OT Equipment, ICU Monitors, Laparoscopy sets, Autoclaves, and Hospital Furniture.";
 $hideFooter = true;
+require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/public-header.php';
 
-// Comprehensive catalog database of 10 categories
-$allProducts = [
-    // 1. Surgical Instruments
-    [
-        'id' => 1,
-        'name' => 'Metzenbaum Dissecting Scissors (Curved)',
-        'category' => 'Surgical Instruments',
-        'sku' => 'EQ-SI-101',
-        'material' => 'German Stainless Steel (Tungsten Carbide Inset)',
-        'size_model' => '7 Inch (180mm) / Gold Ring Handle',
-        'desc' => 'High-precision dissecting scissors with micro-serrated tungsten carbide blades for delicate soft tissue dissection.',
-        'specs' => ['Autoclavable at 134°C', 'Gold Ring Handle (TC)', 'Non-glare satin finish', 'Passivated against pitting'],
-        'brand' => 'Aesculap / Apex OEM',
-    ],
-    [
-        'id' => 2,
-        'name' => 'Mayo-Hegar Needle Holder (TC Jaws)',
-        'category' => 'Surgical Instruments',
-        'sku' => 'EQ-SI-102',
-        'material' => 'AISI 420 Surgical Stainless Steel',
-        'size_model' => '6 Inch (150mm) / 8 Inch (200mm)',
-        'desc' => 'Cross-serrated Tungsten Carbide jaws ensuring non-slip grip on curved surgical suture needles.',
-        'specs' => ['Pyramid serrations 0.4mm pitch', 'Ergonomic finger rings', 'Box-lock joint design', 'CE Approved'],
-        'brand' => 'Apex Surgical',
-    ],
-    [
-        'id' => 3,
-        'name' => 'Babcock Atraumatic Tissue Grasping Forceps',
-        'category' => 'Surgical Instruments',
-        'sku' => 'EQ-SI-103',
-        'material' => 'Medical Grade Stainless Steel',
-        'size_model' => '6.5 Inch (160mm) & 8 Inch (200mm)',
-        'desc' => 'Loop-shaped jaws designed for holding delicate tubular organs and bowel without tissue ischemia.',
-        'specs' => ['Non-traumatic grip', 'Multi-step ratchet lock', 'Ultra-lightweight balance', '100% Autoclave Safe'],
-        'brand' => 'Aesculap',
-    ],
+// Dynamic Database Fetch
+$allProducts = [];
+$categories = [];
 
-    // 2. OT Equipment
-    [
-        'id' => 4,
-        'name' => 'Electro-Hydraulic Operating Table (Universal)',
-        'category' => 'OT Equipment',
-        'sku' => 'EQ-OT-201',
-        'material' => 'SS 304 Stainless Steel Chassis & PU Memory Foam',
-        'size_model' => 'Model OT-Pro 9000 (C-Arm Compatible)',
-        'desc' => 'Multi-position universal surgical table with motorized Trendelenburg, lateral tilt, flex-reflex, and kidney bridge.',
-        'specs' => ['Weight Capacity: 280 kg', 'Full C-Arm Radiotranslucent top', 'Built-in battery backup', 'Emergency manual override'],
-        'brand' => 'Apex OEM',
-    ],
-    [
-        'id' => 5,
-        'name' => 'Shadowless Twin LED OT Ceiling Surgical Light',
-        'category' => 'OT Equipment',
-        'sku' => 'EQ-OT-202',
-        'material' => 'Aviation Aluminum Head with German OSRAM LEDs',
-        'size_model' => 'Twin Dome 700mm + 500mm',
-        'desc' => 'High-intensity cool illumination up to 160,000 Lux with adjustable color temperature and deep-cavity endo-mode.',
-        'specs' => ['Illuminance: 160,000 + 120,000 Lux', 'Color Temp: 3800K - 5000K', 'LED Lifespan > 60,000 hours', 'Endoscopy mode button'],
-        'brand' => 'Apex Surgical',
-    ],
+try {
+    $pdo = getDbConnection();
 
-    // 3. Hospital Furniture
-    [
-        'id' => 6,
-        'name' => '5-Function Motorized ICU Hospital Bed',
-        'category' => 'Hospital Furniture',
-        'sku' => 'EQ-HF-301',
-        'material' => 'Mild Steel Epoxy Powder Coated & ABS Panels',
-        'size_model' => 'Model ICU-Elite 5M with Nurse Control Panel',
-        'desc' => 'Advanced motorized patient bed with backrest, knee-rest, height adjustment, Trendelenburg, and reverse Trendelenburg.',
-        'specs' => ['Linak Danish linear actuators', 'Tente 125mm central locking wheels', 'One-touch cardiac chair position', 'CPR emergency quick release'],
-        'brand' => 'Apex MedTech',
-    ],
-    [
-        'id' => 7,
-        'name' => 'Stainless Steel Emergency Crash Cart Trolley',
-        'category' => 'Hospital Furniture',
-        'sku' => 'EQ-HF-302',
-        'material' => 'Heavy Gauge SS 304 Grade',
-        'size_model' => '5 Drawers with Defibrillator Shelf & IV Pole',
-        'desc' => 'Mobile resuscitation cart with central locking, oxygen cylinder holder, cardiac CPR board, and modular drawer dividers.',
-        'specs' => ['5 Central lockable sliding drawers', 'Defibrillator tray 360° swivel', 'Heavy duty anti-static castors', 'Built-in power extension socket'],
-        'brand' => 'Apex MedTech',
-    ],
+    // Fetch all active products
+    $stmt = $pdo->query("SELECT * FROM equipment_inventory WHERE status != 'retired' ORDER BY id DESC");
+    $dbRows = $stmt->fetchAll();
 
-    // 4. ICU Equipment
-    [
-        'id' => 8,
-        'name' => '12.1-Inch Multi-Parameter ICU Patient Monitor',
-        'category' => 'ICU Equipment',
-        'sku' => 'EQ-ICU-401',
-        'material' => 'Antimicrobial ABS Housing',
-        'size_model' => 'Model LifeGuard-1200 (6-Para Standard)',
-        'desc' => 'Displays ECG (3/5 Lead), SpO2, NIBP, Respiration, 2-Temp, and Pulse Rate with optional EtCO2 and Dual IBP modules.',
-        'specs' => ['12.1" Color TFT touch screen', '120-hour graphic & tabular trends', 'Lithium battery backup (4+ hours)', 'Central nursing station connectivity'],
-        'brand' => 'Mindray / Apex OEM',
-    ],
-    [
-        'id' => 9,
-        'name' => 'Microprocessor Syringe Infusion Pump',
-        'category' => 'ICU Equipment',
-        'sku' => 'EQ-ICU-402',
-        'material' => 'High-Impact Engineering Polycarbonate',
-        'size_model' => 'Dual Channel & Single Channel Models',
-        'desc' => 'Accurate drug delivery system compatible with all standard 5ml, 10ml, 20ml, 30ml, and 50/60ml syringes.',
-        'specs' => ['Flow rate: 0.1 to 1500 ml/hr', 'Accuracy: ±2%', 'Anti-bolus & occlusion sensing', 'Audio-visual multi alarms'],
-        'brand' => 'Apex MedTech',
-    ],
+    foreach ($dbRows as $row) {
+        $notes = $row['notes'] ?? '';
 
-    // 5. Laparoscopy Instruments
-    [
-        'id' => 10,
-        'name' => 'Laparoscopic Bipolar Maryland Grasper (5mm)',
-        'category' => 'Laparoscopy Instruments',
-        'sku' => 'EQ-LAP-501',
-        'material' => 'Medical Stainless Steel with PTFE Insulated Shaft',
-        'size_model' => '5mm Diameter x 330mm Working Length',
-        'desc' => 'Rotatable 360-degree curved Maryland dissecting grasper with bipolar electro-cautery coagulation connection.',
-        'specs' => ['360° Finger rotation wheel', 'High-dielectric insulation sleeve', 'Detachable 3-piece cleaning design', 'Autoclavable'],
-        'brand' => 'Karl Storz / Apex OEM',
-    ],
-    [
-        'id' => 11,
-        'name' => 'Reusable Safety Trocar & Cannula Set',
-        'category' => 'Laparoscopy Instruments',
-        'sku' => 'EQ-LAP-502',
-        'material' => 'Stainless Steel with Silicone Sealing Valve',
-        'size_model' => '5mm & 10mm Pyramidal Tip Cannulas',
-        'desc' => 'Abdominal port access set with magnetic flapper valve and stopcock for CO2 insufflation tubing.',
-        'specs' => ['Zero gas leakage silicone seals', 'Threaded anchor sleeve option', 'Sharp pyramidal / blunt tips', 'Corrosion-free alloy'],
-        'brand' => 'Apex Surgical',
-    ],
+        // Extract Material if formatted in notes, or fallback
+        $material = 'Medical Grade German Stainless Steel / Certified Alloy';
+        if (preg_match('/Material:\s*([^;\n]+)/i', $notes, $m)) {
+            $material = trim($m[1]);
+        }
 
-    // 6. Orthopedic Instruments
-    [
-        'id' => 12,
-        'name' => 'Orthopedic Bone Drill & Sagittal Saw System',
-        'category' => 'Orthopedic Instruments',
-        'sku' => 'EQ-ORT-601',
-        'material' => 'Aircraft Grade Aluminum & Stainless Steel Collet',
-        'size_model' => 'Cordless Lithium Battery Driven (System 8 Type)',
-        'desc' => 'High-torque bone drill with cannulated chuck (0.8–8mm) and oscillating sagittal saw for joint replacement and trauma.',
-        'specs' => ['Speed: 0-1200 RPM stepless', 'Full handpiece 134°C autoclavable', 'Dual 14.4V rechargeable battery packs', 'Keyless AO quick coupling'],
-        'brand' => 'Stryker / Apex OEM',
-    ],
+        // Extract Brand if formatted in notes
+        $brand = 'Apex Surgical';
+        if (preg_match('/Brand:\s*([^;\n]+)/i', $notes, $m)) {
+            $brand = trim($m[1]);
+        }
 
-    // 7. Anaesthesia Equipment
-    [
-        'id' => 13,
-        'name' => 'Integrated Anaesthesia Workstation with Ventilator',
-        'category' => 'Anaesthesia Equipment',
-        'sku' => 'EQ-ANS-701',
-        'material' => 'SS Frame with Antimicrobial Coated Alloy',
-        'size_model' => 'Dual Vaporizer Station (Isoflurane / Sevoflurane)',
-        'desc' => 'Pneumatically driven electronic anaesthesia ventilator with integrated Circle Absorber, O2/N2O/Air flowmeters, and hypoxic guard.',
-        'specs' => ['Tidal Volume: 20 to 1500 ml', 'Ventilation Modes: VCV, PCV, SIMV, PSV', 'Selectatec compatible manifold', 'Battery backup 3 hours'],
-        'brand' => 'Mindray / Apex OEM',
-    ],
+        // Extract Specs if formatted in notes, or fallback
+        $specs = [];
+        if (preg_match('/Specs:\s*([^\n]+)/i', $notes, $m)) {
+            $specs = array_map('trim', explode(',', $m[1]));
+        } else {
+            $specs = [
+                'Status: ' . ucfirst(str_replace('_', ' ', $row['status'])),
+                'Location: ' . ($row['current_location'] ?: 'Main Clinic Store'),
+                'CE & ISO 13485 Certified',
+                'Warranty: ' . ($row['warranty_expiry'] ? date('M Y', strtotime($row['warranty_expiry'])) : '2 Years Warranty'),
+            ];
+        }
 
-    // 8. Autoclave & Sterilizers
-    [
-        'id' => 14,
-        'name' => 'Horizontal High-Pressure Steam Autoclave (Class B)',
-        'category' => 'Autoclave & Sterilizers',
-        'sku' => 'EQ-ST-801',
-        'material' => 'SS 316L Inner Chamber & SS 304 Outer Body',
-        'size_model' => 'Capacities: 75 Litres to 500 Litres',
-        'desc' => 'Heavy-duty automatic steam sterilizer with fractional vacuum cycles, digital microprocessor temperature/pressure controller, and printer.',
-        'specs' => ['Working Temp: 121°C & 134°C', 'Radial locking safety door', 'Automatic water filling & vacuum drying', 'Digital cycle printout'],
-        'brand' => 'Apex SteriTech',
-    ],
+        // Clean description
+        $cleanDesc = trim(preg_replace('/(Material|Brand|Specs):[^\n]+/i', '', $notes));
+        if ($cleanDesc === '') {
+            $cleanDesc = 'Hospital-grade ' . strtolower($row['category']) . ' engineered for high clinical reliability, sterilization compatibility, and continuous operating performance.';
+        }
 
-    // 9. Suction Machines
-    [
-        'id' => 15,
-        'name' => 'Heavy-Duty Electric Surgical Suction Unit (Twin Jar)',
-        'category' => 'Suction Machines',
-        'sku' => 'EQ-SUC-901',
-        'material' => 'SS 304 Trolley Body with Polycarbonate Jars',
-        'size_model' => 'Capacity: 2 x 4000ml (4 Litre Jars)',
-        'desc' => 'Oil-free piston pump suction apparatus delivering high vacuum up to -0.09 MPa with overflow safety protection.',
-        'specs' => ['Suction Capacity: > 60 Litres/min', 'Max Vacuum: -680 mmHg (-0.09MPa)', 'Shatter-proof autoclavable jars', 'Foot pedal & hand switch operation'],
-        'brand' => 'Apex MedTech',
-    ],
+        $sizeModel = $row['serial_number'] ?: ('Model: ' . $row['equipment_code']);
 
-    // 10. Surgical Disposables
-    [
-        'id' => 16,
-        'name' => 'Sterile Electrosurgical Cautery Pencil (Hand Switch)',
-        'category' => 'Surgical Disposables',
-        'sku' => 'EQ-DSP-1001',
-        'material' => 'Medical Grade PVC with Stainless Steel Blade Electrode',
-        'size_model' => '3-Pin Standard Plug with 3-Meter Cable',
-        'desc' => 'Disposable cut & coag push-button electrosurgery pencil with hex-lock non-turn blade tip.',
-        'specs' => ['EO Gas Pre-Sterilized in peel pouch', 'Push-button tactile feedback', 'Universal 3-prong generator fit', 'Pack of 50 / 100 pcs'],
-        'brand' => 'Apex Disposable',
-    ]
-];
+        $allProducts[] = [
+            'id' => (int) $row['id'],
+            'name' => $row['name'],
+            'category' => $row['category'],
+            'sku' => $row['equipment_code'],
+            'material' => $material,
+            'size_model' => $sizeModel,
+            'desc' => $cleanDesc,
+            'specs' => $specs,
+            'brand' => $brand,
+            'status' => $row['status'],
+        ];
+    }
+
+    // Fetch dynamic categories
+    $catStmt = $pdo->query("SELECT DISTINCT category FROM equipment_inventory WHERE category != '' AND status != 'retired' ORDER BY category ASC");
+    $categories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
+
+} catch (PDOException $e) {
+    error_log("Products page DB error: " . $e->getMessage());
+}
 
 // Active category filter from GET
 $activeCategory = $_GET['cat'] ?? 'all';
@@ -213,7 +84,7 @@ $activeCategory = $_GET['cat'] ?? 'all';
     <section class="figma-products-hero">
         <h1 class="figma-products-hero-title">Precision in every cut.</h1>
         <p class="figma-products-hero-subtitle">
-            Explore 10 certified medical categories engineered with German metallurgy, CE & ISO 13485 compliance, and full biomedical calibration.
+            Explore our comprehensive medical catalogue engineered with German metallurgy, CE & ISO 13485 compliance, and full biomedical calibration.
         </p>
     </section>
 
@@ -237,19 +108,14 @@ $activeCategory = $_GET['cat'] ?? 'all';
                 </div>
             </div>
 
-            <!-- Category Pills -->
+            <!-- Dynamic Category Pills from DB -->
             <div class="figma-pills-row" id="categoryFilterGroup">
                 <button class="figma-pill-btn <?= ($activeCategory === 'all') ? 'active' : '' ?>" data-cat="all">All Categories</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Surgical Instruments') ? 'active' : '' ?>" data-cat="Surgical Instruments">Surgical Instruments</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'OT Equipment') ? 'active' : '' ?>" data-cat="OT Equipment">OT Equipment</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Hospital Furniture') ? 'active' : '' ?>" data-cat="Hospital Furniture">Hospital Furniture</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'ICU Equipment') ? 'active' : '' ?>" data-cat="ICU Equipment">ICU Equipment</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Laparoscopy Instruments') ? 'active' : '' ?>" data-cat="Laparoscopy Instruments">Laparoscopy Instruments</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Orthopedic Instruments') ? 'active' : '' ?>" data-cat="Orthopedic Instruments">Orthopedic Instruments</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Anaesthesia Equipment') ? 'active' : '' ?>" data-cat="Anaesthesia Equipment">Anaesthesia Equipment</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Autoclave & Sterilizers') ? 'active' : '' ?>" data-cat="Autoclave & Sterilizers">Autoclave & Sterilizers</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Suction Machines') ? 'active' : '' ?>" data-cat="Suction Machines">Suction Machines</button>
-                <button class="figma-pill-btn <?= ($activeCategory === 'Surgical Disposables') ? 'active' : '' ?>" data-cat="Surgical Disposables">Surgical Disposables</button>
+                <?php foreach ($categories as $cat): ?>
+                    <button class="figma-pill-btn <?= ($activeCategory === $cat) ? 'active' : '' ?>" data-cat="<?= htmlspecialchars($cat) ?>">
+                        <?= htmlspecialchars($cat) ?>
+                    </button>
+                <?php endforeach; ?>
             </div>
 
         </div>

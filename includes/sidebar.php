@@ -76,8 +76,14 @@ $menu_items = [
 ];
 ?>
 <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <span class="brand-text">SurgicalEquip</span>
+    <div class="sidebar-header" style="display:flex; align-items:center; justify-content:space-between;">
+        <a href="/surgical_equipment/dashboard.php" style="text-decoration:none; display:flex; align-items:baseline; gap:6px;">
+            <span class="brand-text" style="color:var(--color-primary); font-family:var(--font-serif); font-size:1.65rem; font-weight:700; letter-spacing:-0.02em;">APEX</span>
+            <span style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; background:var(--color-primary-light); color:var(--color-primary); padding:2px 6px; border-radius:4px;">Admin</span>
+        </a>
+        <a href="/surgical_equipment/index.php" target="_blank" title="View Public Website" style="color:var(--color-text-muted); font-size:0.75rem; display:flex; align-items:center; text-decoration:none; padding:4px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
     </div>
     <nav class="sidebar-nav">
         <ul class="nav-list">
