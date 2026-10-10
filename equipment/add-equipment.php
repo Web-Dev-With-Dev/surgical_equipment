@@ -33,8 +33,14 @@ try {
     $catStmt = $pdo->query("SELECT DISTINCT category FROM equipment_inventory WHERE category != '' ORDER BY category ASC");
     $existingCategories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 
+    // Also fetch categories and subcategories from the hierarchy tables
+    $dbCatNames = $pdo->query("SELECT name FROM categories WHERE status = 'active'")->fetchAll(PDO::FETCH_COLUMN);
+    $dbSubCatNames = $pdo->query("SELECT name FROM sub_categories WHERE status = 'active'")->fetchAll(PDO::FETCH_COLUMN);
+
 } catch (PDOException $e) {
     error_log($e->getMessage());
+    $dbCatNames = [];
+    $dbSubCatNames = [];
 }
 
 $standardCategories = [
@@ -54,7 +60,7 @@ $standardCategories = [
     'Retractors'
 ];
 
-$allCategoryOptions = array_values(array_unique(array_merge($existingCategories, $standardCategories)));
+$allCategoryOptions = array_values(array_unique(array_merge($existingCategories, $standardCategories, $dbCatNames, $dbSubCatNames)));
 sort($allCategoryOptions);
 
 require_once __DIR__ . '/../includes/header.php';

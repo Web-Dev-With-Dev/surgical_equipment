@@ -38,6 +38,15 @@ $roleRestrictions = [
     'supplier_delete'             => ['admin'],
     'purchase_create'             => ['admin'],
     'purchase_delete'             => ['admin'],
+    'super_category_create'       => ['admin'],
+    'super_category_update'       => ['admin'],
+    'super_category_delete'       => ['admin'],
+    'category_create'             => ['admin'],
+    'category_update'             => ['admin'],
+    'category_delete'             => ['admin'],
+    'sub_category_create'         => ['admin'],
+    'sub_category_update'         => ['admin'],
+    'sub_category_delete'         => ['admin'],
 ];
 
 if (isset($roleRestrictions[$action]) && !in_array($role, $roleRestrictions[$action], true)) {
@@ -571,6 +580,309 @@ try {
             $logAudit('purchase.delete', 'purchases', $id, "Deleted PO: $poNum");
             $_SESSION['flash_success'] = "Purchase PO \"$poNum\" deleted successfully.";
             header('Location: /surgical_equipment/purchases/purchases.php');
+            exit;
+        }
+
+        case 'super_category_create': {
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $icon        = trim($_POST['icon'] ?? '') ?: 'folder';
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($name === '') {
+                throw new RuntimeException('Super category name is required.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate name or slug
+            $chk = $pdo->prepare('SELECT id FROM super_categories WHERE name = :name OR slug = :slug LIMIT 1');
+            $chk->execute([':name' => $name, ':slug' => $slug]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("A super category with the name \"$name\" or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                INSERT INTO super_categories (name, slug, description, icon, status, sort_order)
+                VALUES (:name, :slug, :desc, :icon, :status, :sort)
+            ');
+            $stmt->execute([
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':icon'   => $icon,
+                ':status' => $status,
+                ':sort'   => $sortOrder
+            ]);
+            $newId = (int) $pdo->lastInsertId();
+            $logAudit('super_category.create', 'super_categories', $newId, "Created: $name ($slug)");
+            $_SESSION['flash_success'] = "Super Category \"$name\" created successfully.";
+            header('Location: /surgical_equipment/categories/super-categories.php');
+            exit;
+        }
+
+        case 'super_category_update': {
+            $id          = (int) ($_POST['id'] ?? 0);
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $icon        = trim($_POST['icon'] ?? '') ?: 'folder';
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($id <= 0 || $name === '') {
+                throw new RuntimeException('Invalid super category ID or name.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate on other records
+            $chk = $pdo->prepare('SELECT id FROM super_categories WHERE (name = :name OR slug = :slug) AND id != :id LIMIT 1');
+            $chk->execute([':name' => $name, ':slug' => $slug, ':id' => $id]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("Another super category with the name \"$name\" or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                UPDATE super_categories
+                SET name = :name, slug = :slug, description = :desc, icon = :icon, status = :status, sort_order = :sort
+                WHERE id = :id
+            ');
+            $stmt->execute([
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':icon'   => $icon,
+                ':status' => $status,
+                ':sort'   => $sortOrder,
+                ':id'     => $id
+            ]);
+            $logAudit('super_category.update', 'super_categories', $id, "Updated: $name ($slug)");
+            $_SESSION['flash_success'] = "Super Category \"$name\" updated successfully.";
+            header('Location: /surgical_equipment/categories/super-categories.php');
+            exit;
+        }
+
+        case 'super_category_delete': {
+            $id = (int) ($_POST['id'] ?? 0);
+            if ($id <= 0) throw new RuntimeException('Invalid super category ID.');
+
+            $stmt = $pdo->prepare('SELECT name FROM super_categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+            $name = $stmt->fetchColumn() ?: 'Unknown';
+
+            $stmt = $pdo->prepare('DELETE FROM super_categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $logAudit('super_category.delete', 'super_categories', $id, "Deleted: $name");
+            $_SESSION['flash_success'] = "Super Category \"$name\" and related categories deleted successfully.";
+            header('Location: /surgical_equipment/categories/super-categories.php');
+            exit;
+        }
+
+        case 'category_create': {
+            $superId     = (int) ($_POST['super_category_id'] ?? 0);
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($superId <= 0 || $name === '') {
+                throw new RuntimeException('Super Category and Category name are required.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate
+            $chk = $pdo->prepare('SELECT id FROM categories WHERE (super_category_id = :sid AND name = :name) OR slug = :slug LIMIT 1');
+            $chk->execute([':sid' => $superId, ':name' => $name, ':slug' => $slug]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("A category with this name under the selected Super Category or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                INSERT INTO categories (super_category_id, name, slug, description, status, sort_order)
+                VALUES (:sid, :name, :slug, :desc, :status, :sort)
+            ');
+            $stmt->execute([
+                ':sid'    => $superId,
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':status' => $status,
+                ':sort'   => $sortOrder
+            ]);
+            $newId = (int) $pdo->lastInsertId();
+            $logAudit('category.create', 'categories', $newId, "Created: $name ($slug)");
+            $_SESSION['flash_success'] = "Category \"$name\" created successfully.";
+            header('Location: /surgical_equipment/categories/categories.php');
+            exit;
+        }
+
+        case 'category_update': {
+            $id          = (int) ($_POST['id'] ?? 0);
+            $superId     = (int) ($_POST['super_category_id'] ?? 0);
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($id <= 0 || $superId <= 0 || $name === '') {
+                throw new RuntimeException('Invalid category ID, super category, or name.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate on other records
+            $chk = $pdo->prepare('SELECT id FROM categories WHERE ((super_category_id = :sid AND name = :name) OR slug = :slug) AND id != :id LIMIT 1');
+            $chk->execute([':sid' => $superId, ':name' => $name, ':slug' => $slug, ':id' => $id]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("Another category with this name under the selected Super Category or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                UPDATE categories
+                SET super_category_id = :sid, name = :name, slug = :slug, description = :desc, status = :status, sort_order = :sort
+                WHERE id = :id
+            ');
+            $stmt->execute([
+                ':sid'    => $superId,
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':status' => $status,
+                ':sort'   => $sortOrder,
+                ':id'     => $id
+            ]);
+            $logAudit('category.update', 'categories', $id, "Updated: $name ($slug)");
+            $_SESSION['flash_success'] = "Category \"$name\" updated successfully.";
+            header('Location: /surgical_equipment/categories/categories.php');
+            exit;
+        }
+
+        case 'category_delete': {
+            $id = (int) ($_POST['id'] ?? 0);
+            if ($id <= 0) throw new RuntimeException('Invalid category ID.');
+
+            $stmt = $pdo->prepare('SELECT name FROM categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+            $name = $stmt->fetchColumn() ?: 'Unknown';
+
+            $stmt = $pdo->prepare('DELETE FROM categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $logAudit('category.delete', 'categories', $id, "Deleted: $name");
+            $_SESSION['flash_success'] = "Category \"$name\" and related sub categories deleted successfully.";
+            header('Location: /surgical_equipment/categories/categories.php');
+            exit;
+        }
+
+        case 'sub_category_create': {
+            $catId       = (int) ($_POST['category_id'] ?? 0);
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($catId <= 0 || $name === '') {
+                throw new RuntimeException('Category and Sub Category name are required.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate
+            $chk = $pdo->prepare('SELECT id FROM sub_categories WHERE (category_id = :cid AND name = :name) OR slug = :slug LIMIT 1');
+            $chk->execute([':cid' => $catId, ':name' => $name, ':slug' => $slug]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("A sub category with this name under the selected Category or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                INSERT INTO sub_categories (category_id, name, slug, description, status, sort_order)
+                VALUES (:cid, :name, :slug, :desc, :status, :sort)
+            ');
+            $stmt->execute([
+                ':cid'    => $catId,
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':status' => $status,
+                ':sort'   => $sortOrder
+            ]);
+            $newId = (int) $pdo->lastInsertId();
+            $logAudit('sub_category.create', 'sub_categories', $newId, "Created: $name ($slug)");
+            $_SESSION['flash_success'] = "Sub Category \"$name\" created successfully.";
+            header('Location: /surgical_equipment/categories/sub-categories.php');
+            exit;
+        }
+
+        case 'sub_category_update': {
+            $id          = (int) ($_POST['id'] ?? 0);
+            $catId       = (int) ($_POST['category_id'] ?? 0);
+            $name        = trim($_POST['name'] ?? '');
+            $slug        = trim($_POST['slug'] ?? '');
+            $description = trim($_POST['description'] ?? '') ?: null;
+            $status      = in_array($_POST['status'] ?? 'active', ['active', 'inactive'], true) ? $_POST['status'] : 'active';
+            $sortOrder   = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($id <= 0 || $catId <= 0 || $name === '') {
+                throw new RuntimeException('Invalid sub category ID, category, or name.');
+            }
+            if ($slug === '') {
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name), '-'));
+            }
+
+            // Check duplicate on other records
+            $chk = $pdo->prepare('SELECT id FROM sub_categories WHERE ((category_id = :cid AND name = :name) OR slug = :slug) AND id != :id LIMIT 1');
+            $chk->execute([':cid' => $catId, ':name' => $name, ':slug' => $slug, ':id' => $id]);
+            if ($chk->fetch()) {
+                throw new RuntimeException("Another sub category with this name under the selected Category or slug \"$slug\" already exists.");
+            }
+
+            $stmt = $pdo->prepare('
+                UPDATE sub_categories
+                SET category_id = :cid, name = :name, slug = :slug, description = :desc, status = :status, sort_order = :sort
+                WHERE id = :id
+            ');
+            $stmt->execute([
+                ':cid'    => $catId,
+                ':name'   => $name,
+                ':slug'   => $slug,
+                ':desc'   => $description,
+                ':status' => $status,
+                ':sort'   => $sortOrder,
+                ':id'     => $id
+            ]);
+            $logAudit('sub_category.update', 'sub_categories', $id, "Updated: $name ($slug)");
+            $_SESSION['flash_success'] = "Sub Category \"$name\" updated successfully.";
+            header('Location: /surgical_equipment/categories/sub-categories.php');
+            exit;
+        }
+
+        case 'sub_category_delete': {
+            $id = (int) ($_POST['id'] ?? 0);
+            if ($id <= 0) throw new RuntimeException('Invalid sub category ID.');
+
+            $stmt = $pdo->prepare('SELECT name FROM sub_categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+            $name = $stmt->fetchColumn() ?: 'Unknown';
+
+            $stmt = $pdo->prepare('DELETE FROM sub_categories WHERE id = :id');
+            $stmt->execute([':id' => $id]);
+
+            $logAudit('sub_category.delete', 'sub_categories', $id, "Deleted: $name");
+            $_SESSION['flash_success'] = "Sub Category \"$name\" deleted successfully.";
+            header('Location: /surgical_equipment/categories/sub-categories.php');
             exit;
         }
 

@@ -9,13 +9,17 @@ CREATE DATABASE IF NOT EXISTS `surgical_equipment_db`
 
 USE `surgical_equipment_db`;
 
--- Drop existing tables in reverse order of foreign keys to avoid conflicts
+DROP TABLE IF EXISTS `order_items`;
+DROP TABLE IF EXISTS `orders`;
 DROP TABLE IF EXISTS `sterilization_batch_items`;
 DROP TABLE IF EXISTS `sterilization_batches`;
 DROP TABLE IF EXISTS `tracking_logs`;
 DROP TABLE IF EXISTS `maintenance_records`;
 DROP TABLE IF EXISTS `system_audit_trails`;
 DROP TABLE IF EXISTS `equipment_inventory`;
+DROP TABLE IF EXISTS `sub_categories`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `super_categories`;
 DROP TABLE IF EXISTS `purchases`;
 DROP TABLE IF EXISTS `suppliers`;
 DROP TABLE IF EXISTS `users`;
@@ -29,7 +33,13 @@ CREATE TABLE `users` (
   `password_hash` VARCHAR(255) NOT NULL,
   `full_name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) DEFAULT NULL,
-  `role` ENUM('admin', 'surgeon', 'nurse', 'sterilisation_tech', 'auditor') NOT NULL DEFAULT 'nurse',
+  `phone` VARCHAR(30) DEFAULT NULL,
+  `organization` VARCHAR(150) DEFAULT NULL,
+  `shipping_address` TEXT DEFAULT NULL,
+  `city` VARCHAR(100) DEFAULT NULL,
+  `pincode` VARCHAR(20) DEFAULT NULL,
+  `role` ENUM('admin', 'surgeon', 'nurse', 'sterilisation_tech', 'auditor', 'registered_user', 'customer') NOT NULL DEFAULT 'customer',
+  `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -65,6 +75,57 @@ CREATE TABLE `purchases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
+-- Table: super_categories
+-- --------------------------------------------------------
+CREATE TABLE `super_categories` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(150) NOT NULL UNIQUE,
+  `slug` VARCHAR(150) NOT NULL UNIQUE,
+  `description` TEXT DEFAULT NULL,
+  `icon` VARCHAR(100) DEFAULT NULL,
+  `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+-- Table: categories
+-- --------------------------------------------------------
+CREATE TABLE `categories` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `super_category_id` INT NOT NULL,
+  `name` VARCHAR(150) NOT NULL,
+  `slug` VARCHAR(150) NOT NULL,
+  `description` TEXT DEFAULT NULL,
+  `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_cat_super` FOREIGN KEY (`super_category_id`) REFERENCES `super_categories`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_super_cat_name` (`super_category_id`, `name`),
+  UNIQUE KEY `unique_cat_slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+-- Table: sub_categories
+-- --------------------------------------------------------
+CREATE TABLE `sub_categories` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `category_id` INT NOT NULL,
+  `name` VARCHAR(150) NOT NULL,
+  `slug` VARCHAR(150) NOT NULL,
+  `description` TEXT DEFAULT NULL,
+  `status` ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+  `sort_order` INT NOT NULL DEFAULT 0,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_subcat_cat` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY `unique_cat_subname` (`category_id`, `name`),
+  UNIQUE KEY `unique_subcat_slug` (`slug`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
 -- Table: equipment_inventory
 -- --------------------------------------------------------
 CREATE TABLE `equipment_inventory` (
@@ -72,6 +133,9 @@ CREATE TABLE `equipment_inventory` (
   `equipment_code` VARCHAR(50) NOT NULL UNIQUE,
   `name` VARCHAR(150) NOT NULL,
   `category` VARCHAR(100) NOT NULL,
+  `super_category_id` INT DEFAULT NULL,
+  `category_id` INT DEFAULT NULL,
+  `sub_category_id` INT DEFAULT NULL,
   `status` ENUM('available', 'in_use', 'under_maintenance', 'sterilising', 'retired') NOT NULL DEFAULT 'available',
   `current_location` VARCHAR(150) DEFAULT 'Main Store',
   `last_sterilised_at` DATETIME DEFAULT NULL,
@@ -84,7 +148,10 @@ CREATE TABLE `equipment_inventory` (
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT `fk_equip_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `suppliers`(`id`) ON DELETE SET NULL,
-  CONSTRAINT `fk_equip_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases`(`id`) ON DELETE SET NULL
+  CONSTRAINT `fk_equip_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases`(`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_equip_super_cat` FOREIGN KEY (`super_category_id`) REFERENCES `super_categories`(`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_equip_cat` FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_equip_subcat` FOREIGN KEY (`sub_category_id`) REFERENCES `sub_categories`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -166,6 +233,49 @@ CREATE TABLE `sterilization_batch_items` (
   `equipment_id` INT NOT NULL,
   CONSTRAINT `fk_batch_item_batch` FOREIGN KEY (`batch_id`) REFERENCES `sterilization_batches`(`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_batch_item_equipment` FOREIGN KEY (`equipment_id`) REFERENCES `equipment_inventory`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+-- Table: orders
+-- --------------------------------------------------------
+CREATE TABLE `orders` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `order_number` VARCHAR(50) NOT NULL UNIQUE,
+  `user_id` INT NOT NULL,
+  `total_amount` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `tax_amount` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `shipping_amount` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `status` ENUM('pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled') NOT NULL DEFAULT 'pending',
+  `payment_status` ENUM('unpaid', 'paid', 'invoice_requested', 'cod') NOT NULL DEFAULT 'invoice_requested',
+  `payment_method` VARCHAR(50) DEFAULT 'Pro-forma Medical Invoice / PO',
+  `shipping_name` VARCHAR(100) NOT NULL,
+  `shipping_phone` VARCHAR(30) DEFAULT NULL,
+  `shipping_email` VARCHAR(100) DEFAULT NULL,
+  `shipping_address` TEXT NOT NULL,
+  `city` VARCHAR(100) DEFAULT NULL,
+  `pincode` VARCHAR(20) DEFAULT NULL,
+  `notes` TEXT DEFAULT NULL,
+  `tracking_number` VARCHAR(100) DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_order_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+-- Table: order_items
+-- --------------------------------------------------------
+CREATE TABLE `order_items` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `order_id` INT NOT NULL,
+  `equipment_id` INT DEFAULT NULL,
+  `item_name` VARCHAR(150) NOT NULL,
+  `sku` VARCHAR(50) DEFAULT NULL,
+  `unit_price` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `quantity` INT NOT NULL DEFAULT 1,
+  `total_price` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_order_items_order` FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_order_items_equipment` FOREIGN KEY (`equipment_id`) REFERENCES `equipment_inventory`(`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------

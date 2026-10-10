@@ -7,7 +7,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!empty($_SESSION['user_id'])) {
-    header('Location: /surgical_equipment/dashboard.php');
+    if (in_array($_SESSION['role'] ?? '', ['registered_user', 'customer'])) {
+        header('Location: /surgical_equipment/user/home.php');
+    } else {
+        header('Location: /surgical_equipment/dashboard.php');
+    }
     exit;
 }
 
@@ -28,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user && password_verify($password, $user['password_hash'])) {
                 session_regenerate_id(true);
-                $_SESSION['user_id']    = $user['id'];
-                $_SESSION['username']   = $user['username'];
-                $_SESSION['full_name']  = $user['full_name'];
-                $_SESSION['role']       = $user['role'];
-                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                $_SESSION['user_id']      = $user['id'];
+                $_SESSION['username']     = $user['username'];
+                $_SESSION['full_name']    = $user['full_name'];
+                $_SESSION['role']         = $user['role'];
+                $_SESSION['organization'] = $user['organization'] ?? '';
+                $_SESSION['csrf_token']   = bin2hex(random_bytes(32));
 
                 $audit = $pdo->prepare('
                     INSERT INTO system_audit_trails (user_id, action, entity_type, entity_id, ip_address, user_agent)
@@ -47,7 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':ua'     => substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 255),
                 ]);
 
-                header('Location: /surgical_equipment/dashboard.php');
+                if (in_array($user['role'], ['registered_user', 'customer'])) {
+                    header('Location: /surgical_equipment/user/home.php');
+                } else {
+                    header('Location: /surgical_equipment/dashboard.php');
+                }
                 exit;
             } else {
                 $error = 'Invalid username or password.';
@@ -276,9 +285,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </svg>
                 </button>
 
+                <div class="divider" style="margin: 8px 0;"><span>or</span></div>
+
+                <div style="display:flex; flex-direction:column; gap:10px; text-align:center;">
+                    <a href="/surgical_equipment/auth/register.php" style="display:block; padding:12px; background:#e8f0d8; color:var(--color-primary); border-radius:6px; font-weight:700; font-size:0.875rem; text-decoration:none;">
+                        Create Hospital / Buyer Account &rarr;
+                    </a>
+                    <a href="/surgical_equipment/index.php" style="font-size:0.8125rem; color:var(--color-muted); text-decoration:none;">
+                        &larr; Return to Public Website
+                    </a>
+                </div>
+
+                <!-- Quick Demo Login Helper Box -->
+                <div style="margin-top:20px; padding:14px; background:#f9faf8; border:1px dashed var(--color-border); border-radius:8px; font-size:0.75rem; color:var(--color-muted);">
+                    <div style="font-weight:700; color:var(--color-text); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.05em;">Quick Demo Credentials:</div>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button type="button" onclick="fillCreds('dr_rachel', 'Password123!')" style="padding:4px 8px; background:#fff; border:1px solid #cbd5e1; border-radius:4px; font-size:0.75rem; cursor:pointer; font-weight:600;">
+                            🏥 Dr. Rachel (Customer)
+                        </button>
+                        <button type="button" onclick="fillCreds('admin', 'Password123!')" style="padding:4px 8px; background:#fff; border:1px solid #cbd5e1; border-radius:4px; font-size:0.75rem; cursor:pointer; font-weight:600;">
+                            🛡️ Admin
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </form>
 
     </div>
+
+    <script>
+        function fillCreds(u, p) {
+            document.getElementById('username').value = u;
+            document.getElementById('password').value = p;
+        }
+    </script>
 </body>
 </html>

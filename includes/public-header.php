@@ -35,23 +35,41 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <div class="figma-nav-capsule-wrapper" id="figmaNavCapsule">
                 <ul class="figma-nav-center-links" id="figmaNavLinks">
                     <li><a href="/surgical_equipment/index.php" class="<?= ($currentPage === 'index.php' || $currentPage === '') ? 'active' : '' ?>">Home</a></li>
+                    <li><a href="/surgical_equipment/user/shop.php" class="<?= ($currentPage === 'shop.php') ? 'active' : '' ?>">Shop</a></li>
                     <li><a href="/surgical_equipment/products.php" class="<?= ($currentPage === 'products.php' || $currentPage === 'product-details.php') ? 'active' : '' ?>">Products</a></li>
                     <li><a href="/surgical_equipment/services.php" class="<?= ($currentPage === 'services.php') ? 'active' : '' ?>">Services</a></li>
                     <li><a href="/surgical_equipment/about.php" class="<?= ($currentPage === 'about.php') ? 'active' : '' ?>">About Us</a></li>
                     <li><a href="/surgical_equipment/brands.php" class="<?= ($currentPage === 'brands.php') ? 'active' : '' ?>">Brands</a></li>
-                    <li><a href="/surgical_equipment/certifications.php" class="<?= ($currentPage === 'certifications.php') ? 'active' : '' ?>">Quality & Certs</a></li>
-                    <li><a href="/surgical_equipment/contact.php" class="<?= ($currentPage === 'contact.php') ? 'active' : '' ?>">Contact Us</a></li>
+                    <li><a href="/surgical_equipment/contact.php" class="<?= ($currentPage === 'contact.php') ? 'active' : '' ?>">Contact</a></li>
                 </ul>
             </div>
 
             <!-- Right: Action Button & Mobile Toggle (fades out on scroll) -->
             <div class="figma-nav-right-actions" id="figmaNavRight">
-                <a href="/surgical_equipment/auth/login.php" class="figma-btn-pill figma-nav-admin-btn" title="Staff & Admin Portal">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:-1px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <span>Admin Login</span>
-                </a>
-                <a href="/surgical_equipment/contact.php#contact-form" class="figma-btn-pill figma-btn-primary figma-nav-btn">
-                    <span>Request Quote ↗</span>
+                <?php if (!empty($_SESSION['user_id'])): ?>
+                    <?php if (in_array($_SESSION['role'] ?? '', ['registered_user', 'customer'])): ?>
+                        <a href="/surgical_equipment/user/home.php" class="figma-btn-pill figma-btn-primary" style="padding:7px 14px; font-size:12px; font-weight:700;">
+                            <span>🏥 My Portal</span>
+                        </a>
+                        <a href="/surgical_equipment/user/orders.php" class="figma-btn-pill figma-nav-admin-btn" style="padding:7px 12px; font-size:12px;">
+                            <span>Orders</span>
+                        </a>
+                    <?php else: ?>
+                        <a href="/surgical_equipment/dashboard.php" class="figma-btn-pill figma-btn-primary" style="padding:7px 14px; font-size:12px; font-weight:700;">
+                            <span>Admin Panel ↗</span>
+                        </a>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a href="/surgical_equipment/auth/register.php" class="figma-btn-pill" style="border:1px solid var(--fg-border); color:var(--fg-dark); text-decoration:none; padding:7px 12px; border-radius:9999px; font-weight:700; font-size:12px;">
+                        <span>Register</span>
+                    </a>
+                    <a href="/surgical_equipment/auth/login.php" class="figma-btn-pill figma-nav-admin-btn" title="Sign In">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px; vertical-align:-1px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <span>Sign In</span>
+                    </a>
+                <?php endif; ?>
+                <a href="/surgical_equipment/user/shop.php" class="figma-btn-pill figma-btn-primary figma-nav-btn">
+                    <span>Shop Now 🛒</span>
                 </a>
                 <button class="figma-mobile-menu-btn" id="figmaMobileToggle" aria-label="Open Navigation Menu">
                     <span></span><span></span><span></span>

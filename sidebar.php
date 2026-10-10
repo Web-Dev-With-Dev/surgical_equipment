@@ -15,8 +15,29 @@ $menu_items = [
     'equipment' => [
         'label' => 'Equipment Inventory',
         'icon'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>',
-        'href'  => $base . '/inventory-list.php',
+        'href'  => $base . '/equipment/inventory-list.php',
         'match' => ['inventory-list','add-equipment','equipment-details','check-out','check-in'],
+        'roles' => ['admin','surgeon','nurse','sterilisation_tech','auditor'],
+    ],
+    'super_categories' => [
+        'label' => 'Super Categories',
+        'icon'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>',
+        'href'  => $base . '/categories/super-categories.php',
+        'match' => ['super-categories','add-super-category'],
+        'roles' => ['admin','surgeon','nurse','sterilisation_tech','auditor'],
+    ],
+    'categories' => [
+        'label' => 'Categories',
+        'icon'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>',
+        'href'  => $base . '/categories/categories.php',
+        'match' => ['categories','add-category','edit-category'],
+        'roles' => ['admin','surgeon','nurse','sterilisation_tech','auditor'],
+    ],
+    'sub_categories' => [
+        'label' => 'Sub Categories',
+        'icon'  => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>',
+        'href'  => $base . '/categories/sub-categories.php',
+        'match' => ['sub-categories','add-sub-category','edit-sub-category'],
         'roles' => ['admin','surgeon','nurse','sterilisation_tech','auditor'],
     ],
     'suppliers' => [
